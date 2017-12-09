@@ -33,7 +33,20 @@
 				<div class="col s12 m6 offset-m3 card-panel hoverable">
 	         <p><a href="login.php"><i class="material-icons left">arrow_back</i> Go back to login</a></p>
 	      </div>
-        <form class="col s12" style="margin-top:4%;">
+				<h4 class="left-align col s12 m6 offset-m3">Registration</h4>
+				<?php //Display register failure
+				if (isset($_GET['register'])){
+					if($_GET['register'] == 1){
+						echo "<p class='col s12 offset-m3'>Username exists, please choose another one</p>";
+					} elseif ($_GET['register'] == 2){
+						echo "<p class='col s12 offset-m3'>Please do not enter special characters</p>";
+					} elseif ($_GET['register'] == 3){
+						echo "<p class='col s12 offset-m3'>Passwords do not match. Please re-enter password</p>";
+					}
+				}
+				?>
+				<div class="divider col s12 m6 offset-m3"></div>
+        <form action="php/doRegister.php" method="POST" class="col s12" style="margin-top:4%;">
           <div class="row col s12 ">
             <div class="input-field col s12 m3 offset-m3">
               <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" required>
@@ -51,18 +64,18 @@
             </div>
             <div class="col s12 m3">
 							<label class="col s12">I identify as</label><br />
-					      <input name="gender" type="radio" id="male" required/>
+					      <input name="gender" type="radio" id="male" value="male" required/>
 					      <label for="male">Male</label>
-					      <input name="gender" type="radio" id="female" required/>
+					      <input name="gender" type="radio" id="female" value="female" required/>
 					      <label for="female">Female</label>
-					      <input name="gender" type="radio" id="others" required/>
+					      <input name="gender" type="radio" id="others" value="others" required/>
 					      <label for="others">Others</label>
             </div>
           </div>
           <div class="row col s12 ">
             <div class="input-field col s12 m4 offset-m3">
               <input name="uname" id="uname" type="text" placeholder="jonathanlawhh" class="validate" required>
-              <label for="uname">Username</label>
+							<label for="uname">Username</label>
             </div>
             <div class="col s12 m2">
 							<label for="bday">Birthday</label>
@@ -72,7 +85,7 @@
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
               <input name="email" id="email" type="email" placeholder="jonathanlawhh@mail.com" class="validate" required>
-              <label for="pwd">Email</label>
+              <label for="email">Email</label>
             </div>
           </div>
           <div class="row col s12 ">
@@ -94,7 +107,7 @@
             </p>
 					<div class="row col s12 offset-m3">
 						<button type="reset" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">autorenew</i>Reset</button>
-						<button type="submit" class="waves-effect waves-light btn"><i class="material-icons left">create</i>Register</button>
+						<button name="register" value="register" type="submit" class="waves-effect waves-light btn"><i class="material-icons left">create</i>Register</button>
 					</div>
 
           </div>
