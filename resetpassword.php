@@ -34,8 +34,15 @@
 	         <p><a href="login.php"><i class="material-icons left">arrow_back</i> Go back to login</a></p>
 	      </div>
         <h4 class="left-align col s12 m6 offset-m3">Reset password</h4>
+				<?php //Display login failure
+				if(isset($_GET['search'])){
+					if($_GET['search'] == 0){
+						echo "<p class='col s12 offset-m3'>Wrong details</p>";
+					}
+				}
+				?>
   			<div class="divider col s12 m6 offset-m3"></div>
-        <form class="col s12"  style="margin-top:3%;">
+        <form action="php/doForgot.php" method="POST" class="col s12"  style="margin-top:3%;">
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
               <input name="username" id="username" type="text" placeholder="mary1234" class="validate">
@@ -51,12 +58,12 @@
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
               <input name="email" id="email" type="email" placeholder="mary_had@alittle.lamb.com" class="validate">
-              <label for="password">Email</label>
+              <label for="email">Email</label>
             </div>
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <button type="submit" data-target="confirmation" class="waves-effect waves-light btn" href="#confirmation">Send me my reset!!</button>
+              <button type="submit" data-target="confirmation" class="waves-effect waves-light btn" name="resetMe">Send me my reset!!</button>
             </div>
           </div>
         </form>

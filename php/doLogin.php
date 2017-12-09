@@ -15,7 +15,7 @@ if (isset($_POST['login'])){
   $username = scanner($_POST['username']);
   $password = scanner($_POST["password"]);
   //Lets encrypt the Password
-  $salt = "tpmb_salt";
+  $salt = $username . "tpmb";
   $epassword = crypt($password, $salt);
 
   //Check if user exist. If yes, do not continue

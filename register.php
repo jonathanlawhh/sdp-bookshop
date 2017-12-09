@@ -42,6 +42,8 @@
 						echo "<p class='col s12 offset-m3'>Please do not enter special characters</p>";
 					} elseif ($_GET['register'] == 3){
 						echo "<p class='col s12 offset-m3'>Passwords do not match. Please re-enter password</p>";
+					} elseif ($_GET['register'] == 4){
+						echo "<p class='col s12 offset-m3'>Email exist! Please use another email</p>";
 					}
 				}
 				?>
@@ -96,8 +98,8 @@
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate" required>
-              <label for="pwd2">Retype password</label>
+              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate" onkeyup="check();" required>
+              <label id="txtpasswordcheck" for="pwd2">Retype password</label>
             </div>
           </div>
           <div class="row col s12">
@@ -112,6 +114,17 @@
 
           </div>
         </form>
+				<script>
+	        var check = function() {
+	            if (document.getElementById('pwd').value !== document.getElementById('pwd2').value) {
+	                document.getElementById('txtpasswordcheck').style.color = 'red';
+	                document.getElementById('txtpasswordcheck').innerHTML = 'Retype password : Password do not match';
+	            } else {
+								document.getElementById('txtpasswordcheck').style.color = '';
+								document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
+							}
+	        }
+	    </script>
       </div>
     </div>
 
