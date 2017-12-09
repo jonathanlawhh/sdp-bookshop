@@ -36,12 +36,27 @@
         <form class="col s12" style="margin-top:4%;">
           <div class="row col s12 ">
             <div class="input-field col s12 m3 offset-m3">
-              <input name="fname" id="r-fname" type="text" placeholder="Jonathan" class="validate" required>
+              <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" required>
               <label for="fname">First Name</label>
             </div>
             <div class="input-field col s12 m3">
-              <input name="lname" id="r-lname" type="text" placeholder="Law" class="validate">
+              <input name="lname" id="lname" type="text" placeholder="Law" class="validate">
               <label for="lname">Last Name</label>
+            </div>
+          </div>
+          <div class="row col s12 ">
+            <div class="input-field col s12 m3 offset-m3">
+              <input name="pnumber" id="pnumber" type="number" placeholder="0123456789" class="validate" required>
+              <label for="pnumber">Phone Number</label>
+            </div>
+            <div class="col s12 m3">
+							<label class="col s12">I identify as</label><br />
+					      <input name="gender" type="radio" id="male" required/>
+					      <label for="male">Male</label>
+					      <input name="gender" type="radio" id="female" required/>
+					      <label for="female">Female</label>
+					      <input name="gender" type="radio" id="others" required/>
+					      <label for="others">Others</label>
             </div>
           </div>
           <div class="row col s12 ">
@@ -49,7 +64,8 @@
               <input name="uname" id="uname" type="text" placeholder="jonathanlawhh" class="validate" required>
               <label for="uname">Username</label>
             </div>
-            <div class="input-field col s12 m2">
+            <div class="col s12 m2">
+							<label for="bday">Birthday</label>
               <input name="bday" id="bday" type="date" required>
             </div>
           </div>
@@ -74,7 +90,7 @@
           <div class="row col s12">
             <p class="col s12 offset-m3" style="margin-top:0;">
               <input type="checkbox" id="tnc" required/>
-              <label for="tnc">I agree to the terms and condition <a href="tnc">here</a></label>
+              <label for="tnc">I agree to the terms and condition <a href="tnc.html" target="_blank">here</a></label>
             </p>
 					<div class="row col s12 offset-m3">
 						<button type="reset" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">autorenew</i>Reset</button>

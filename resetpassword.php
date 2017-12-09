@@ -30,7 +30,10 @@
 
     <div class="container" >
       <div class="row" style="margin-top:5%;">
-        <h4 class="left-align col s12 m6 offset-m3">Login page</h4>
+				<div class="col s12 m6 offset-m3 card-panel hoverable">
+	         <p><a href="login.php"><i class="material-icons left">arrow_back</i> Go back to login</a></p>
+	      </div>
+        <h4 class="left-align col s12 m6 offset-m3">Reset password</h4>
   			<div class="divider col s12 m6 offset-m3"></div>
         <form class="col s12"  style="margin-top:3%;">
           <div class="row col s12 ">
@@ -41,22 +44,19 @@
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="password" id="password" type="password" placeholder="********" class="validate">
-              <label for="password">Password</label>
+              <input name="pnumber" id="pnumber" type="number" placeholder="0123456789" class="validate">
+              <label for="pnumber">Phone number used to register</label>
             </div>
           </div>
-          <div class="row col s12">
-            <p class="col s12 m4 offset-m3" style="margin-top:0;">
-              <input name="rememberMe" type="checkbox" id="rmbMe" />
-              <label for="rmbMe">Remember Me</label>
-              <button type="submit" class="waves-effect waves-light btn" style="margin-left:10%;">Login</button>
-            </p>
-
-            <div class="col s12 m4 offset-m3">
-              <a href="resetpassword.php">I have forgotten my password</a>
+          <div class="row col s12 " style="margin-bottom:0;">
+            <div class="input-field col s12 m6 offset-m3">
+              <input name="email" id="email" type="email" placeholder="mary_had@alittle.lamb.com" class="validate">
+              <label for="password">Email</label>
             </div>
-            <div class="col s12 m4 offset-m3">
-              Not a member yet? Register <a href="register.php">here</a>
+          </div>
+          <div class="row col s12 " style="margin-bottom:0;">
+            <div class="input-field col s12 m6 offset-m3">
+              <button type="submit" data-target="confirmation" class="waves-effect waves-light btn" href="#confirmation">Send me my reset!!</button>
             </div>
           </div>
         </form>
