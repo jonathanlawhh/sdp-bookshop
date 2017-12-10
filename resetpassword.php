@@ -4,20 +4,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-  </style>
 </head>
 
 <body>
@@ -71,12 +61,6 @@
     </div>
 
   </main>
-  <footer class="page-footer grey darken-3">
-    <div class="footer-copyright grey darken-4">
-      <div class="container">
-      © 2017 SDP TPM Bookshop
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-      </div>
-    </div>
-  </footer>
+	<?php //Load footer
+    include "ui/footer.html"; ?>
 </body>

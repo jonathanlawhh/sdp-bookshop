@@ -24,12 +24,14 @@ if (isset($_POST['login'])){
   if(mysqli_num_rows($checkRows) == 0){
     echo "<script>window.location = '../login.php?loginfailure=1'; exit();</script>";
   } else {
-    echo "Login sucessful";
     if(isset($_POST['rememberMe'])){
       setcookie("tpmb-username", $username, time() + 31536000, '/');
     } else {
       setcookie("tpmb-username", "", time() + 31536000, '/');
     }
+    session_start();
+    $_SESSION['tpmb-user']=$username;
+    echo "<script>window.location = '../index.php'; exit();</script>";
   }
 }
 ?>

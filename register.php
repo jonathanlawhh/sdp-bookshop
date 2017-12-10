@@ -4,20 +4,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
-  </style>
+	<script type="text/javascript">
+	function checkUsername(){
+	 var name=document.getElementById( "uname" ).value;
+	 if(name){
+	  $.ajax({
+	  type: 'post',
+	  url: 'php/doRegister.php',
+		dataType: 'text',
+	  data: {
+	   uname:name,
+	  },
+	  success: function (response) {
+	   $( '#uname-result' ).html(response);
+	   document.getElementById('uname-result').innerHTML = response;
+	  }
+	  });
+	 } else {
+	  document.getElementById('uname-result').innerHTML = 'Username';
+	 }
+	}
+	</script>
 </head>
 
 <body>
@@ -51,11 +62,11 @@
         <form action="php/doRegister.php" method="POST" class="col s12" style="margin-top:4%;">
           <div class="row col s12 ">
             <div class="input-field col s12 m3 offset-m3">
-              <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" required>
+              <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" pattern="[A-Za-z]{2,}" required>
               <label for="fname">First Name</label>
             </div>
             <div class="input-field col s12 m3">
-              <input name="lname" id="lname" type="text" placeholder="Law" class="validate">
+              <input name="lname" id="lname" type="text" placeholder="Law" class="validate" pattern="[A-Za-z]{2,}">
               <label for="lname">Last Name</label>
             </div>
           </div>
@@ -76,8 +87,8 @@
           </div>
           <div class="row col s12 ">
             <div class="input-field col s12 m4 offset-m3">
-              <input name="uname" id="uname" type="text" placeholder="jonathanlawhh" class="validate" required>
-							<label for="uname">Username</label>
+              <input name="uname" id="uname" type="text" placeholder="jonathanlawhh" class="validate" onkeyup="checkUsername();" pattern="[0-9A-Za-z_]{3,}" required>
+							<label id="uname-result" for="uname">Username</label>
             </div>
             <div class="col s12 m2">
 							<label for="bday">Birthday</label>
@@ -92,13 +103,13 @@
           </div>
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="pwd" id="pwd" type="password" placeholder="********" class="validate" required>
+              <input name="pwd" id="pwd" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" required>
               <label for="pwd">Password</label>
             </div>
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate" onkeyup="check();" required>
+              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate"  pattern="[0-9A-Za-z_]{7,}" onkeyup="check();" required>
               <label id="txtpasswordcheck" for="pwd2">Retype password</label>
             </div>
           </div>
@@ -129,12 +140,6 @@
     </div>
 
   </main>
-  <footer class="page-footer grey darken-3">
-    <div class="footer-copyright grey darken-4">
-      <div class="container">
-      © 2017 SDP TPM Bookshop
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-      </div>
-    </div>
-  </footer>
+	<?php //Load footer
+    include "ui/footer.html"; ?>
 </body>

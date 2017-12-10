@@ -45,4 +45,17 @@ if (isset($_POST['register'])){
     mysqli_query($conn, $sql);
   }
 }
+
+
+//For ajax check
+if(isset($_POST['uname'])){
+  $username = $_POST["uname"];
+  $checkUsername = "SELECT username FROM user WHERE username='$username'";
+  $checkUserRows=mysqli_query($conn,$checkUsername);
+  if(mysqli_num_rows($checkUserRows) == 0){
+    echo "Username is available";
+  } else {
+    echo "Username exist, please choose another one";
+  }
+}
 ?>
