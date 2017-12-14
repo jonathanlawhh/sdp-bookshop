@@ -1,3 +1,10 @@
+<?php //Check if user has login
+session_start();
+if(isset($_SESSION['tpmb-user'])){
+	header("Location: index.php");
+}
+?>
+
 <head>
 	<title>TPM Bookshop</title>
 	<link rel="icon" href="images/favicon.png">
@@ -12,11 +19,10 @@
 
 <body>
   <main>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">TPM Bookshop</a>
-      </div>
-    </nav>
+    <header>
+			<?php //load header
+			  include "ui/header.php" ?>
+		</header>
 
     <div class="container" >
       <div class="row" style="margin-top:5%;">
@@ -53,9 +59,11 @@
             </div>
           </div>
           <div class="row col s12">
-            <p class="col s12 m3 offset-m3" style="margin-top:0;">
-              <input name="rememberMe" type="checkbox" id="rmbMe" <?php if(isset($_COOKIE['tpmb-username'])){ echo "checked"; }?>/>
-              <label for="rmbMe">Remember Me</label>
+            <p class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top:0;">
+							<label>
+				        <input name="rememberMe" type="checkbox" id="rmbMe" <?php if(isset($_COOKIE['tpmb-username'])){ echo "checked"; }?>/>
+				        <span>Remember Me</span>
+				      </label>
               <button name="login" type="submit" class="waves-effect waves-light btn" style="margin-left:10%;">Login</button>
             </p>
 

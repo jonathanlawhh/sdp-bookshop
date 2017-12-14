@@ -3,7 +3,7 @@
       <nav>
         <div class="nav-wrapper brown darken-4">
           <div class="container">
-          <a href="#!" class="brand-logo" style="margin-left:50px;"><i class="material-icons">book</i>TPM Bookshop</a>
+          <a href="index.php" class="brand-logo" style="margin-left:50px;"><i class="material-icons">book</i>TPM Bookshop</a>
           <ul class="right hide-on-med-and-down">
             <li><a href="category.php">Browse by category</a></li>
             <?php if(isset($_SESSION['tpmb-user'])){ ?>
@@ -12,7 +12,7 @@
                 <li><a href="#!"><i class="material-icons left">hourglass_emptys</i>History</a></li>
                 <li><a href="#!"><i class="material-icons left">settings</i>Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="#!"><i class="material-icons left">directions_walk</i>Logout</a></li>
+                <li><a href="php/logout.php"><i class="material-icons left">directions_walk</i>Logout</a></li>
               </ul>
             <?php } else { ?>
               <li><a href="login.php">Login</a></li>

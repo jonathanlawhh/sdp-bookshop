@@ -13,6 +13,10 @@
   $(document).ready(function(){
     $('.carousel').carousel();
   });
+	$(document).ready(function(){
+    $('.scrollspy').scrollSpy();
+  });
+
   </script>
 </head>
 
@@ -21,6 +25,14 @@
   include "ui/header.php" ?>
 
 <main>
+	<div class="col hide-on-small-only m3 l2" style="right:6%; margin-top:5%; position:fixed;">
+      <ul class="section table-of-contents">
+        <li>Fast jump</li>
+        <li><a href="#book-new">Newly released books</a></li>
+        <li><a href="#book-recc">Reccomended for you</a></li>
+        <li><a href="#book-rate">Top rating books</a></li>
+      </ul>
+    </div>
 <div class="container">
   <div class="row" style="margin-top:4%;">
     <form>
@@ -32,9 +44,8 @@
       </div>
     </form>
   </div>
-
-  <h4 class="left-align col s12 m6 offset-m3">Newly released books</h4>
-  <div class="divider col s12 m6 offset-m3"></div>
+  <h4 id="book-new" class="left-align col s12 m6 offset-m3 scrollspy">Newly released books</h4>
+  <div class="divider line"></div>
   <div class="carousel">
     <a class="carousel-item" href="#one!"><img src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg"></a>
     <a class="carousel-item" href="#two!"><img src="https://wallpaperclicker.com/storage/wallpaper/High-Definition-Ultra-HD-Wallpaper-96262544.jpg"></a>
@@ -43,9 +54,9 @@
     <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
   </div>
 
-  <h4 class="left-align col s12 m6 offset-m3">Books reccomended for you</h4>
+  <h4 id="book-recc" class="left-align col s12 m6 offset-m3 scrollspy">Books reccomended for you</h4>
   Based on your preferences
-  <div class="divider col s12 m6 offset-m3"></div>
+  <div class="divider line"></div>
 
   <?php //Use loop here ?>
   <div class="row section">
@@ -62,9 +73,9 @@
     </div>
   </div>
 
-  <h4 class="left-align col s12 m6 offset-m3">Top rating books</h4>
+  <h4 id="book-rate" class="left-align col s12 m6 offset-m3 scrollspy">Top rating books</h4>
   Based on users rating
-  <div class="divider col s12 m6 offset-m3"></div>
+  <div class="divider line"></div>
 
   <?php //Use loop here ?>
   <div class="row section">

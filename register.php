@@ -33,11 +33,10 @@
 
 <body>
   <main>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">TPM Bookshop Member Area</a>
-      </div>
-    </nav>
+    <header>
+			<?php //load header
+			  include "ui/header.php" ?>
+		</header>
 
     <div class="container" >
       <div class="row" style="margin-top:4%;">
@@ -72,17 +71,23 @@
           </div>
           <div class="row col s12 ">
             <div class="input-field col s12 m3 offset-m3">
-              <input name="pnumber" id="pnumber" type="number" placeholder="0123456789" class="validate" required>
+              <input name="pnumber" id="pnumber" type="tel" placeholder="0123456789" class="validate" required>
               <label for="pnumber">Phone Number</label>
             </div>
             <div class="col s12 m3">
 							<label class="col s12">I identify as</label><br />
-					      <input name="gender" type="radio" id="male" value="male" required/>
-					      <label for="male">Male</label>
-					      <input name="gender" type="radio" id="female" value="female" required/>
-					      <label for="female">Female</label>
-					      <input name="gender" type="radio" id="others" value="others" required/>
-					      <label for="others">Others</label>
+								<label>
+					        <input name="gender" type="radio" id="male" value="male" required/>
+					        <span>Male</span>
+					      </label>
+								<label>
+					        <input name="gender" type="radio" id="female" value="female" required/>
+					        <span>Female</span>
+					      </label>
+								<label>
+					        <input name="gender" type="radio" id="others" value="others" required/>
+					        <span>Others</span>
+					      </label>
             </div>
           </div>
           <div class="row col s12 ">
@@ -115,8 +120,10 @@
           </div>
           <div class="row col s12">
             <p class="col s12 offset-m3" style="margin-top:0;">
-              <input type="checkbox" id="tnc" required/>
-              <label for="tnc">I agree to the terms and condition <a href="tnc.html" target="_blank">here</a></label>
+							<label>
+				        <input type="checkbox" id="tnc" required/>
+				        <span>I agree to the terms and condition <a href="tnc.html" target="_blank">here</a></span>
+				      </label>
             </p>
 					<div class="row col s12 offset-m3">
 						<button type="reset" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">autorenew</i>Reset</button>

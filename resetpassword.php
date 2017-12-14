@@ -12,11 +12,10 @@
 
 <body>
   <main>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo center">TPM Bookshop</a>
-      </div>
-    </nav>
+    <header>
+			<?php //load header
+			  include "ui/header.php" ?>
+		</header>
 
     <div class="container" >
       <div class="row" style="margin-top:5%;">
@@ -41,7 +40,7 @@
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="pnumber" id="pnumber" type="number" placeholder="0123456789" class="validate">
+              <input name="pnumber" id="pnumber" type="tel" placeholder="0123456789" class="validate">
               <label for="pnumber">Phone number used to register</label>
             </div>
           </div>

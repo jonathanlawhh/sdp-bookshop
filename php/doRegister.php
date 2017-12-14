@@ -55,7 +55,7 @@ if(isset($_POST['uname'])){
   if(mysqli_num_rows($checkUserRows) == 0){
     echo "Username is available";
   } else {
-    echo "Username exist, please choose another one";
+    echo "Username is being used :(";
   }
 }
 ?>
