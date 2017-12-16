@@ -5,10 +5,9 @@
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript">
+
 	function checkUsername(){
 	 var name=document.getElementById( "uname" ).value;
 	 if(name){
@@ -44,6 +43,7 @@
 	         <p><a href="login.php"><i class="material-icons left">arrow_back</i> Go back to login</a></p>
 	      </div>
 				<h4 class="left-align col s12 m6 offset-m3">Registration</h4>
+
 				<?php //Display register failure
 				if (isset($_GET['register'])){
 					if($_GET['register'] == 1){
@@ -77,16 +77,16 @@
             <div class="col s12 m3">
 							<label class="col s12">I identify as</label><br />
 								<label>
-					        <input name="gender" type="radio" id="male" value="male" required/>
-					        <span>Male</span>
+									<input name="gender" type="radio" id="male" value="male" required/>
+      						<label for="male">Male</label>
 					      </label>
 								<label>
-					        <input name="gender" type="radio" id="female" value="female" required/>
-					        <span>Female</span>
+									<input name="gender" type="radio" id="female" value="female" required/>
+      						<label for="female">Female</label>
 					      </label>
 								<label>
-					        <input name="gender" type="radio" id="others" value="others" required/>
-					        <span>Others</span>
+									<input name="gender" type="radio" id="others" value="others" required/>
+      						<label for="others">Others</label>
 					      </label>
             </div>
           </div>
@@ -120,33 +120,35 @@
           </div>
           <div class="row col s12">
             <p class="col s12 offset-m3" style="margin-top:0;">
-							<label>
-				        <input type="checkbox" id="tnc" required/>
-				        <span>I agree to the terms and condition <a href="tnc.html" target="_blank">here</a></span>
-				      </label>
+							<input type="checkbox" id="tnc" required/>
+				      <label for="tnc">I agree to the terms and condition <a href="tnc.html" target="_blank">here</a></label>
             </p>
-					<div class="row col s12 offset-m3">
-						<button type="reset" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">autorenew</i>Reset</button>
-						<button name="register" value="register" type="submit" class="waves-effect waves-light btn"><i class="material-icons left">create</i>Register</button>
-					</div>
-
+						<div class="row col s12 offset-m3">
+							<button type="reset" class="waves-effect waves-light btn orange darken-4"><i class="material-icons left">autorenew</i>Reset</button>
+							<button name="register" value="register" type="submit" class="waves-effect waves-light btn"><i class="material-icons left">create</i>Register</button>
+						</div>
           </div>
         </form>
-				<script>
-	        var check = function() {
-	            if (document.getElementById('pwd').value !== document.getElementById('pwd2').value) {
-	                document.getElementById('txtpasswordcheck').style.color = 'red';
-	                document.getElementById('txtpasswordcheck').innerHTML = 'Retype password : Password do not match';
-	            } else {
-								document.getElementById('txtpasswordcheck').style.color = '';
-								document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
-							}
-	        }
-	    </script>
       </div>
     </div>
 
   </main>
+
 	<?php //Load footer
     include "ui/footer.html"; ?>
 </body>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+	var check = function() {
+			if (document.getElementById('pwd').value !== document.getElementById('pwd2').value) {
+					document.getElementById('txtpasswordcheck').style.color = 'red';
+					document.getElementById('txtpasswordcheck').innerHTML = 'Retype password : Password do not match';
+			} else {
+				document.getElementById('txtpasswordcheck').style.color = '';
+				document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
+			}
+	}
+</script>

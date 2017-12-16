@@ -60,10 +60,8 @@ if(isset($_SESSION['tpmb-user'])){
           </div>
           <div class="row col s12">
             <p class="col s12 m6 l6 offset-m3 offset-l3" style="margin-top:0;">
-							<label>
-				        <input name="rememberMe" type="checkbox" id="rmbMe" <?php if(isset($_COOKIE['tpmb-username'])){ echo "checked"; }?>/>
-				        <span>Remember Me</span>
-				      </label>
+							<input name="rememberMe" type="checkbox" id="rmbMe" <?php if(isset($_COOKIE['tpmb-username'])){ echo "checked"; }?>/>
+				      <label for="rmbMe">Remember Me</label>
               <button name="login" type="submit" class="waves-effect waves-light btn" style="margin-left:10%;">Login</button>
             </p>
 
