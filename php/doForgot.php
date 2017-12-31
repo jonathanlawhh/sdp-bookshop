@@ -3,18 +3,9 @@ include "connect.php";
 
 if (isset($_POST['resetMe'])){
 
-  //Prevent unknown symbols and XSS
-  function scanner($input){
-    if (preg_match('/[\'"^$&%*}{#~?><>,|;]/', $input)){
-       $fail = 1;
-       echo "<script>window.location = '../login.php?loginfailure=2'; exit();</script>";
-    } else {
-      return $input;
-    }
-  }
-  $username = scanner($_POST['username']);
-  $pnumber = scanner($_POST["pnumber"]);
-  $email = scanner($_POST["email"]);
+  $username = scanner($_POST['username'],'../login.php?loginfailure=2');
+  $pnumber = scanner($_POST["pnumber"],'../login.php?loginfailure=2');
+  $email = scanner($_POST["email"],'../login.php?loginfailure=2');
 
   //Check if user exist. If yes, do not continue
   $checkUsername = "SELECT username,pnumber,email FROM user WHERE username='$username' AND pnumber='$pnumber' AND email='$email'";

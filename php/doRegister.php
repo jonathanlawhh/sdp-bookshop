@@ -3,25 +3,16 @@ include "connect.php";
 
 if (isset($_POST['register'])){
 
-  //Prevent unknown symbols and XSS
-  function scanner($input){
-    if (preg_match('/[\'"^$&%*}{#~?><>,|;]/', $input)){
-       $fail = 1;
-       echo "<script>window.location = '../register.php?register=2'; exit();</script>";
-    } else {
-      return $input;
-    }
-  }
-  $username = scanner($_POST['uname']);
-  $fname = scanner($_POST['fname']);
-  $lname = scanner($_POST['lname']);
-  $email = scanner($_POST['email']);
-  $gender = scanner($_POST['gender']);
-  $pnumber = scanner($_POST['pnumber']);
-  $pnumber = scanner($_POST['pnumber']);
-  $bday = scanner($_POST["bday"]);
-  $date = scanner(date("Ymd"));
-  $password = scanner($_POST["pwd"]);
+  $username = scanner($_POST['uname'],'../register.php?register=2');
+  $fname = scanner($_POST['fname'],'../register.php?register=2');
+  $lname = scanner($_POST['lname'],'../register.php?register=2');
+  $email = scanner($_POST['email'],'../register.php?register=2');
+  $gender = scanner($_POST['gender'],'../register.php?register=2');
+  $pnumber = scanner($_POST['pnumber'],'../register.php?register=2');
+  $pnumber = scanner($_POST['pnumber'],'../register.php?register=2');
+  $bday = scanner($_POST["bday"],'../register.php?register=2');
+  $date = scanner(date("Ymd"),'../register.php?register=2');
+  $password = scanner($_POST["pwd"],'../register.php?register=2');
   //Lets encrypt the Password
   $salt = $username . "tpmb";
   $epassword = crypt($password, $salt);
@@ -52,10 +43,12 @@ if(isset($_POST['uname'])){
   $username = $_POST["uname"];
   $checkUsername = "SELECT username FROM user WHERE username='$username'";
   $checkUserRows=mysqli_query($conn,$checkUsername);
-  if(mysqli_num_rows($checkUserRows) == 0){
-    echo "Username is available";
-  } else {
-    echo "Username is being used :(";
-  }
+  if (preg_match('/[\'"^$&%*}{#~?><>,|;]/', $username)){
+       echo "Invalid characters detected";
+  } elseif(mysqli_num_rows($checkUserRows) == 0){
+      echo "Username is available";
+    } else {
+      echo "Username is being used :(";
+    }
 }
 ?>

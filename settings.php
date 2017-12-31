@@ -25,7 +25,7 @@ include "php/userData.php";
 
     <div class="container" >
         <div class="row margintop4">
-          <div class="col m12 l6 offset-l2">
+          <div class="col s12 m12 l6 offset-l2">
             <div class="section">
             <div class="card-panel">
               <span>
@@ -35,14 +35,14 @@ include "php/userData.php";
                     <div class="row">
                       <div class="input-field">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="fname" id="fname" type="text" class="validate" value=<?php echo $fname; ?> required>
+                        <input name="fname" id="fname" type="text" class="validate" value=<?php echo $fname; ?> pattern="[A-Za-z]{2,}" required>
                         <label for="fname">First Name</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="input-field">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="lname" id="lname" type="text" class="validate" value=<?php echo $lname; ?> required>
+                        <input name="lname" id="lname" type="text" class="validate" value=<?php echo $lname; ?> pattern="[A-Za-z]{2,}"required>
                         <label for="lname">Last Name</label>
                       </div>
                     </div>
@@ -53,6 +53,7 @@ include "php/userData.php";
                         <label for="email">Email</label>
                       </div>
                     </div>
+                    <button name="update" type="submit" class="waves-effect waves-light btn"><i class="material-icons prefix left">edit</i>Update</button>
                   </form>
                 </div>
               </span>
@@ -64,6 +65,7 @@ include "php/userData.php";
                 <span>
                   <div class="section">
                     <h4><b>Password</b></h4><br>
+                    <form method="POST" action="php/changeSettings.php">
                     <div class="row">
                       <div class="input-field">
                         <i class="material-icons prefix">security</i>
@@ -72,15 +74,17 @@ include "php/userData.php";
                       </div>
                       <div class="input-field">
                         <i class="material-icons prefix">security</i>
-                        <input name="npassword" id="npassword" type="password" placeholder="********" class="validate" required>
-                        <label for="npassword">New password</label>
+                        <input name="pwd" id="pwd" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" required>
+                        <label for="pwd">New password</label>
                       </div>
                       <div class="input-field">
                         <i class="material-icons prefix">security</i>
-                        <input name="valpassword" id="valpassword" type="password" placeholder="********" class="validate" required>
-                        <label for="valpassword">Retype new password</label>
+                        <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" onkeyup="check();" required>
+                        <label for="pwd2" id="txtpasswordcheck">Retype new password</label>
                       </div>
                     </div>
+                    <button name="chgpw" type="submit" class="waves-effect waves-light btn"><i class="material-icons prefix left">track_changes</i>Change</button>
+                  </form>
                   </div>
                 </span>
               </div>
@@ -97,3 +101,14 @@ include "php/userData.php";
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
+<script>
+	var check = function() {
+			if (document.getElementById('pwd').value !== document.getElementById('pwd2').value) {
+					document.getElementById('txtpasswordcheck').style.color = 'red';
+					document.getElementById('txtpasswordcheck').innerHTML = 'Retype password : Password do not match';
+			} else {
+				document.getElementById('txtpasswordcheck').style.color = '';
+				document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
+			}
+	}
+</script>

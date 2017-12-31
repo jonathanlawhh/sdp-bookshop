@@ -3,17 +3,8 @@ include "connect.php";
 
 if (isset($_POST['login'])){
 
-  //Prevent unknown symbols and XSS
-  function scanner($input){
-    if (preg_match('/[\'"^$&%*}{#~?><>,|;]/', $input)){
-       $fail = 1;
-       echo "<script>window.location = '../login.php?loginfailure=2'; exit();</script>";
-    } else {
-      return $input;
-    }
-  }
-  $username = scanner($_POST['username']);
-  $password = scanner($_POST["password"]);
+  $username = scanner($_POST['username'],'../login.php?loginfailure=2');
+  $password = scanner($_POST["password"],'../login.php?loginfailure=2');
   //Lets encrypt the Password
   $salt = $username . "tpmb";
   $epassword = crypt($password, $salt);

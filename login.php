@@ -41,7 +41,7 @@ if(isset($_SESSION['tpmb-user'])){
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
               <i class="material-icons prefix">account_circle</i>
-              <input name="username" id="username" type="text"
+              <input name="username" id="username" type="text" pattern="[0-9A-Za-z_]{3,}"
 							<?php //Do cookie
 							if(isset($_COOKIE['tpmb-username'])){
 								echo "value=" . "'" . $_COOKIE['tpmb-username'] . "'";
@@ -54,7 +54,7 @@ if(isset($_SESSION['tpmb-user'])){
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
               <i class="material-icons prefix">security</i>
-              <input name="password" id="password" type="password" placeholder="********" class="validate" required>
+              <input name="password" id="password" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" required>
               <label for="password">Password</label>
             </div>
           </div>

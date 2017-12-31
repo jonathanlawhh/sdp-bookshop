@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();
+?>
 <head>
 	<title>TPM Bookshop</title>
 	<link rel="icon" href="images/favicon.png">
@@ -49,6 +50,7 @@
   <div class="carousel">
     <a class="carousel-item" href="#one!"><img src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg"></a>
     <a class="carousel-item" href="#two!"><img src="https://wallpaperclicker.com/storage/wallpaper/High-Definition-Ultra-HD-Wallpaper-96262544.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="books/thumbnail/harrypotter-cursed-small.png"></a>
   </div>
 
   <h4 id="book-recc" class="left-align col s12 m6 offset-m3 scrollspy">Books reccomended for you</h4>
@@ -60,7 +62,7 @@
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" height="200px" src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg">
+          <img class="activator" height="250px" src="books/thumbnail/harrypotter-cursed-small.png">
         </div>
         <div class="card-content">
           <span class="grey-text text-darken-4">Book name</span>
@@ -79,7 +81,7 @@
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" height="200px" src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg">
+          <img class="activator" height="250px" src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg">
         </div>
         <div class="card-content">
           <span class="grey-text text-darken-4">Book name</span>

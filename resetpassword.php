@@ -34,7 +34,7 @@
         <form action="php/doForgot.php" method="POST" class="col s12"  style="margin-top:3%;">
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="username" id="username" type="text" placeholder="mary1234" class="validate">
+              <input name="username" id="username" type="text" placeholder="mary1234" pattern="[0-9A-Za-z_]{3,}" class="validate">
               <label for="username">Username</label>
             </div>
           </div>

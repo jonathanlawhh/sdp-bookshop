@@ -59,7 +59,7 @@
 				?>
 				<div class="divider col s12 m6 offset-m3"></div>
         <form action="php/doRegister.php" method="POST" class="col s12" style="margin-top:4%;">
-          <div class="row col s12 ">
+          <div class="row col s12">
             <div class="input-field col s12 m3 offset-m3">
               <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" pattern="[A-Za-z]{2,}" required>
               <label for="fname">First Name</label>
@@ -114,7 +114,7 @@
           </div>
           <div class="row col s12 " style="margin-bottom:0;">
             <div class="input-field col s12 m6 offset-m3">
-              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate"  pattern="[0-9A-Za-z_]{7,}" onkeyup="check();" required>
+              <input name="pwd2" id="pwd2" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" onkeyup="check();" required>
               <label id="txtpasswordcheck" for="pwd2">Retype password</label>
             </div>
           </div>
