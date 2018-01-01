@@ -1,8 +1,10 @@
 <?php
 //Use to prevent people from coming in
-//if(!isset($_SESSION['tpmb-user'])){
-//	header("Location: ../index.php");
-//}
+function checkLoginStatus(){
+  if(!isset($_SESSION['tpmb-user'])){
+  	header("Location: ../index.php");
+  }
+}
 
 $servername = "localhost";
 $username = "root";

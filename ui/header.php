@@ -15,7 +15,13 @@
                 <li><a href="php/logout.php"><i class="material-icons left">directions_walk</i>Logout</a></li>
               </ul>
             <?php } else { ?>
-              <li><a href="login.php">Login</a></li>
+              <li><a id="menu" href="login.php">Login</a></li>
+              <div class="tap-target deep-purple darken-4" data-activates="menu">
+                <div class="tap-target-content ">
+                  <h5>Hey there!!</h5>
+                  <p>Do consider registering or logging in :)</p>
+                </div>
+              </div>
             <?php } ?>
           </ul>
           </div>

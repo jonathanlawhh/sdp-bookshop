@@ -1,0 +1,46 @@
+<?php session_start();
+include "php/connect.php";
+
+$i = 1;
+$searchterm = scanner($_POST['searchterm'],'404.php');
+
+$getBook = "SELECT * FROM book WHERE bookISBN LIKE '%$searchterm%' OR bookname LIKE '%$searchterm%' OR bookauthor LIKE '%$searchterm%'";
+$bookArray=mysqli_query($conn,$getBook);
+?>
+<head>
+	<title>TPM Bookshop</title>
+	<link rel="icon" href="images/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<script>
+function goBack() {
+	window.history.back();
+}
+</script>
+
+<body>
+<?php //load header
+  include "ui/header.php";?>
+
+  <main class="container">
+    <div class="row" style="margin-top:4%;">
+			<?php include "ui/searchUI.php"; ?>
+    </div>
+    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Search results</h4>
+    <div class="divider line"></div>
+		<?php while($book = mysqli_fetch_array($bookArray)){ ?>
+    <div class="row section">
+      <h5><?php echo $i . " . " . $book['bookname']; ?></h5>
+    </div>
+		<div class="divider">
+		<?php $i += 1; } ?>
+  </main>
+  <?php //Load footer
+    include "ui/footer.html"; ?>
+</body>

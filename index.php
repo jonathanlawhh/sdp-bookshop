@@ -36,14 +36,7 @@
     </div>
 <div class="container">
   <div class="row margintop4">
-    <form>
-      <div class="row">
-        <div class="input-field col s12 m8 l6">
-          <input placeholder="Harry potter" id="searchterm" type="text" class="validate">
-          <label for="searchterm">Use me to search</label>
-        </div>
-      </div>
-    </form>
+    <?php include "ui/searchUI.php"; ?>
   </div>
   <h4 id="book-new" class="left-align col s12 m6 offset-m3 scrollspy">Newly released books</h4>
   <div class="divider line"></div>

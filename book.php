@@ -1,5 +1,8 @@
 <?php session_start();
 include "php/connect.php";
+if(!isset($_SESSION['tpmb-user'])){
+	$loginStatus=0;
+} else { $loginStatus=1;}
 $getBook = "SELECT * FROM book WHERE bookISBN='b-00001'";
 $bookArray=mysqli_query($conn,$getBook);
 ?>
@@ -14,6 +17,14 @@ $bookArray=mysqli_query($conn,$getBook);
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+<script>
+function goBack() {
+	window.history.back();
+}
+function forceLogin(){
+ $('.tap-target').tapTarget('open');
+}
+</script>
 
 <body>
 <?php //load header
@@ -21,16 +32,14 @@ $bookArray=mysqli_query($conn,$getBook);
   while($book = mysqli_fetch_array($bookArray)){?>
   <main class="container">
     <div class="row" style="margin-top:4%;">
-      <div class="input-field col s12 m8 l6">
-        <input placeholder="Harry potter" id="searchterm" type="text" class="validate">
-        <label for="searchterm">Use me to search</label>
-      </div>
+			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;"><?php echo $book['bookname']; ?></h4>
+    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $book['bookname']; ?></h4>
     <div class="divider line"></div>
 
     <div style="margin-top:1%;" class="chip"><a href="?category=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><a href="?search=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
+    <div style="margin-top:1%;" class="chip"><?php echo $book['bookpages']; ?> pages</div>
 
     <div class="row section">
       <div class="col s6 m4 l2 offset-m3 offset-s3">
@@ -47,7 +56,11 @@ $bookArray=mysqli_query($conn,$getBook);
       <div class="col l6">
         <p><?php echo $book['bookdesc']; ?></p>
       </div>
-      <a class="waves-effect waves-light btn right"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
+			<?php if($loginStatus==1){ ?>
+      	<a class="waves-effect waves-light btn right" onclick="addToCart()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
+			<?php } else { ?>
+				<a class="waves-effect waves-light btn right" onclick="forceLogin()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
+			<?php } ?>
     </div>
   </main>
   <?php //Load footer
