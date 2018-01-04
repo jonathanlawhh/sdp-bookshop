@@ -2,7 +2,7 @@
 //Use to prevent people from coming in
 function checkLoginStatus(){
   if(!isset($_SESSION['tpmb-user'])){
-  	header("Location: ../index.php");
+  	header("Location: 404.php");
   }
 }
 

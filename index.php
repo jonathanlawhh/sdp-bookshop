@@ -1,4 +1,5 @@
 <?php session_start();
+include "php/connect.php";
 ?>
 <head>
 	<title>TPM Bookshop</title>
@@ -41,9 +42,12 @@
   <h4 id="book-new" class="left-align col s12 m6 offset-m3 scrollspy">Newly released books</h4>
   <div class="divider line"></div>
   <div class="carousel">
-    <a class="carousel-item" href="#one!"><img src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg"></a>
-    <a class="carousel-item" href="#two!"><img src="https://wallpaperclicker.com/storage/wallpaper/High-Definition-Ultra-HD-Wallpaper-96262544.jpg"></a>
-    <a class="carousel-item" href="#two!"><img src="books/thumbnail/harrypotter-cursed-small.png"></a>
+		<?php //Query for new book
+		$getNewBook = "SELECT * FROM book ORDER BY bookdateadd DESC LIMIT 5";
+		$newBooksQuery=mysqli_query($conn,$getNewBook);
+		while($newBook = mysqli_fetch_array($newBooksQuery)){?>
+    	<a class="carousel-item" href="book.php?bookid=<?php echo $newBook['bookISBN']; ?>"><img src="books/cover/<?php echo $newBook['bookthumbnail']; ?>"></a>
+		<?php } ?>
   </div>
 
   <h4 id="book-recc" class="left-align col s12 m6 offset-m3 scrollspy">Books reccomended for you</h4>

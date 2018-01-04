@@ -3,7 +3,8 @@ include "php/connect.php";
 if(!isset($_SESSION['tpmb-user'])){
 	$loginStatus=0;
 } else { $loginStatus=1;}
-$getBook = "SELECT * FROM book WHERE bookISBN='b-00001'";
+$currentBook=$_GET['bookid'];
+$getBook = "SELECT * FROM book WHERE bookISBN='$currentBook'";
 $bookArray=mysqli_query($conn,$getBook);
 ?>
 <head>
@@ -19,7 +20,7 @@ $bookArray=mysqli_query($conn,$getBook);
 </head>
 <script>
 function goBack() {
-	window.history.back();
+	history.go(-1);
 }
 function forceLogin(){
  $('.tap-target').tapTarget('open');
@@ -38,7 +39,7 @@ function forceLogin(){
     <div class="divider line"></div>
 
     <div style="margin-top:1%;" class="chip"><a href="?category=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
-    <div style="margin-top:1%;" class="chip"><a href="?search=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
+    <div style="margin-top:1%;" class="chip"><a href="search.php?searchterm=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpages']; ?> pages</div>
 
     <div class="row section">

@@ -1,4 +1,4 @@
-<form action="search.php" method="POST">
+<form action="search.php" method="GET">
   <span>
     <div class="input-field col s12 m8 l6">
       <input placeholder="Harry potter" id="searchterm" type="text" class="validate" name="searchterm">

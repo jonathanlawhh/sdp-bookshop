@@ -2,7 +2,11 @@
 include "php/connect.php";
 
 $i = 1;
-$searchterm = scanner($_POST['searchterm'],'404.php');
+if(isset($_GET['searchterm'])){
+	$searchterm = scanner($_GET['searchterm'],'404.php');
+} else {
+	$searchterm = "";
+}
 
 $getBook = "SELECT * FROM book WHERE bookISBN LIKE '%$searchterm%' OR bookname LIKE '%$searchterm%' OR bookauthor LIKE '%$searchterm%'";
 $bookArray=mysqli_query($conn,$getBook);
@@ -36,9 +40,15 @@ function goBack() {
     <div class="divider line"></div>
 		<?php while($book = mysqli_fetch_array($bookArray)){ ?>
     <div class="row section">
-      <h5><?php echo $i . " . " . $book['bookname']; ?></h5>
+			<img style="float:left;" height="150px" src="books/cover/<?php echo $book['bookthumbnail']; ?>">
+			<div style="float:left; margin-left:4%;">
+      <h5><a href="book.php?bookid=<?php echo $book['bookISBN']; ?>"><?php echo $i . " . " . $book['bookname']; ?></a></h5>
+			<div class="chip"><a href="?category=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
+	    <div class="chip"><a href="?searchterm=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
+	    <div class="chip"><?php echo $book['bookpages']; ?> pages</div>
+			</div>
     </div>
-		<div class="divider">
+		<div class="divider"></div>
 		<?php $i += 1; } ?>
   </main>
   <?php //Load footer

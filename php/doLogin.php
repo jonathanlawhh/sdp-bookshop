@@ -1,7 +1,6 @@
 <?php
 include "connect.php";
 
-checkLoginStatus();
 if (isset($_POST['login'])){
 
   $username = scanner($_POST['username'],'../login.php?loginfailure=2');

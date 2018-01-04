@@ -1,9 +1,7 @@
 <?php //Check if user has login
 session_start();
-if(!isset($_SESSION['tpmb-user'])){
-	header("Location: index.php");
-}
 include "php/userData.php";
+checkLoginStatus();
 ?>
 
 <head>
@@ -53,6 +51,36 @@ include "php/userData.php";
                         <label for="email">Email</label>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="input-field">
+                        <i class="material-icons prefix">local_phone</i>
+                        <input name="pnumber" id="pnumber" type="tel" class="validate" value=<?php echo $pnumber; ?> required>
+                        <label for="pnumber">Phone Number</label>
+                      </div>
+                    </div>
+										<div class="row">
+												<i class="material-icons prefix">date_range</i>
+												<label for="bday">Birthday</label>
+					              <input name="bday" id="bday" type="date" value="<?php echo $bday; ?>" required>
+                    </div>
+                    <div class="row">
+											<div class="col s12">
+												<label class="col s12">I identify as</label><br />
+													<label>
+														<input name="gender" type="radio" id="male" value="male" <?php if($gender=="male"){ echo 'checked'; } ?> required/>
+					      						<label for="male">Male</label>
+										      </label>
+													<label>
+														<input name="gender" type="radio" id="female" value="female" <?php if($gender=="female"){ echo 'checked'; } ?> required/>
+					      						<label for="female">Female</label>
+										      </label>
+													<label>
+														<input name="gender" type="radio" id="others" value="others" <?php if($gender=="others"){ echo 'checked'; } ?> required/>
+					      						<label for="others">Others</label>
+										      </label>
+					            </div>
+                    </div>
+
                     <button name="update" type="submit" class="waves-effect waves-light btn"><i class="material-icons prefix left">edit</i>Update</button>
                   </form>
                 </div>
