@@ -2,11 +2,10 @@
 include "php/connect.php";
 if(!isset($_SESSION['tpmb-user'])){
 	$loginStatus=0;
-} else { $loginStatus=1;}
+} else { $currentUser = $_SESSION['tpmb-user']; $loginStatus=1;}
 $currentBook=$_GET['bookid'];
-$getBook = "SELECT * FROM book WHERE bookISBN='$currentBook'";
-$bookArray=mysqli_query($conn,$getBook);
 ?>
+
 <head>
 	<title>TPM Bookshop</title>
 	<link rel="icon" href="images/favicon.png">
@@ -15,6 +14,7 @@ $bookArray=mysqli_query($conn,$getBook);
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -30,6 +30,10 @@ function forceLogin(){
 <body>
 <?php //load header
   include "ui/header.php";
+
+	//Query for book details
+	$getBook = "SELECT * FROM book WHERE bookISBN='$currentBook'";
+	$bookArray=mysqli_query($conn,$getBook);
   while($book = mysqli_fetch_array($bookArray)){?>
   <main class="container">
     <div class="row" style="margin-top:4%;">
@@ -63,6 +67,99 @@ function forceLogin(){
 				<a class="waves-effect waves-light btn right" onclick="forceLogin()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
 			<?php } ?>
     </div>
+
+		<h5>Users feedbacks and ratings</h5>
+		<div class="divider line"></div>
+    <div class="row section">
+			<canvas id="myChart" width="500" height="100"></canvas>
+			<script>
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+			    type: 'doughnut',
+			    data: {
+			        labels: ["Very Bad", "Bad", "Average", "Good", "Reccomended"],
+			        datasets: [{
+			            label: '# of Votes',
+									data: [
+									<?php //Make rating into a nice chart
+									$checkBookRatingQuery = "SELECT rating, COUNT(rating) AS result FROM bookrating WHERE bookISBN='$currentBook' GROUP BY rating";
+									$executeBookRating = mysqli_query($conn,$checkBookRatingQuery);
+									while($bookRating = mysqli_fetch_array($executeBookRating)){
+										echo $bookRating['result'] . ","; }?>
+			            ],
+									backgroundColor: ["#ff6384", "#36a2eb", "#cc65fe"]
+			        }]
+			    }
+			});
+			</script>
+    </div>
+		<ul class="collapsible" data-collapsible="expandable" style="margin-bottom:5%;">
+		<?php //If user is not logged in, do not allow them to give rating or feedback
+		if($loginStatus==1){ ?>
+    <li class="hoverable">
+			<?php //Check if user has rated this book before
+			$checkIfRatedQuery = "SELECT * FROM bookrating WHERE bookISBN='$currentBook' AND username='$currentUser'";
+			$executeRateCheck = mysqli_query($conn,$checkIfRatedQuery);
+			if(mysqli_num_rows($executeRateCheck) > 0){
+				while($rateCheck = mysqli_fetch_array($executeRateCheck)){ ?>
+					<div class="collapsible-header"><i class="material-icons">rate_review</i>You rated this book a <?php echo $rateCheck['rating']; ?> out of 5</div>
+					<div class="collapsible-body">
+						<form action="php/doFeedback.php" method="POST">
+							<label for="slider1">Please rate this book. <br /> 1 is very bad and 5 is extremely good</label>
+					    <p id="slider1" class="range-field">
+					      <input name="rating" type="range" min="1" max="5" value="<?php echo $rateCheck['rating']; ?>" />
+								<input name="bookID" type="hidden" value="<?php echo $currentBook; ?>" />
+								<button name="update-rate" type="submit" class="waves-effect waves-light btn">Update!</button>
+					    </p>
+					  </form>
+					</div>
+		<?php } } else { ?>
+      		<div class="collapsible-header"><i class="material-icons">rate_review</i>Rate this book</div>
+		      <div class="collapsible-body">
+						<form action="php/doFeedback.php" method="POST">
+							<label for="slider1">Please rate this book. <br /> 1 is very bad and 5 is extremely good</label>
+					    <p id="slider1" class="range-field">
+					      <input name="rating" type="range" min="1" max="5" />
+								<input name="bookID" type="hidden" value="<?php echo $currentBook; ?>" />
+								<button name="rate" type="submit" class="waves-effect waves-light btn">Rate!</button>
+					    </p>
+					  </form>
+					</div>
+		<?php } //End of making sure user do not give rating 2 times ?>
+    </li>
+    <li class="hoverable">
+      <div class="collapsible-header"><i class="material-icons">feedback</i>Provide Feedback</div>
+      <div class="collapsible-body">
+				<form action="php/doFeedback.php" method="POST">
+		      <div class="row">
+		        <div class="input-field">
+		          <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
+		          <label for="commment">Enter your feedback</label>
+							<input name="bookID" type="hidden" value="<?php echo $currentBook; ?>" />
+		        </div>
+						<button name="feedback" type="submit" class="waves-effect waves-light btn">Submit!!</button>
+		      </div>
+		    </form>
+			</div>
+    </li>
+	<?php } //End of preventing non login users from giving feedbacks and rating ?>
+
+    <li class="hoverable">
+      <div class="collapsible-header active"><i class="material-icons">chat</i>Users feedback</div>
+      <div class="collapsible-body">
+				<?php //Select all user comments for this book
+				$queryForComments = "SELECT * FROM bookcomment WHERE bookISBN='$currentBook'";
+				$arrayComments = mysqli_query($conn,$queryForComments);
+				while($feedbacks = mysqli_fetch_array($arrayComments)){ ?>
+				<div class="section">
+					<span><?php echo $feedbacks['username'] . " on " . $feedbacks['date'] ?> says :</span>
+					<p><?php echo $feedbacks['comments'] ?></p>
+					<div class="divider"></div>
+				</div>
+			<?php } //End of user comments?>
+			</div>
+    </li>
+  </ul>
   </main>
   <?php //Load footer
     include "ui/footer.html"; ?>

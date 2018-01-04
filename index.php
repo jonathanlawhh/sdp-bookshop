@@ -13,7 +13,7 @@ include "php/connect.php";
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script>
   $(document).ready(function(){
-    $('.carousel').carousel();
+    $('.carousel').carousel({padding:250});
   });
 	$(document).ready(function(){
     $('.scrollspy').scrollSpy();
@@ -73,21 +73,24 @@ include "php/connect.php";
   Based on users rating
   <div class="divider line"></div>
 
-  <?php //Use loop here ?>
   <div class="row section">
+		<?php //Query for top rating books
+		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN ORDER BY br.date DESC LIMIT 5";
+		$executeTopRate=mysqli_query($conn,$queryTopRate);
+		while($topRating = mysqli_fetch_array($executeTopRate)){?>
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" height="250px" src="https://i.pinimg.com/736x/e2/b8/2a/e2b82aded815e80351b929a77519adaa--tropical-wallpapers-tropical-iphone-wallpaper.jpg">
+          <img class="activator" height="250px" src="books/cover/<?php echo $topRating['bookthumbnail'] ?>">
         </div>
         <div class="card-content">
-          <span class="grey-text text-darken-4">Book name</span>
-          <p><a href="#">Click me</a></p>
+          <span class="grey-text text-darken-4"><?php echo $topRating['bookname'] ?></span>
+          <p><a target="_blank" href="book.php?bookid=<?php echo $topRating['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>
     </div>
+		<?php } //End of top rating books ?>
   </div>
-
 
   </div>
 
