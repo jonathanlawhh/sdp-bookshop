@@ -13,10 +13,8 @@ $currentBook=$_GET['bookid'];
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 </head>
 <script>
 function goBack() {
@@ -71,6 +69,28 @@ function forceLogin(){
 		<h5>Users feedbacks and ratings</h5>
 		<div class="divider line"></div>
     <div class="row section">
+			<?php //Make rating into a nice chart
+			$checkBookRatingQuery = "SELECT rating, COUNT(rating) AS result FROM bookrating WHERE bookISBN='$currentBook' GROUP BY rating";
+			$executeBookRating = mysqli_query($conn,$checkBookRatingQuery);
+			$rating01 = $rating02 = $rating03 = $rating04 = $rating05 = 0;
+			while($bookRating = mysqli_fetch_array($executeBookRating)){
+				if($bookRating['rating'] == 1){
+					$rating01=$bookRating['result'];
+				} elseif ($bookRating['rating'] == 2){
+					$rating02=$bookRating['result'];
+				} elseif ($bookRating['rating'] == 3){
+					$rating03=$bookRating['result'];
+				} elseif ($bookRating['rating'] == 4){
+					$rating04=$bookRating['result'];
+				} elseif ($bookRating['rating'] == 5){
+					$rating05=$bookRating['result'];
+				}
+			}
+
+			//Check if this book has any rating. If no, do not show empty chart
+			if($rating01 == 0  && $rating02 == 0  && $rating03 == 0 && $rating04 == 0 && $rating05 == 0){
+				echo "<p class='center-align'>No user gave any feedback for this book yet. Be the first! :)</p>";
+			} else { ?>
 			<canvas id="myChart" width="500" height="100"></canvas>
 			<script>
 			var ctx = document.getElementById("myChart");
@@ -80,19 +100,15 @@ function forceLogin(){
 			        labels: ["Very Bad", "Bad", "Average", "Good", "Reccomended"],
 			        datasets: [{
 			            label: '# of Votes',
-									data: [
-									<?php //Make rating into a nice chart
-									$checkBookRatingQuery = "SELECT rating, COUNT(rating) AS result FROM bookrating WHERE bookISBN='$currentBook' GROUP BY rating";
-									$executeBookRating = mysqli_query($conn,$checkBookRatingQuery);
-									while($bookRating = mysqli_fetch_array($executeBookRating)){
-										echo $bookRating['result'] . ","; }?>
-			            ],
-									backgroundColor: ["#ff6384", "#36a2eb", "#cc65fe"]
+									data: [<?php echo "$rating01,$rating02,$rating03,$rating04,$rating05"; ?>],
+									backgroundColor: ["#ff6384", "#ffb74d", "#36a2eb", "#7986cb", "#4db6ac"]
 			        }]
 			    }
 			});
 			</script>
+		<?php } //End of rating chart ?>
     </div>
+
 		<ul class="collapsible" data-collapsible="expandable" style="margin-bottom:5%;">
 		<?php //If user is not logged in, do not allow them to give rating or feedback
 		if($loginStatus==1){ ?>
@@ -164,4 +180,7 @@ function forceLogin(){
   <?php //Load footer
     include "ui/footer.html"; ?>
 <?php } ?>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>

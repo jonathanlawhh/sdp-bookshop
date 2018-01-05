@@ -1,6 +1,7 @@
 <?php session_start();
 include "php/connect.php";
 
+//$i is for index number beside book name
 $i = 1;
 if(isset($_GET['searchterm'])){
 	$searchterm = scanner($_GET['searchterm'],'404.php');
@@ -8,7 +9,8 @@ if(isset($_GET['searchterm'])){
 	$searchterm = "";
 }
 
-$getBook = "SELECT * FROM book WHERE bookISBN LIKE '%$searchterm%' OR bookname LIKE '%$searchterm%' OR bookauthor LIKE '%$searchterm%'";
+//Query for book
+$getBook = "SELECT * FROM book WHERE bookISBN LIKE '%$searchterm%' OR bookname LIKE '%$searchterm%' OR bookauthor LIKE '%$searchterm%' LIMIT 10";
 $bookArray=mysqli_query($conn,$getBook);
 ?>
 <head>

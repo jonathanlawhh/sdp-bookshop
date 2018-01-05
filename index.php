@@ -43,7 +43,7 @@ include "php/connect.php";
   <div class="divider line"></div>
   <div class="carousel">
 		<?php //Query for new book
-		$getNewBook = "SELECT * FROM book ORDER BY bookdateadd DESC LIMIT 5";
+		$getNewBook = "SELECT * FROM book ORDER BY bookdateadd DESC LIMIT 6";
 		$newBooksQuery=mysqli_query($conn,$getNewBook);
 		while($newBook = mysqli_fetch_array($newBooksQuery)){?>
     	<a class="carousel-item" href="book.php?bookid=<?php echo $newBook['bookISBN']; ?>"><img src="books/cover/<?php echo $newBook['bookthumbnail']; ?>"></a>
@@ -75,7 +75,7 @@ include "php/connect.php";
 
   <div class="row section">
 		<?php //Query for top rating books
-		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN ORDER BY br.date DESC LIMIT 5";
+		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY br.date DESC LIMIT 5";
 		$executeTopRate=mysqli_query($conn,$queryTopRate);
 		while($topRating = mysqli_fetch_array($executeTopRate)){?>
     <div class="col s6 m3 l2">
@@ -84,7 +84,7 @@ include "php/connect.php";
           <img class="activator" height="250px" src="books/cover/<?php echo $topRating['bookthumbnail'] ?>">
         </div>
         <div class="card-content">
-          <span class="grey-text text-darken-4"><?php echo $topRating['bookname'] ?></span>
+          <span class="grey-text text-darken-4 truncate"><?php echo $topRating['bookname'] ?></span>
           <p><a target="_blank" href="book.php?bookid=<?php echo $topRating['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>

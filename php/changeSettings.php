@@ -4,6 +4,7 @@ session_start();
 checkLoginStatus();
 $currentUser = $_SESSION['tpmb-user'];
 
+//Update user details
 if(isset($_POST['update'])){
   $fname = scanner($_POST["fname"],"../settings.php");
   $lname = scanner($_POST["lname"],"../settings.php");
@@ -17,16 +18,20 @@ if(isset($_POST['update'])){
   echo "<script>window.location = '../settings.php'; exit();</script>";
 }
 
+//Change user password
 if(isset($_POST['chgpw'])){
   $opassword = scanner($_POST["opassword"],'../settings.php');
   $pwd = scanner($_POST["pwd"],'../settings.php');
   $pwd2 = scanner($_POST["pwd2"],'../settings.php');
 
+  //Check if first password is same as second password
   if($_POST['pwd'] == $pwd2){
+    //Encrypt
     $salt = $currentUser . "tpmb";
     $oldpassword = crypt($opassword, $salt);
     $newpassword = crypt($pwd2, $salt);
 
+    //Check if old password entered is correct
     $checkOldPassword = "SELECT password FROM user WHERE username='$currentUser' AND password='$oldpassword'";
     $oldPasswordResult=mysqli_query($conn,$checkOldPassword);
       if(mysqli_num_rows($oldPasswordResult)>0){
