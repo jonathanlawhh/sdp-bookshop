@@ -32,7 +32,9 @@ function forceLogin(){
 	//Query for book details
 	$getBook = "SELECT * FROM book WHERE bookISBN='$currentBook'";
 	$bookArray=mysqli_query($conn,$getBook);
-  while($book = mysqli_fetch_array($bookArray)){?>
+  while($book = mysqli_fetch_array($bookArray)){
+	setcookie("tpmb-recc", $book['bookcategory'], time() + 31536000, '/');
+	?>
   <main class="container">
     <div class="row" style="margin-top:4%;">
 			<?php include "ui/searchUI.php"; ?>

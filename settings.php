@@ -33,14 +33,14 @@ checkLoginStatus();
                     <div class="row">
                       <div class="input-field">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="fname" id="fname" type="text" class="validate" value=<?php echo $fname; ?> pattern="[A-Za-z]{2,}" required>
+                        <input name="fname" id="fname" type="text" class="validate" value=<?php echo $fname; ?> pattern="[A-Za-z\s]{2,}" required>
                         <label for="fname">First Name</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="input-field">
                         <i class="material-icons prefix">account_circle</i>
-                        <input name="lname" id="lname" type="text" class="validate" value=<?php echo $lname; ?> pattern="[A-Za-z]{2,}"required>
+                        <input name="lname" id="lname" type="text" class="validate" value=<?php echo $lname; ?> pattern="[A-Za-z\s]{2,}"required>
                         <label for="lname">Last Name</label>
                       </div>
                     </div>

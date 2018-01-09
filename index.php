@@ -31,7 +31,7 @@ include "php/connect.php";
       <ul class="section table-of-contents">
         <li>Fast jump</li>
         <li><a href="#book-new">Newly released books</a></li>
-        <li><a href="#book-recc">Reccomended for you</a></li>
+        <li><a href="#book-recc">Recomended for you</a></li>
         <li><a href="#book-rate">Top rating books</a></li>
       </ul>
     </div>
@@ -50,23 +50,32 @@ include "php/connect.php";
 		<?php } ?>
   </div>
 
-  <h4 id="book-recc" class="left-align col s12 m6 offset-m3 scrollspy">Books reccomended for you</h4>
+  <h4 id="book-recc" class="left-align col s12 m6 offset-m3 scrollspy">Books recomended for you</h4>
   Based on your preferences
   <div class="divider line"></div>
 
-  <?php //Use loop here ?>
   <div class="row section">
+		<?php //Query for Reccomended
+		if(isset($_COOKIE['tpmb-recc'])){
+			$recc = $_COOKIE['tpmb-recc'];
+		} else {
+			$recc = "Fantasy";
+		}
+		$queryRecc = "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$recc' ORDER BY RAND() DESC LIMIT 5";
+		$executeRecc=mysqli_query($conn, $queryRecc);
+		while($reccbook = mysqli_fetch_array($executeRecc)){?>
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" height="250px" src="books/thumbnail/harrypotter-cursed-small.png">
+          <img class="activator" height="250px" src="books/cover/<?php echo $reccbook['bookthumbnail'] ?>">
         </div>
         <div class="card-content">
-          <span class="grey-text text-darken-4">Book name</span>
-          <p><a href="#">Click me</a></p>
+          <span class="grey-text text-darken-4 truncate"><?php echo $reccbook['bookname'] ?></span>
+          <p><a target="_blank" href="book.php?bookid=<?php echo $reccbook['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>
     </div>
+		<?php } //End of top rating books ?>
   </div>
 
   <h4 id="book-rate" class="left-align col s12 m6 offset-m3 scrollspy">Top rating books</h4>

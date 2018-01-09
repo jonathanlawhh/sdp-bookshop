@@ -61,11 +61,11 @@
         <form action="php/doRegister.php" method="POST" class="col s12" style="margin-top:4%;">
           <div class="row col s12">
             <div class="input-field col s12 m3 offset-m3">
-              <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" pattern="[A-Za-z]{2,}" required>
+              <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" pattern="[A-Za-z\s]{2,}" required>
               <label for="fname">First Name</label>
             </div>
             <div class="input-field col s12 m3">
-              <input name="lname" id="lname" type="text" placeholder="Law" class="validate" pattern="[A-Za-z]{2,}">
+              <input name="lname" id="lname" type="text" placeholder="Law" class="validate" pattern="[A-Za-z\s]{2,}">
               <label for="lname">Last Name</label>
             </div>
           </div>
