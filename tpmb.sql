@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2018 at 03:26 AM
+-- Generation Time: Jan 09, 2018 at 05:26 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -55,7 +55,13 @@ INSERT INTO `book` (`bookISBN`, `bookname`, `bookcategory`, `bookauthor`, `bookd
 ('b-00007', 'The Infinite Sea: The Second Book of the 5th Wave', 'Sci-Fi', 'Rick Yancey', 'How do you rid the Earth of seven billion humans? Rid the humans of their humanity.\r\n\r\nSurviving the first four waves was nearly impossible. Now Cassie Sullivan finds herself in a new world, a world in which the fundamental trust that binds us together is gone. As the 5th Wave rolls across the landscape, Cassie, Ben, and Ringer are forced to confront the Others ultimate goal: the extermination of the human race.\r\n\r\nCassie and her friends have not seen the depths to which the Others will sink, nor have the Others seen the heights to which humanity will rise, in the ultimate battle between life and death, hope and despair, love and hate.', 22, 105, 'Paperback', 20180101, 'the5thwave02.png'),
 ('b-00008', 'The Last Star: The Final Book of The 5th Wave', 'Sci-Fi', 'Rick Yancey', 'The enemy is Other. The enemy is us. They are down here, they are up there, they are nowhere. They want the Earth, they want us to have it. They came to wipe us out, they came to save us.\r\n\r\nBut beneath these riddles lies one truth: Cassie has been betrayed. So has Ringer. Zombie. Nugget. And all 7.5 billion people who used to live on our planet. Betrayed first by the Others, and now by ourselves.\r\n\r\nIn these last days, Earths remaining survivors will need to decide what is more important: saving themselves ... or saving what makes us human.', 22, 115, 'Paperback', 20180101, 'the5thwave03.png'),
 ('b-00009', 'The Da Vinci Code', 'Mystery', 'Dan Brown', 'The Da Vinci Code is a 2003 mystery thriller novel by Dan Brown. It follows symbologist Robert Langdon and cryptologist Sophie Neveu after a murder in the Louvre Museum in Paris causes them to become involved in a battle between the Priory of Sion and Opus Dei over the possibility of Jesus Christ having been a companion to Mary Magdalene.\r\n\r\nThe title of the novel refers to the finding of the first murder victim in the Grand Gallery of the Louvre, naked and posed similar to Leonardo da Vinci\'s famous drawing, the Vitruvian Man, with a cryptic message written beside his body and a pentagram drawn on his chest in his own blood.\r\n\r\nThe novel explores an alternative religious history, whose central plot point is that the Merovingian kings of France were descended from the bloodline of Jesus Christ and Mary Magdalene, ideas derived from Clive Prince\'s The Templar Revelation (1997) and books by Margaret Starbird. The book also refers to The Holy Blood and the Holy Grail (1982) though Dan Brown has stated that it was not used as research material.\r\n\r\nThe Da Vinci Code provoked a popular interest in speculation concerning the Holy Grail legend and Mary Magdalene\'s role in the history of Christianity. The book has, however, been extensively denounced by many Christian denominations as an attack on the Roman Catholic Church, and consistently criticized for its historical and scientific inaccuracies.', 25, 597, 'Paperback', 20180101, 'thedavinccicode.png'),
-('b-00010', 'Inferno', 'Mystery', 'Dan Brown', 'Harvard professor of symbology Robert Langdon awakens in an Italian hospital, disoriented and with no recollection of the past thirty-six hours, including the origin of the macabre object hidden in his belongings. With a relentless female assassin trailing them through Florence, he and his resourceful doctor, Sienna Brooks, are forced to flee. Embarking on a harrowing journey, they must unravel a series of codes, which are the work of a brilliant scientist whose obsession with the end of the world is matched only by his passion for one of the most influential masterpieces ever written, Dante Alighieri\'s The Inferno. ', 23, 624, 'Paperback', 20180101, 'inferno.png');
+('b-00010', 'Inferno', 'Mystery', 'Dan Brown', 'Harvard professor of symbology Robert Langdon awakens in an Italian hospital, disoriented and with no recollection of the past thirty-six hours, including the origin of the macabre object hidden in his belongings. With a relentless female assassin trailing them through Florence, he and his resourceful doctor, Sienna Brooks, are forced to flee. Embarking on a harrowing journey, they must unravel a series of codes, which are the work of a brilliant scientist whose obsession with the end of the world is matched only by his passion for one of the most influential masterpieces ever written, Dante Alighieri\'s The Inferno. ', 23, 624, 'Paperback', 20180101, 'inferno.png'),
+('b-00011', 'Fifty Shades of Grey: Book One', 'Romance', 'E L James', 'When literature student Anastasia Steele goes to interview young entrepreneur Christian Grey, she encounters a man who is beautiful, brilliant, and intimidating. The unworldly, innocent Ana is startled to realize she wants this man and, despite his enigmatic reserve, finds she is desperate to get close to him. Unable to resist Ana\'s quiet beauty, wit, and independent spirit, Grey admits he wants her, too—but on his own terms.\r\n \r\nShocked yet thrilled by Grey\'s singular erotic tastes, Ana hesitates. For all the trappings of success—his multinational businesses, his vast wealth, his loving family—Grey is a man tormented by demons and consumed by the need to control. When the couple embarks on a daring, passionately physical affair, Ana discovers Christian Grey\'s secrets and explores her own dark desires.\r\n\r\nThis book is intended for mature audiences.', 18, 514, 'Vintage Books', 20180101, 'fiftyshadesofgrey01.png'),
+('b-00012', 'Fifty Shades Darker', 'Romance', 'E L James', 'Daunted by the singular tastes and dark secrets of the beautiful, tormented young entrepreneur Christian Grey, Anastasia Steele has broken off their relationship to start a new career with a Seattle publishing house. \r\n \r\nBut desire for Christian still dominates her every waking thought, and when he proposes a new arrangement, Anastasia cannot resist. They rekindle their searing sensual affair, and Anastasia learns more about the harrowing past of her damaged, driven and demanding Fifty Shades.\r\n \r\nWhile Christian wrestles with his inner demons, Anastasia must confront the anger and envy of the women who came before her, and make the most important decision of her life.\r\n\r\nThis book is intended for mature audiences. ', 19, 544, 'Vintage Books', 20180101, 'fiftyshadesdarker.png'),
+('b-00013', 'Fifty Shades Freed: Book Three of the Fifty Shades', 'Romance', 'E L James', 'When unworldly student Anastasia Steele first encountered the driven and dazzling young entrepreneur Christian Grey it sparked a sensual affair that changed both of their lives irrevocably. Shocked, intrigued, and, ultimately, repelled by Christian\'s singular erotic tastes, Ana demands a deeper commitment. Determined to keep her, Christian agrees.\r\n \r\nNow, Ana and Christian have it all—love, passion, intimacy, wealth, and a world of possibilities for their future. But Ana knows that loving her Fifty Shades will not be easy, and that being together will pose challenges that neither of them would anticipate. Ana must somehow learn to share Christian\'s opulent lifestyle without sacrificing her own identity. And Christian must overcome his compulsion to control as he wrestles with the demons of a tormented past.\r\n \r\nJust when it seems that their strength together will eclipse any obstacle, misfortune, malice, and fate conspire to make Ana\'s deepest fears turn to reality.\r\n\r\nThis book is intended for mature audiences.', 19, 592, 'Vintage Books', 20180101, 'fiftyshadesfreed.png'),
+('b-00014', 'Dark Notes', 'Romance', 'Pam Godwin', 'They call me a slut. Maybe I am.\r\nSometimes I do things I despise.\r\nSometimes men take without asking.\r\n\r\nBut I have a musical gift, only a year left of high school, and a plan.\r\nWith one obstacle.\r\n\r\nEmeric Marceaux doesn\'t just take.\r\nHe seizes my will power and bangs it like a dark note.\r\nWhen he commands me to play, I want to give him everything.\r\nI kneel for his punishments, tremble for his touch, and risk it all for our stolen moments.\r\n\r\nHe\'s my obsession, my master, my music.\r\nAnd my teacher.', 50, 428, 'Pam Godwin', 20180101, 'darknotes.png'),
+('b-00015', 'Dirty Ties', 'Romance', 'Pam Godwin', 'Revenge.\r\nI race to finance it.\r\nI evade to protect it.\r\nI kill to attain it.\r\nI planned everything.\r\n\r\nExcept her.\r\nThe alluring, curvaceous blonde at the finish line.\r\nWith sapphire eyes that cheat and lie.\r\nWhose powerful family murdered mine.\r\n\r\nI hate her.\r\nI want her.\r\n\r\nI know she\'s hiding something.\r\nBut so am I.', 24, 305, 'Pam Godwin', 20180101, 'dirtyties.png'),
+('b-00016', 'Beneath the Burn', 'Romance', 'Pam Godwin', 'They meet by chance. The timing is wrong.\r\n\r\nThree years later, she finds him again, but their separation was poisoned with narcotics and bloodied by enslavement.\r\n\r\nHer freedom gambled away, Charlee Grosky escapes the international businessman who held her captive. But his power reaches beyond her protective barriers and threatens everyone she has come to love.\r\n\r\nJay Mayard wears his tortured secrets under his rock god facade. Drugs are his release, even as he seeks to be the man forged of the steel only she can see.\r\n\r\nIn a celebrity world filled with paparazzi, groupies, and drugs, Jay and Charlee must face their worst fears. When the battle is over, what will be left...Beneath The Burn.', 32, 484, 'Pam Godwin', 20180101, 'beneaththeburn.png');
 
 -- --------------------------------------------------------
 
@@ -83,7 +89,8 @@ INSERT INTO `bookcomment` (`ratingID`, `bookISBN`, `username`, `comments`, `date
 (5, 'b-00009', 'test', 'Perfect book when you are bored or want something to think about. Very absorbing ', 20180105),
 (6, 'b-00009', 'admin', 'Entertaining book, lets your imagination run wild. Totally recommend it!!', 20180105),
 (7, 'b-00010', 'admin', 'Dan Brown has raised the bar yet again, combining classical Italian art, history, and literature with cutting-edge science in this sumptuously entertaining thriller.', 20180105),
-(8, 'b-00003', 'hrx', 'This book is quite boring, not worth the money and time', 20180105);
+(8, 'b-00003', 'hrx', 'This book is quite boring, not worth the money and time', 20180105),
+(10, 'b-00011', 'admin', 'First, let me say I liked this series, hence the 4 star review. It wasnt perfect, but it was worth the price of admission.', 20180109);
 
 -- --------------------------------------------------------
 
@@ -111,7 +118,9 @@ INSERT INTO `bookrating` (`ratingID`, `bookISBN`, `username`, `rating`, `date`) 
 (7, 'b-00009', 'test', 5, 20180105),
 (8, 'b-00009', 'admin', 4, 20180105),
 (9, 'b-00005', 'admin', 3, 20180105),
-(10, 'b-00003', 'hrx', 1, 20180105);
+(10, 'b-00003', 'hrx', 1, 20180105),
+(11, 'b-00007', 'admin', 3, 20180109),
+(12, 'b-00011', 'admin', 5, 20180109);
 
 -- --------------------------------------------------------
 
@@ -178,13 +187,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bookcomment`
 --
 ALTER TABLE `bookcomment`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `bookrating`
 --
 ALTER TABLE `bookrating`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -55,7 +55,7 @@ include "php/connect.php";
   <div class="divider line"></div>
 
   <div class="row section">
-		<?php //Query for Reccomended
+		<?php //Query for Recomended
 		if(isset($_COOKIE['tpmb-recc'])){
 			$recc = $_COOKIE['tpmb-recc'];
 		} else {
@@ -75,7 +75,7 @@ include "php/connect.php";
         </div>
       </div>
     </div>
-		<?php } //End of top rating books ?>
+	<?php } //End of recomended ?>
   </div>
 
   <h4 id="book-rate" class="left-align col s12 m6 offset-m3 scrollspy">Top rating books</h4>
