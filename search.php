@@ -35,10 +35,10 @@ function goBack() {
   include "ui/header.php";?>
 
   <main class="container">
-    <div class="row" style="margin-top:4%;">
+    <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Search results</h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Search results</h4>
     <div class="divider line"></div>
 		<?php while($book = mysqli_fetch_array($bookArray)){ ?>
     <div class="row section">

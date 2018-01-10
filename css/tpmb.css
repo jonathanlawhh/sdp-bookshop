@@ -15,3 +15,9 @@ main {
 .margintop4 {
   margin-top : 4%;
 }
+
+.customCardDiv{
+  width:205px;
+  float:left;
+  margin:10px;
+}

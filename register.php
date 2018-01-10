@@ -38,7 +38,7 @@
 		</header>
 
     <div class="container" >
-      <div class="row" style="margin-top:4%;">
+      <div class="row margintop4">
 				<div class="col s12 m6 offset-m3 card-panel hoverable">
 	         <p><a href="login.php"><i class="material-icons left">arrow_back</i> Go back to login</a></p>
 	      </div>
@@ -58,7 +58,7 @@
 				}
 				?>
 				<div class="divider col s12 m6 offset-m3"></div>
-        <form action="php/doRegister.php" method="POST" class="col s12" style="margin-top:4%;">
+        <form action="php/doRegister.php" method="POST" class="col s12 margintop4">
           <div class="row col s12">
             <div class="input-field col s12 m3 offset-m3">
               <input name="fname" id="fname" type="text" placeholder="Jonathan" class="validate" pattern="[A-Za-z\s]{2,}" required>

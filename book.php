@@ -36,13 +36,13 @@ function forceLogin(){
 	setcookie("tpmb-recc", $book['bookcategory'], time() + 31536000, '/');
 	?>
   <main class="container">
-    <div class="row" style="margin-top:4%;">
+    <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $book['bookname']; ?></h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $book['bookname']; ?></h4>
     <div class="divider line"></div>
 
-    <div style="margin-top:1%;" class="chip"><a href="?category=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
+    <div style="margin-top:1%;" class="chip"><a href="category-more.php?cat=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><a href="search.php?searchterm=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpublisher']; ?></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpages']; ?> pages</div>
@@ -92,7 +92,7 @@ function forceLogin(){
 
 			//Check if this book has any rating. If no, do not show empty chart
 			if($rating01 == 0  && $rating02 == 0  && $rating03 == 0 && $rating04 == 0 && $rating05 == 0){
-				echo "<p class='center-align'>No user gave any feedback for this book yet. Be the first! :)</p>";
+				echo "<p class='center-align'>No user gave any rating for this book yet. Be the first! :)</p>";
 			} else { ?>
 			<canvas id="myChart" width="500" height="100"></canvas>
 			<script>

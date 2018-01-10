@@ -20,10 +20,10 @@ $currentUser = $_SESSION['tpmb-user'];
   include "ui/header.php";?>
 
   <main class="container">
-    <div class="row" style="margin-top:4%;">
+    <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;">Your feedbacks</h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4">Your feedbacks</h4>
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>
@@ -50,7 +50,7 @@ $currentUser = $_SESSION['tpmb-user'];
       </tbody>
     </table>
 
-    <h4 class="left-align col s12 m6 offset-m3" style="margin-top:4%;">Your ratings</h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4">Your ratings</h4>
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>

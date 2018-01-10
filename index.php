@@ -63,10 +63,10 @@ include "php/connect.php";
 		} else {
 			$recc = "Fantasy";
 		}
-		$queryRecc = "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$recc' ORDER BY RAND() DESC LIMIT 5";
+		$queryRecc = "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$recc' ORDER BY RAND() LIMIT 5";
 		$executeRecc=mysqli_query($conn, $queryRecc);
 		while($reccbook = mysqli_fetch_array($executeRecc)){?>
-    <div class="col s6 m3 l2">
+    <div class="customCardDiv">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" height="250px" src="books/cover/<?php echo $reccbook['bookthumbnail'] ?>">
@@ -89,7 +89,7 @@ include "php/connect.php";
 		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY RAND() DESC LIMIT 5";
 		$executeTopRate=mysqli_query($conn,$queryTopRate);
 		while($topRating = mysqli_fetch_array($executeTopRate)){?>
-    <div class="col s6 m3 l2">
+    <div class="customCardDiv">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" height="250px" src="books/cover/<?php echo $topRating['bookthumbnail'] ?>">
