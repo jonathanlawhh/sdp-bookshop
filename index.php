@@ -27,7 +27,7 @@ include "php/connect.php";
   include "ui/header.php" ?>
 
 <main>
-	<div class="col hide-on-small-only m3 l2" style="right:6%; margin-top:5%; position:fixed;">
+	<div class="col hide-on-med-and-down m3 l2" style="right:6%; margin-top:5%; position:fixed;">
       <ul class="section table-of-contents">
         <li>Fast jump</li>
         <li><a href="#book-new">Newly released books</a></li>
@@ -55,7 +55,9 @@ include "php/connect.php";
   <div class="divider line"></div>
 
   <div class="row section">
-		<?php //Query for Recomended
+		<?php
+		// Query for Recomended
+		// A cache for the book category is made everytime a book is being searched. This cache will be used to reccomend.
 		if(isset($_COOKIE['tpmb-recc'])){
 			$recc = $_COOKIE['tpmb-recc'];
 		} else {
@@ -84,7 +86,7 @@ include "php/connect.php";
 
   <div class="row section">
 		<?php //Query for top rating books
-		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY br.date DESC LIMIT 5";
+		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY RAND() DESC LIMIT 5";
 		$executeTopRate=mysqli_query($conn,$queryTopRate);
 		while($topRating = mysqli_fetch_array($executeTopRate)){?>
     <div class="col s6 m3 l2">

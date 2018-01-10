@@ -1,5 +1,6 @@
 <?php session_start();
 include "php/connect.php";
+checkLoginStatus();
 $currentUser = $_SESSION['tpmb-user'];
 ?>
 <head>
@@ -35,16 +36,16 @@ $currentUser = $_SESSION['tpmb-user'];
       <tbody>
 		<?php
     //Query for feedback
-    $getFeedbackHistory = "SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN LIMIT 3";
-    $userFeedbackArray=mysqli_query($conn,$getFeedbackHistory);
+    $userFeedbackArray=mysqli_query($conn,"SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN LIMIT 3");
+    $userFeedbackCount=mysqli_query($conn,"SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN");
     while($userFeedback = mysqli_fetch_array($userFeedbackArray)){ ?>
           <tr>
             <td><a target="_blank" href="book.php?bookid=<?php echo $userFeedback['bookISBN']; ?>"><?php echo $userFeedback['bookname']; ?></a></td>
             <td><?php echo $userFeedback['comments']; ?></td>
             <td><?php echo $userFeedback['date']; ?></td>
           </tr>
-      <?php } if(mysqli_num_rows($userFeedbackArray) > 2){
-        echo "<tr><td colspan='3'><a href=''><i class='material-icons right'>chevron_right</i>View more feedbacks you gave</a></td></tr>";
+      <?php } if(mysqli_num_rows($userFeedbackCount) > 3){
+        echo "<tr><td colspan='3'><a href='history-more.php?action=feedbacks'><i class='material-icons right'>chevron_right</i>View more feedbacks you gave</a></td></tr>";
       } ?>
       </tbody>
     </table>
@@ -62,16 +63,16 @@ $currentUser = $_SESSION['tpmb-user'];
       <tbody>
 		<?php
     //Query for rating
-    $getRatingHistory = "SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN LIMIT 3";
-    $userRatingArray=mysqli_query($conn,$getRatingHistory);
+    $userRatingArray=mysqli_query($conn,"SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN LIMIT 3");
+    $userRatingCount=mysqli_query($conn,"SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN");
     while($userRating = mysqli_fetch_array($userRatingArray)){ ?>
           <tr>
             <td><a target="_blank" href="book.php?bookid=<?php echo $userRating['bookISBN']; ?>"><?php echo $userRating['bookname']; ?></a></td>
             <td><?php echo $userRating['rating']; ?></td>
             <td><?php echo $userRating['date']; ?></td>
           </tr>
-      <?php } if(mysqli_num_rows($userRatingArray) > 2){
-        echo "<tr><td colspan='3'><a href=''><i class='material-icons right'>chevron_right</i>View more ratings you gave</a></td></tr>";
+      <?php } if(mysqli_num_rows($userRatingCount) > 3){
+        echo "<tr><td colspan='3'><a href='history-more.php?action=rating'><i class='material-icons right'>chevron_right</i>View more ratings you gave</a></td></tr>";
       } ?>
       </tbody>
     </table>

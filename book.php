@@ -44,6 +44,7 @@ function forceLogin(){
 
     <div style="margin-top:1%;" class="chip"><a href="?category=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><a href="search.php?searchterm=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
+    <div style="margin-top:1%;" class="chip"><?php echo $book['bookpublisher']; ?></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpages']; ?> pages</div>
 
     <div class="row section">
