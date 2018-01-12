@@ -33,7 +33,7 @@ $currentAction = scanner($_GET['cat'], "404.php");
 		<div class="row" >
 		<?php
 		$currentCat = $bookCat['bookcategory'];
-		$getCatBooks=mysqli_query($conn, "SELECT * FROM book WHERE bookcategory = '$currentCat' ORDER BY RAND()");
+		$getCatBooks=mysqli_query($conn, "SELECT * FROM book WHERE bookcategory = '$currentCat'");
 		while($bookInCat = mysqli_fetch_array($getCatBooks)){ ?>
 			<div class="customCardDiv">
 	      <div class="card">

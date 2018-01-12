@@ -11,6 +11,12 @@ include "php/connect.php";
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script>
+	$(document).ready(function(){
+    $('.scrollspy').scrollSpy();
+  });
+
+  </script>
 </head>
 
 <body>
@@ -21,11 +27,22 @@ include "php/connect.php";
 		<div class="row margintop4">
 	    <?php include "ui/searchUI.php"; ?>
 	  </div>
+		<div class="col hide-on-med-and-down m3 l2" style="right:6%; margin-top:5%; position:fixed;">
+		   <ul class="section table-of-contents">
+		      <li>Fast jump</li>
+					<?php //Give users fast jump ability
+					$executeCategories=mysqli_query($conn, "SELECT bookcategory FROM book GROUP BY bookcategory");
+					while($bookCat = mysqli_fetch_array($executeCategories)){?>
+		      <li><a href="#<?php echo $bookCat['bookcategory'] ?>"><?php echo $bookCat['bookcategory'] ?></a></li>
+				<?php } ?>
+		   </ul>
+		</div>
+
 	<?php
 	// Query for categories
 	$executeCategories=mysqli_query($conn, "SELECT bookcategory FROM book GROUP BY bookcategory");
 	while($bookCat = mysqli_fetch_array($executeCategories)){?>
-  <a href="category-more.php?cat=<?php echo $bookCat['bookcategory'] ?>"><h4 class="left-align col s12 m6"><?php echo $bookCat['bookcategory'] ?><i class="material-icons">chevron_right</i></h4></a>
+  <a href="category-more.php?cat=<?php echo $bookCat['bookcategory'] ?>"><h4 id="<?php echo $bookCat['bookcategory'] ?>" class="left-align col s12 m6 scrollspy"><?php echo $bookCat['bookcategory'] ?><i class="material-icons">chevron_right</i></h4></a>
   <div class="divider line"></div>
 	<div class="row section">
 		<?php //Query for 5 books of that category
