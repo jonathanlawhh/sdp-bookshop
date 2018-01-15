@@ -1,4 +1,5 @@
 <?php session_start();
+error_reporting(0);
 include "php/connect.php";
 if(!isset($_SESSION['tpmb-user'])){
 	$loginStatus=0;
@@ -15,6 +16,8 @@ $currentBook=$_GET['bookid'];
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 </head>
 <script>
 function goBack() {
@@ -23,6 +26,33 @@ function goBack() {
 function forceLogin(){
  $('.tap-target').tapTarget('open');
 }
+
+function addToCartForm(){
+ var name=document.getElementById( "bookID" ).value;
+ if(name){
+	$.ajax({
+	type: 'post',
+	url: 'php/addToCart.php',
+	dataType: 'text',
+	data: {
+	 bookID:name,
+	},
+	success: function (response) {
+	 $( '#cartBtn' ).html(response);
+	 if(response == "Exist"){
+		 document.getElementById('cartBtn').innerHTML = "<i class='material-icons left'>tag_faces</i>Item exist in cart";
+		 Materialize.toast("Item exist in cart", 2000, 'rounded')
+	 } else if (response == "Added"){
+		 document.getElementById('cartBtn').innerHTML = "<i class='material-icons left'>add_to_queue</i>Item added to cart";
+		 Materialize.toast("Added to cart", 2000, 'rounded')
+	 }
+	}
+	});
+ } else {
+	document.getElementById('cartBtn').innerHTML = 'Add to cart';
+ }
+}
+
 </script>
 
 <body>
@@ -34,6 +64,7 @@ function forceLogin(){
 	$bookArray=mysqli_query($conn,$getBook);
   while($book = mysqli_fetch_array($bookArray)){
 	setcookie("tpmb-recc", $book['bookcategory'], time() + 31536000, '/');
+	$bookID = $book['bookISBN'];
 	?>
   <main class="container">
     <div class="row margintop4">
@@ -55,15 +86,23 @@ function forceLogin(){
           </div>
           <div class="card-content">
             <span class="grey-text text-darken-4">RM <?php echo $book['bookprice']; ?></span>
-            <p><a href="#">Click me</a></p>
           </div>
         </div>
       </div>
       <div class="col l6">
         <p><?php echo $book['bookdesc']; ?></p>
       </div>
-			<?php if($loginStatus==1){ ?>
-      	<a class="waves-effect waves-light btn right" onclick="addToCart()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
+			<?php
+			$cartStatus = "Add to cart";
+			if(isset($_SESSION["tpmb-cartItem"])){
+				if(in_array($currentBook, $_SESSION["tpmb-cartItem"])){
+			    $cartStatus = "Item exist in cart";
+			  }
+			}
+
+			if($loginStatus==1){ // onclick="forceLogin()" ?>
+					<input id="bookID" name="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
+					<button id="cartBtn" class="waves-effect waves-light btn right" onclick="addToCartForm()"><i class="material-icons left">add_shopping_cart</i><?php echo $cartStatus; ?></button>
 			<?php } else { ?>
 				<a class="waves-effect waves-light btn right" onclick="forceLogin()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
 			<?php } ?>
@@ -183,7 +222,4 @@ function forceLogin(){
   <?php //Load footer
     include "ui/footer.html"; ?>
 <?php } ?>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
