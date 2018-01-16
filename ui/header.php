@@ -3,6 +3,30 @@
   $(document).ready(function(){
     $('.modal').modal();
   });
+
+  function updateCart(){
+    $('#cartPopup').load(location.href + ' #cartContent');
+  }
+
+  //Delete cart ajax
+  function deleteCart(cartID){
+	 var name=document.getElementById(cartID).value;
+	 if(name){
+	  $.ajax({
+	  type: 'post',
+	  url: 'php/addToCart.php',
+		dataType: 'text',
+	  data: {
+	   deleteCart:name,
+	  },
+	  success: function (response) {
+	   updateCart();
+	  }
+	  });
+	 } else {
+	  updateCart();
+	 }
+	}
 </script>
 <header>
       <nav class="top-nav">
@@ -12,7 +36,7 @@
           <ul class="right hide-on-med-and-down">
             <li><a href="category.php">Browse by category</a></li>
             <?php if(isset($_SESSION['tpmb-user'])){ ?>
-              <li><a class="modal-trigger" href="#cartPopup">Cart</a></li>
+              <li><a class="modal-trigger" href="#cartPopup" onclick="updateCart()">Cart</a></li>
               <li><a class="dropdown-button" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false" data-activates="userDropdown"><?php echo $_SESSION['tpmb-user']; ?><i class="material-icons right">arrow_drop_down</i></a></li>
               <ul id="userDropdown" class="dropdown-content">
                 <li><a href="history.php"><i class="material-icons left">hourglass_emptys</i>History</a></li>
@@ -35,9 +59,12 @@
       </nav>
 </header>
 
-<?php if(isset($_SESSION['tpmb-user'])){ //Only load popup if user is logged in. This is to save loading time for users who are not logged in and prevent exploits ?>
+
+<?php if(isset($_SESSION['tpmb-user'])){ //Only load popup if user is logged in. This is to save loading time for users who are not logged in and prevent exploits
+  $totalPrice = 0;?>
  <!-- Modal Structure -->
  <div id="cartPopup" class="modal bottom-sheet">
+   <div id="cartContent">
    <div class="modal-content">
      <h4>Cart</h4>
      <?php
@@ -50,21 +77,28 @@
        </thead>
        <tbody>
          <?php //Query items in the cart
-         $totalPrice = 0;
          foreach($_SESSION["tpmb-cartItem"] as $sessionArray ){
          	 $bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
-           while($book = mysqli_fetch_array($bookArray)){ ?>
-             <tr><td><?php echo $sessionArray; ?></td><td><?php echo $book['bookname']; ?></td><td>RM <?php echo $book['bookprice']; ?></td><td><a onclick="deleteCart()" href="#"><i class="material-icons">delete</i></a></td></tr>
-          <?php $totalPrice += $book['bookprice']; } //End of fetching book name and price from database
+           while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database?>
+               <tr>
+                   <input name="bookID" id="<?php echo $sessionArray; ?>" value="<?php echo $sessionArray; ?>" type="hidden">
+                   <td><?php echo $sessionArray; ?></td>
+                   <td><?php echo $book['bookname']; ?></td>
+                   <td>RM <?php echo $book['bookprice']; ?></td>
+                   <td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
+               </tr>
+          <?php $totalPrice += $book['bookprice'];
+          } //End of fetching book name and price from database
         } //End of cart query
       } //End of checking whether the cart is empty ?>
       <tr><td></td></tr>
-      <tr><td colspan="2">Book Price :</td><td>RM <?php echo $totalPrice; ?></td></tr>
+      <tr><td colspan="2">Total Book Price : </td><td>RM <?php echo $totalPrice; ?></td></tr>
      </tbody>
    </table>
    </div>
    <div class="modal-footer">
      <a href="checkout.php" class="modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+   </div>
    </div>
  </div>
 

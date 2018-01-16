@@ -3,6 +3,7 @@ session_start();
 include "connect.php";
 checkLoginStatus();
 
+//Add to cart
 if(isset($_POST['bookID'])){
   if(!isset($_SESSION["tpmb-cartItem"])){
     $cartItemArray = array();
@@ -11,7 +12,7 @@ if(isset($_POST['bookID'])){
       $cartItemArray[] = $sessionArray;
     }
   }
-  $cartItem = $_POST["bookID"];
+  $cartItem = scanner($_POST["bookID"], "404.php");
   if(in_array($cartItem, $cartItemArray)){
     echo "Exist";
   } else {
@@ -19,6 +20,12 @@ if(isset($_POST['bookID'])){
     $_SESSION["tpmb-cartItem"] = $cartItemArray;
     echo "Added";
   }
+}
+
+//Delete from cart
+if(isset($_POST['deleteCart'])){
+  $arrayToDelete = array_search($_POST['deleteCart'], $_SESSION["tpmb-cartItem"]);
+  unset($_SESSION["tpmb-cartItem"][$arrayToDelete]);
 }
 
 //unset($_SESSION["tpmb-cartItem"]);

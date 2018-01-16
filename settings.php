@@ -11,6 +11,7 @@ checkLoginStatus();
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -42,13 +43,6 @@ checkLoginStatus();
                         <i class="material-icons prefix">account_circle</i>
                         <input name="lname" id="lname" type="text" class="validate" value=<?php echo $lname; ?> pattern="[A-Za-z\s]{2,}"required>
                         <label for="lname">Last Name</label>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="input-field">
-                        <i class="material-icons prefix">email</i>
-                        <input name="email" id="email" type="text" class="validate" value=<?php echo $email; ?> required>
-                        <label for="email">Email</label>
                       </div>
                     </div>
                     <div class="row">

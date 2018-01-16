@@ -8,12 +8,11 @@ $currentUser = $_SESSION['tpmb-user'];
 if(isset($_POST['update'])){
   $fname = scanner($_POST["fname"],"../settings.php");
   $lname = scanner($_POST["lname"],"../settings.php");
-  $email = scanner($_POST["email"],"../settings.php");
   $pnumber = scanner($_POST["pnumber"],"../settings.php");
   $bday = scanner($_POST["bday"],"../settings.php");
   $gender = scanner($_POST["gender"],"../settings.php");
 
-  $updateUserQuery = "UPDATE user SET fname='$fname', lname='$lname', email='$email', gender='$gender', pnumber='$pnumber', birthday='$bday' WHERE username='$currentUser'";
+  $updateUserQuery = "UPDATE user SET fname='$fname', lname='$lname', gender='$gender', pnumber='$pnumber', birthday='$bday' WHERE username='$currentUser'";
   $executeUserUpdate=mysqli_query($conn,$updateUserQuery);
   echo "<script>window.location = '../settings.php'; exit();</script>";
 }
