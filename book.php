@@ -27,6 +27,7 @@ function forceLogin(){
  $('.tap-target').tapTarget('open');
 }
 
+<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login?>
 function addToCartForm(){
  var name=document.getElementById( "bookID" ).value;
  if(name){
@@ -52,7 +53,7 @@ function addToCartForm(){
 	document.getElementById('cartBtn').innerHTML = 'Add to cart';
  }
 }
-
+<?php } ?>
 </script>
 
 <body>

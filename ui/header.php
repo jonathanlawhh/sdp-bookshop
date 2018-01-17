@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
 <script>
 //Initalize cart popup
   $(document).ready(function(){
@@ -28,6 +29,7 @@
 	 }
 	}
 </script>
+<?php } ?>
 <header>
       <nav class="top-nav">
         <div class="nav-wrapper brown darken-4">
@@ -91,8 +93,8 @@
           } //End of fetching book name and price from database
         } //End of cart query
       } //End of checking whether the cart is empty ?>
-      <tr><td></td></tr>
-      <tr><td colspan="2">Total Book Price : </td><td>RM <?php echo $totalPrice; ?></td></tr>
+      <tr><td colspan="4"></td></tr>
+      <tr><th colspan="2">Total Book Price : </th><td>RM <?php echo $totalPrice; ?></td></tr>
      </tbody>
    </table>
    </div>

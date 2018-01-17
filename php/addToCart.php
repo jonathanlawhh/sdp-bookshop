@@ -5,6 +5,7 @@ checkLoginStatus();
 
 //Add to cart
 if(isset($_POST['bookID'])){
+  //If array does not exist, initalize one. Else load cartSESSION into array
   if(!isset($_SESSION["tpmb-cartItem"])){
     $cartItemArray = array();
   } else {
