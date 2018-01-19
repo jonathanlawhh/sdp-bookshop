@@ -42,7 +42,7 @@ $currentAction = scanner($_GET['cat'], "404.php");
 	        </div>
 	        <div class="card-content">
 	          <span class="grey-text text-darken-4 truncate"><?php echo $bookInCat['bookname']; ?></span>
-	          <p><a target="_blank" href="book.php?bookid=<?php echo $bookInCat['bookISBN']; ?>">Click me</a></p>
+	          <p><a href="book.php?bookid=<?php echo $bookInCat['bookISBN']; ?>">Click me</a></p>
 	        </div>
 	      </div>
 	    </div>

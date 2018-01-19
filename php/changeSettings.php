@@ -31,9 +31,15 @@ if(isset($_POST['chgpw'])){
     $newpassword = crypt($pwd2, $salt);
 
     //Check if old password entered is correct
-    $checkOldPassword = "SELECT password FROM user WHERE username='$currentUser' AND password='$oldpassword'";
+    $checkOldPassword = "SELECT fname,email,password FROM user WHERE username='$currentUser' AND password='$oldpassword'";
     $oldPasswordResult=mysqli_query($conn,$checkOldPassword);
       if(mysqli_num_rows($oldPasswordResult)>0){
+        while($userInfo = mysqli_fetch_array($oldPasswordResult)){
+          $username=$currentUser;
+          $fname=$userInfo['fname'];
+          $email=$userInfo['email'];
+        }
+        include "sendChangePasswordEmail.php";
         $changeOldPasswordQuery = "UPDATE user SET password='$newpassword' WHERE username='$currentUser' AND password='$oldpassword'";
         $executePasswordChange=mysqli_query($conn,$changeOldPasswordQuery);
         echo "<script>window.location = '../settings.php'; exit();</script>";

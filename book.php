@@ -26,35 +26,12 @@ function goBack() {
 function forceLogin(){
  $('.tap-target').tapTarget('open');
 }
-
-<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login?>
-function addToCartForm(){
- var name=document.getElementById( "bookID" ).value;
- if(name){
-	$.ajax({
-	type: 'post',
-	url: 'php/addToCart.php',
-	dataType: 'text',
-	data: {
-	 bookID:name,
-	},
-	success: function (response) {
-	 $( '#cartBtn' ).html(response);
-	 if(response == "Exist"){
-		 document.getElementById('cartBtn').innerHTML = "<i class='material-icons left'>tag_faces</i>Item exist in cart";
-		 Materialize.toast("Item exist in cart", 2000, 'rounded')
-	 } else if (response == "Added"){
-		 document.getElementById('cartBtn').innerHTML = "<i class='material-icons left'>add_to_queue</i>Item added to cart";
-		 Materialize.toast("Added to cart", 2000, 'rounded')
-	 }
-	}
-	});
- } else {
-	document.getElementById('cartBtn').innerHTML = 'Add to cart';
- }
-}
-<?php } ?>
 </script>
+
+<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
+	<script type="text/javascript" src="js/cartAjax.js"></script>
+<?php } ?>
+
 
 <body>
 <?php //load header
@@ -81,32 +58,46 @@ function addToCartForm(){
 
     <div class="row section">
       <div class="col s6 m4 l2 offset-m3 offset-s3">
-        <div class="card">
+        <div class="card customCardDiv" style="width:250px; height:450px">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" height="250px" src="books/cover/<?php echo $book['bookthumbnail']; ?>">
+            <img class="activator" height="305px" src="books/cover/<?php echo $book['bookthumbnail']; ?>">
           </div>
           <div class="card-content">
-            <span class="grey-text text-darken-4">RM <?php echo $book['bookprice']; ?></span>
+						<span class="input-field">
+		          <input placeholder="Quantity" id="first_name" type="number" class="validate">
+		        </span>
+						<?php //Add to cart button
+						$cartStatus = "Add";
+						if(isset($_SESSION["tpmb-cartItem"])){
+							if(in_array($currentBook, $_SESSION["tpmb-cartItem"])){
+						    $cartStatus = "Done";
+						  }
+						}
+
+						if($loginStatus==1){?>
+								<input id="bookID" name="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
+								<button id="cartBtn" class="waves-effect waves-light btn" <?php if($book['bookQty'] == 0){ echo "disabled"; } else { echo "onclick='addToCartForm()'"; }?>>
+									<i class="material-icons left">add_shopping_cart</i><?php if($book['bookQty'] == 0){ echo "Out Of Stock"; } else { echo $cartStatus; }?>
+								</button>
+						<?php } else { ?>
+							<a class="waves-effect waves-light btn" onclick="forceLogin()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
+						<?php } ?>
           </div>
         </div>
       </div>
-      <div class="col l6">
+
+			<!-- Dirty codes here!!! -->
+      <div class="col l8 hide-on-med-and-down" style="margin-left:120px;" >
         <p><?php echo $book['bookdesc']; ?></p>
       </div>
-			<?php
-			$cartStatus = "Add to cart";
-			if(isset($_SESSION["tpmb-cartItem"])){
-				if(in_array($currentBook, $_SESSION["tpmb-cartItem"])){
-			    $cartStatus = "Item exist in cart";
-			  }
-			}
+      <div class="col l8 hide-on-small-only hide-on-large-only">
+        <p><?php echo $book['bookdesc']; ?></p>
+      </div>
+      <div class="col s12 hide-on-med-and-up" >
+        <p><?php echo $book['bookdesc']; ?></p>
+      </div>
+			<!-- Dirty codes end here!!! -->
 
-			if($loginStatus==1){ // onclick="forceLogin()" ?>
-					<input id="bookID" name="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
-					<button id="cartBtn" class="waves-effect waves-light btn right" onclick="addToCartForm()"><i class="material-icons left">add_shopping_cart</i><?php echo $cartStatus; ?></button>
-			<?php } else { ?>
-				<a class="waves-effect waves-light btn right" onclick="forceLogin()"><i class="material-icons left">add_shopping_cart</i>Add to cart</a>
-			<?php } ?>
     </div>
 
 		<h5>Users feedbacks and ratings</h5>

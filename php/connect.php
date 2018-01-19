@@ -11,6 +11,10 @@ $username = "root";
 $password = "";
 $db = "tpmb";
 
+//Use Vivaldi Email as SMTP are configured for Vivaldi properly
+$adminEmail = "jonathanlawhh@vivaldi.net";
+$adminEmailPassword = "";
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
 

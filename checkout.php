@@ -68,15 +68,15 @@ function deleteCart(cartID){
 								<td>RM <?php echo $book['bookprice']; ?></td>
 								<td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
 						</tr>
-				 <?php $totalPrice += $book['bookprice'];
+				 <?php $GLOBALS['totalPrice'] += $book['bookprice'];
 				 } //End of fetching book name and price from database
 			 } //End of cart query ?>
 			 <tr><td colspan="4"></td></tr>
-			 <tr><th></th><th>Total Price : </th><td>RM <?php echo $totalPrice; ?></td></tr>
+			 <tr><th></th><th>Total Price : </th><td>RM <?php echo $GLOBALS['totalPrice']; ?></td></tr>
       </tbody>
     </table>
 		</div>
-		<button class="waves-effect waves-light btn right margintop4">Payment</button>
+		<a href="payment.php"><button class="waves-effect waves-light btn right margintop4">Payment</button></a>
   </main>
   <?php //Load footer
     include "ui/footer.html"; ?>

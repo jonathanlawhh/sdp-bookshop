@@ -42,10 +42,10 @@ if (isset($_POST['resetMe'])){
     $mail->SMTPSecure = 'TLS';
 
     //Email credentials
-    $mail->Username = 'jonathanlawhh@vivaldi.net';
-    $mail->Password = '';
-    $mail->setFrom('jonathanlawhh@vivaldi.net', 'TPMB Admin');
-    $mail->addReplyTo('jonathanlawhh@vivaldi.net', 'TPMB Admin');
+    $mail->Username = $adminEmail;
+    $mail->Password = $adminEmailPassword;
+    $mail->setFrom($adminEmail, 'TPMB Admin');
+    $mail->addReplyTo($adminEmail, 'TPMB Admin');
     //Send to ??
     $mail->addAddress($email, $username);
     $mail->Subject = 'Request to reset TPMB password';
