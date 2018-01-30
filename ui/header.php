@@ -1,33 +1,16 @@
 <?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
 <script>
-//Initalize cart popup
-  $(document).ready(function(){
-    $('.modal').modal();
-  });
+  //Initalize cart popup
+  $(document).ready(function(){ $('.modal').modal(); });
 
-  function updateCart(){
-    $('#cartPopup').load(location.href + ' #cartContent');
-  }
+  function nothing(){ Materialize.toast('Nothing to checkout', 2500); }
+  function updateCart(){ $('#cartPopup').load(location.href + ' #cartContent'); }
 
   //Delete cart ajax
-  function deleteCart(cartID){
-	 var name=document.getElementById(cartID).value;
-	 if(name){
-	  $.ajax({
-	  type: 'post',
-	  url: 'php/addToCart.php',
-		dataType: 'text',
-	  data: {
-	   deleteCart:name,
-	  },
-	  success: function (response) {
-	   updateCart();
-	  }
-	  });
-	 } else {
-	  updateCart();
-	 }
-	}
+  function deleteCart(a) {
+  (a = document.getElementById(a).value) ? $.ajax({type:"post", url:"php/addToCart.php", dataType:"text", data:{deleteCart:a}, success:function(a) {
+    updateCart();
+  }}) : updateCart(); }
 </script>
 <?php } ?>
 <header>
@@ -99,7 +82,7 @@
    </table>
    </div>
    <div class="modal-footer">
-     <a href="checkout.php" class="modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+     <a <?php if($totalPrice==0){ echo "onclick='nothing()'"; } else { echo "href='checkout.php'";} ?> class="modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
    </div>
    </div>
  </div>

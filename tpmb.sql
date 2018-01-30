@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2018 at 01:57 PM
+-- Generation Time: Jan 30, 2018 at 05:23 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -143,6 +143,29 @@ INSERT INTO `bookrating` (`ratingID`, `bookISBN`, `username`, `rating`, `date`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `transactionID` varchar(255) NOT NULL,
+  `transactionUser` varchar(255) NOT NULL,
+  `transactionCard` int(11) NOT NULL,
+  `transactionDate` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`transactionID`, `transactionUser`, `transactionCard`, `transactionDate`) VALUES
+('admin-201801290405', 'admin', 12345678, '2018-01-29 04:40'),
+('admin-201801290408', 'admin', 12345678, '2018-01-29 04:56'),
+('admin-201801290426', 'admin', 12345678, '2018-01-29 04:58'),
+('admin-201801290432', 'admin', 12345678, '2018-01-29 04:59');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -167,7 +190,8 @@ INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`,
 ('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'member', 20171209),
 ('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', 'member', 20180105),
 ('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo5aFw4REn/hI', 'male', '0123456789', '0001-01-01', 'member', 20171209),
-('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', 'member', 20171217);
+('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', 'member', 20171217),
+('testing01', 'TestingAccount', 'One', 'testing@test.test', 'tesGeyALKYm3A', 'male', '0123456789', '2018-01-15', 'restricted', 20180130);
 
 --
 -- Indexes for dumped tables
@@ -190,6 +214,12 @@ ALTER TABLE `bookcomment`
 --
 ALTER TABLE `bookrating`
   ADD PRIMARY KEY (`ratingID`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transactionID`);
 
 --
 -- Indexes for table `user`

@@ -34,8 +34,11 @@ if (isset($_POST['register'])){
     $sql = "INSERT INTO user (username, fname, lname, email, password, gender, pnumber, birthday, status, registerdate)
     VALUES ('$username', '$fname', '$lname', '$email', '$epassword', '$gender', '$pnumber', '$bday', 'member', '$date')";
     mysqli_query($conn, $sql);
+    echo "<script>window.location = 'registersuccess.php'; exit();</script>";
+    mysqli_close($conn);
   }
 }
+exit;
 
 
 //For ajax check

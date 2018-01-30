@@ -20,12 +20,8 @@ $currentBook=$_GET['bookid'];
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 </head>
 <script>
-function goBack() {
-	history.go(-1);
-}
-function forceLogin(){
- $('.tap-target').tapTarget('open');
-}
+	function goBack() { history.go(-1); }
+	function forceLogin(){ $('.tap-target').tapTarget('open'); }
 </script>
 
 <?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
@@ -64,7 +60,7 @@ function forceLogin(){
           </div>
           <div class="card-content">
 						<span class="input-field">
-		          <input placeholder="Quantity" id="first_name" type="number" class="validate">
+		          <input placeholder="Quantity" id="cartQty" name="cartQty" type="number" class="validate" value="1">
 		        </span>
 						<?php //Add to cart button
 						$cartStatus = "Add";
@@ -88,13 +84,13 @@ function forceLogin(){
 
 			<!-- Dirty codes here!!! -->
       <div class="col l8 hide-on-med-and-down" style="margin-left:120px;" >
-        <p><?php echo $book['bookdesc']; ?></p>
+        <p><?php echo $book['bookdesc']; ?></p><br><div class="divider"></div><h4>RM <?php echo $book['bookprice']; ?></h4>
       </div>
       <div class="col l8 hide-on-small-only hide-on-large-only">
-        <p><?php echo $book['bookdesc']; ?></p>
+        <p><?php echo $book['bookdesc']; ?></p><br><div class="divider"></div>
       </div>
       <div class="col s12 hide-on-med-and-up" >
-        <p><?php echo $book['bookdesc']; ?></p>
+        <p><?php echo $book['bookdesc']; ?></p><br><div class="divider"></div>
       </div>
 			<!-- Dirty codes end here!!! -->
 

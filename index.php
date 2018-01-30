@@ -12,13 +12,8 @@ include "php/connect.php";
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script>
-  $(document).ready(function(){
-    $('.carousel').carousel({padding:250});
-  });
-	$(document).ready(function(){
-    $('.scrollspy').scrollSpy();
-  });
-
+	  $(document).ready(function(){ $('.carousel').carousel({padding:250}); });
+		$(document).ready(function(){ $('.scrollspy').scrollSpy(); });
   </script>
 </head>
 

@@ -7,25 +7,12 @@
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript">
-
-	function checkUsername(){
-	 var name=document.getElementById( "uname" ).value;
-	 if(name){
-	  $.ajax({
-	  type: 'post',
-	  url: 'php/doRegister.php',
-		dataType: 'text',
-	  data: {
-	   uname:name,
-	  },
-	  success: function (response) {
-	   $( '#uname-result' ).html(response);
-	   document.getElementById('uname-result').innerHTML = response;
-	  }
-	  });
-	 } else {
-	  document.getElementById('uname-result').innerHTML = 'Username';
-	 }
+	function checkUsername() {
+	  var a = document.getElementById("uname").value;
+	  a ? $.ajax({type:"post", url:"php/doRegister.php", dataType:"text", data:{uname:a}, success:function(a) {
+	    $("#uname-result").html(a);
+	    document.getElementById("uname-result").innerHTML = a;
+	  }}) : document.getElementById("uname-result").innerHTML = "Username";
 	}
 	</script>
 </head>
@@ -97,7 +84,7 @@
             </div>
             <div class="col s12 m2">
 							<label for="bday">Birthday</label>
-              <input name="bday" id="bday" type="date" required>
+							<input type="text" name="bday" id='bday' class="datepicker" required>
             </div>
           </div>
           <div class="row col s12 ">
@@ -151,4 +138,16 @@
 				document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
 			}
 	}
+
+
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+		format: 'yyyy-mm-dd',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+
 </script>

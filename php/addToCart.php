@@ -2,7 +2,6 @@
 session_start();
 include "connect.php";
 checkLoginStatus();
-
 //Add to cart
 if(isset($_POST['bookID'])){
   //If array does not exist, initalize one. Else load cartSESSION into array
@@ -22,12 +21,10 @@ if(isset($_POST['bookID'])){
     echo "Added";
   }
 }
-
 //Delete from cart
 if(isset($_POST['deleteCart'])){
   $arrayToDelete = array_search($_POST['deleteCart'], $_SESSION["tpmb-cartItem"]);
   unset($_SESSION["tpmb-cartItem"][$arrayToDelete]);
 }
-
 //unset($_SESSION["tpmb-cartItem"]);
 ?>

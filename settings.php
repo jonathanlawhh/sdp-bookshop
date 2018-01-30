@@ -55,7 +55,7 @@ checkLoginStatus();
 										<div class="row">
 												<i class="material-icons prefix">date_range</i>
 												<label for="bday">Birthday</label>
-					              <input name="bday" id="bday" type="date" value="<?php echo $bday; ?>" required>
+												<input type="text" name="bday" id='bday' class="datepicker" required>
                     </div>
                     <div class="row">
 											<div class="col s12">
@@ -133,4 +133,14 @@ checkLoginStatus();
 				document.getElementById('txtpasswordcheck').innerHTML = 'Retype password';
 			}
 	}
+
+	$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+		format: 'yyyy-mm-dd',
+    closeOnSelect: false // Close upon selecting a date,
+  });
 </script>

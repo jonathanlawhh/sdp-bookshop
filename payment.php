@@ -28,7 +28,7 @@ checkLoginStatus();
 				<div class="row">
 					<div class="input-field col s12 m6">
 						<i class="material-icons prefix">credit_card</i>
-						<input name="creditCardNumber" id="creditCardNumber" type="text" class="validate" required>
+						<input name="creditCardNumber" id="creditCardNumber" type="text" class="validate" <?php if(isset($_COOKIE['tpmb-card'])){ $card=$_COOKIE['tpmb-card']; echo "value=$card"; } ?> required>
 						<label for="creditCardNumber">Card number</label>
 					</div>
 				</div>
@@ -52,6 +52,10 @@ checkLoginStatus();
 					</div>
 					<p class="col s6 m6 l2">
 						<button name="makePayment" type="submit" class="waves-effect waves-light btn"><i class="material-icons left">monetization_on</i>Pay now</button>
+					</p>
+					<p class="col s12">
+						<input name="rememberCard" type="checkbox" id="rmbCard" <?php if(isset($_COOKIE['tpmb-card'])){ echo "checked"; }?>/>
+						<label for="rmbCard">Remember Card</label>
 					</p>
 				</div>
 		</form>
