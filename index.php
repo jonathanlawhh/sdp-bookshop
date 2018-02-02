@@ -53,14 +53,10 @@ include "php/connect.php";
 		<?php
 		// Query for Recomended
 		// A cache for the book category is made everytime a book is being searched. This cache will be used to reccomend.
-		if(isset($_COOKIE['tpmb-recc'])){
-			$recc = $_COOKIE['tpmb-recc'];
-		} else {
-			$recc = "Fantasy";
-		}
+		if(isset($_COOKIE['tpmb-recc'])){ $recc = $_COOKIE['tpmb-recc']; } else { $recc = "Fantasy"; }
 		$queryRecc = "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$recc' ORDER BY RAND() LIMIT 5";
 		$executeRecc=mysqli_query($conn, $queryRecc);
-		while($reccbook = mysqli_fetch_array($executeRecc)){?>
+		while($reccbook = mysqli_fetch_array($executeRecc)){ ?>
     <div class="customCardDiv">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
@@ -68,7 +64,7 @@ include "php/connect.php";
         </div>
         <div class="card-content">
           <span class="grey-text text-darken-4 truncate"><?php echo $reccbook['bookname'] ?></span>
-          <p><a target="_blank" href="book.php?bookid=<?php echo $reccbook['bookISBN']; ?>">Click me</a></p>
+          <p><a href="book.php?bookid=<?php echo $reccbook['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>
     </div>
@@ -91,7 +87,7 @@ include "php/connect.php";
         </div>
         <div class="card-content">
           <span class="grey-text text-darken-4 truncate"><?php echo $topRating['bookname'] ?></span>
-          <p><a target="_blank" href="book.php?bookid=<?php echo $topRating['bookISBN']; ?>">Click me</a></p>
+          <p><a href="book.php?bookid=<?php echo $topRating['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>
     </div>

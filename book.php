@@ -189,20 +189,35 @@ $currentBook=$_GET['bookid'];
 			</div>
     </li>
 	<?php } //End of preventing non login users from giving feedbacks and rating ?>
-
     <li class="hoverable">
       <div class="collapsible-header active"><i class="material-icons">chat</i>Users feedback</div>
-      <div class="collapsible-body">
+      <div class="collapsible-body" id="commentHeader">
+				<div id="commentSection">
 				<?php //Select all user comments for this book
 				$queryForComments = "SELECT * FROM bookcomment WHERE bookISBN='$currentBook'";
 				$arrayComments = mysqli_query($conn,$queryForComments);
-				while($feedbacks = mysqli_fetch_array($arrayComments)){ ?>
-				<div class="section">
+				while($feedbacks = mysqli_fetch_array($arrayComments)){
+					$currentFeedbackID = $feedbacks['ratingID'];
+					$checkCommentVUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totalveryuseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='veryuseful'");
+					$checkCommentUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useful'");
+					$checkCommentUseless = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseless FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useless'");
+				?>
+				<div class="section" id="<?php echo $feedbacks['ratingID']; ?>">
 					<span><?php echo $feedbacks['username'] . " on " . $feedbacks['date'] ?> says :</span>
 					<p><?php echo $feedbacks['comments'] ?></p>
+					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'veryuseful')" class="hand">
+						<i class="material-icons tooltipped teal-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Very useful feedback">thumb_up</i>
+					</a><?php while($commentVal = mysqli_fetch_array($checkCommentVUseful)){ echo $commentVal['totalveryuseful']; }?>
+					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useful')" class="hand">
+						<i class="material-icons tooltipped blue-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useful feedback" style="margin-left:20px;">thumbs_up_down</i>
+					</a><?php while($commentVal = mysqli_fetch_array($checkCommentUseful)){ echo $commentVal['totaluseful']; }?>
+					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useless')" class="hand">
+						<i class="material-icons tooltipped red-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useless feedback" style="margin-left:20px;">thumb_down</i>
+					</a><?php while($commentVal = mysqli_fetch_array($checkCommentUseless)){ echo $commentVal['totaluseless']; }?>
 					<div class="divider"></div>
 				</div>
 			<?php } //End of user comments?>
+			</div>
 			</div>
     </li>
   </ul>

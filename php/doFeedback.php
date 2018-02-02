@@ -37,4 +37,15 @@ if(isset($_POST['feedback'])){
   echo "<script>window.location = '../book.php?bookid=$bookID'; exit();</script>";
 }
 
+//Add feedback
+if(isset($_POST['feedbackID'])){
+  $currentUser = scanner($_SESSION['tpmb-user'], '404.php');
+  $feedbackID = scanner($_POST['feedbackID'], '404.php');
+  $feedbackRating = scanner($_POST['feedbackValue'], '404.php');
+
+  $addBookFeedback = "INSERT INTO userfeedbackrating (username, ratingID, feedbackrated )
+    VALUES ('$currentUser', '$feedbackID', '$feedbackRating')";
+  $executeBookFeedback=mysqli_query($conn,$addBookFeedback);
+}
+
 ?>

@@ -23,3 +23,20 @@ function addToCartForm(){
 	document.getElementById('cartBtn').innerHTML = 'Cart';
  }
 }
+
+function userRatingForm(commentID, rating){
+ if(commentID){
+	$.ajax({
+	type: 'post',
+	url: 'php/doFeedback.php',
+	dataType: 'text',
+	data: {
+	 feedbackID:commentID,
+   feedbackValue:rating,
+	},
+	success: function (response) { refreshComment();}
+	});
+ } else { refreshComment(); }
+}
+
+function refreshComment(){ $('#commentHeader').load(location.href + ' #commentSection'); }

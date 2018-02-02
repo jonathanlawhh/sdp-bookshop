@@ -21,3 +21,7 @@ main {
   float:left;
   margin:10px;
 }
+
+.hand{
+  cursor: pointer;
+}
