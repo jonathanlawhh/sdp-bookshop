@@ -7,7 +7,7 @@ checkLoginStatus();
 if(isset($_POST['makePayment'])){
   $username = $_SESSION['tpmb-user'];
   $cardNumber = $_POST['creditCardNumber'];
-  $transactionID = $username . "-" . date("YmdHs");
+  $transactionID = $username . "-" . date("YmdHis");
   $currentTime = date("Y-m-d H:i");
 
 if(isset($_POST['rememberCard'])){
@@ -16,19 +16,26 @@ if(isset($_POST['rememberCard'])){
   setcookie("tpmb-card", "", time() + 31536000, '/');
 }
 
-
-  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionCard, transactionDate)
-  VALUES ('$transactionID', '$username', '$cardNumber' , '$currentTime')");
-
   //Insert transaction details
-  foreach($_SESSION["tpmb-cartItem"] as $sessionArray ){
+  $cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
+  foreach($cartCombined as $sessionArray => $sessionQtyArray){
     $bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
     while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database
-      $sql = "INSERT INTO transactiondetail (transactionID, bookISBN, quantity)
-      VALUES ('$transactionID', '$book[bookISBN]', '$bookQuantity' )";
-      mysqli_query($conn, $sql);
-      $sessionArray;
+      if($book['bookQty']>0){
+        //Add transaction table
+        mysqli_query($conn, "INSERT INTO transactiondetail (transactionID, bookISBN, quantity)
+        VALUES ('$transactionID', '$sessionArray', '$sessionQtyArray' )");
+        //Deduct book amount
+        $newBookQty = $book['bookQty'] - $sessionQtyArray;
+        mysqli_query($conn, "UPDATE book SET bookQty = $newBookQty WHERE bookISBN = '$sessionArray'");
+      } else {
+        echo "SHIT HAPPENS";
+        exit;
+      }
+
     }
   }
+  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionCard, transactionDate)
+  VALUES ('$transactionID', '$username', '" . $_SESSION['tpmb-total'] . "' ,'$cardNumber' , '$currentTime')");
 }
 ?>

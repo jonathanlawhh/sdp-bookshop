@@ -23,6 +23,29 @@ $currentUser = $_SESSION['tpmb-user'];
     <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4">Transaction History</h4>
+    <div class="divider"></div>
+    <table class="highlight responsive-table">
+      <thead>
+        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+		<?php
+    //Query for feedback
+    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' LIMIT 3");
+    $userTransactionCount=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser'");
+    while($userTransaction = mysqli_fetch_array($userTransactionArray)){ ?>
+          <tr>
+            <td><a href="transaction-slip.php?transID=<?php echo $userTransaction['transactionID']; ?>"><?php echo $userTransaction['transactionID']; ?></a></td>
+            <td>RM <?php echo $userTransaction['transactionTotal']; ?></td>
+            <td><?php echo $userTransaction['transactionDate']; ?></td>
+          </tr>
+      <?php } if(mysqli_num_rows($userTransactionCount) > 3){
+        echo "<tr><td colspan='3'><a href='transaction-more.php'><i class='material-icons right'>chevron_right</i>View more feedbacks you gave</a></td></tr>";
+      } ?>
+      </tbody>
+    </table>
+
     <h4 class="left-align col s12 m6 offset-m3 margintop4">Your feedbacks</h4>
     <div class="divider"></div>
     <table class="highlight responsive-table">

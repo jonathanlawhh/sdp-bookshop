@@ -58,21 +58,23 @@
      } else { //If not empty, list the content of the cart ?>
      <table class="highlight">
        <thead>
-         <tr><th>Book ISBN</th><th>Book Name</th><th>Book Price</th><th>Remove</th></tr>
+         <tr><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
        </thead>
        <tbody>
          <?php //Query items in the cart
-         foreach($_SESSION["tpmb-cartItem"] as $sessionArray ){
+         $cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
+         foreach($cartCombined as $sessionArray => $sessionQtyArray){
          	 $bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
            while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database?>
                <tr>
                    <input name="bookID" id="<?php echo $sessionArray; ?>" value="<?php echo $sessionArray; ?>" type="hidden">
                    <td><?php echo $sessionArray; ?></td>
                    <td><?php echo $book['bookname']; ?></td>
-                   <td>RM <?php echo $book['bookprice']; ?></td>
+                   <td><?php  echo $sessionQtyArray; ?></td>
+                   <td>RM <?php $sumBook = $book['bookprice']*$sessionQtyArray; echo $sumBook; ?></td>
                    <td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
                </tr>
-          <?php $totalPrice += $book['bookprice'];
+          <?php $totalPrice += $sumBook;
           } //End of fetching book name and price from database
         } //End of cart query
       } //End of checking whether the cart is empty ?>

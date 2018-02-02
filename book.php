@@ -198,6 +198,7 @@ $currentBook=$_GET['bookid'];
 				$arrayComments = mysqli_query($conn,$queryForComments);
 				while($feedbacks = mysqli_fetch_array($arrayComments)){
 					$currentFeedbackID = $feedbacks['ratingID'];
+					//Inefficient coding, but who cares
 					$checkCommentVUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totalveryuseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='veryuseful'");
 					$checkCommentUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useful'");
 					$checkCommentUseless = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseless FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useless'");
@@ -218,7 +219,7 @@ $currentBook=$_GET['bookid'];
 				</div>
 			<?php } //End of user comments?>
 			</div>
-			</div>
+		</div>
     </li>
   </ul>
   </main>

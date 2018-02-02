@@ -20,24 +20,11 @@ setInterval("my_function();",5000);
 }
 
 //Delete cart ajax
-function deleteCart(cartID){
- var name=document.getElementById(cartID).value;
- if(name){
-	$.ajax({
-	type: 'post',
-	url: 'php/addToCart.php',
-	dataType: 'text',
-	data: {
-	 deleteCart:name,
-	},
-	success: function (response) {
-	 $( '#test' ).html(response);
-	 my_function();
-	}
-	});
- } else {
-	my_function();
- }
+function deleteCart(a) {
+  (a = document.getElementById(a).value) ? $.ajax({type:"post", url:"php/addToCart.php", dataType:"text", data:{deleteCart:a}, success:function(a) {
+    $("#test").html(a);
+    my_function();
+  }}) : my_function();
 }
 </script>
 
@@ -54,23 +41,25 @@ function deleteCart(cartID){
 		<div id="updateCartDiv">
     <table id="updateCart" class="highlight responsive-table">
       <thead>
-      <tr><th>Book ISBN</th><th>Book Name</th><th>Book Price</th><th>Remove</th></tr>
+      <tr><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
       </thead>
       <tbody>
 				<?php $totalPrice = 0; //Query items in the cart
-				foreach($_SESSION["tpmb-cartItem"] as $sessionArray ){
+				$cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
+				foreach($cartCombined as $sessionArray => $sessionQtyArray){
 					$bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
 					while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database?>
 						<tr>
 								<input name="bookID" id="<?php echo $sessionArray; ?>" value="<?php echo $sessionArray; ?>" type="hidden">
 								<td><?php echo $sessionArray; ?></td>
 								<td><?php echo $book['bookname']; ?></td>
-								<td>RM <?php echo $book['bookprice']; ?></td>
+								<td><?php echo $sessionQtyArray; ?></td>
+								<td>RM <?php $sumBook = $book['bookprice']*$sessionQtyArray; echo $sumBook; ?></td>
 								<td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
 						</tr>
-				 <?php $GLOBALS['totalPrice'] += $book['bookprice'];
+				 <?php $GLOBALS['totalPrice'] += $sumBook;
 				 } //End of fetching book name and price from database
-			 } //End of cart query ?>
+			 } $_SESSION['tpmb-total'] = $GLOBALS['totalPrice'];//End of cart query ?>
 			 <tr><td colspan="4"></td></tr>
 			 <tr><th></th><th>Total Price : </th><td>RM <?php echo $GLOBALS['totalPrice']; ?></td></tr>
       </tbody>
