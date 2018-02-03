@@ -87,12 +87,18 @@
 							<input type="text" name="bday" id='bday' class="datepicker" required>
             </div>
           </div>
-          <div class="row col s12 ">
+          <div class="row col s12">
             <div class="input-field col s12 m6 offset-m3">
               <input name="email" id="email" type="email" placeholder="jonathanlawhh@mail.com" class="validate" required>
               <label for="email">Email</label>
             </div>
           </div>
+				  <div class="row col s12">
+		        <div class="input-field col s12 m6 offset-m3">
+		          <textarea id="address" class="materialize-textarea" name="address" required></textarea>
+		          <label for="address">Address</label>
+		        </div>
+				  </div>
           <div class="row col s12 ">
             <div class="input-field col s12 m6 offset-m3">
               <input name="pwd" id="pwd" type="password" placeholder="********" class="validate" pattern="[0-9A-Za-z_]{7,}" required>

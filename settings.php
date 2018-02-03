@@ -52,10 +52,17 @@ checkLoginStatus();
                         <label for="pnumber">Phone Number</label>
                       </div>
                     </div>
+                    <div class="row">
+							        <div class="input-field">
+												<i class="material-icons prefix">home</i>
+							          <textarea id="address" class="materialize-textarea" name="address" required><?php echo $address; ?></textarea>
+							          <label for="address">Address</label>
+							        </div>
+                    </div>
 										<div class="row">
 												<i class="material-icons prefix">date_range</i>
 												<label for="bday">Birthday</label>
-												<input type="text" name="bday" id='bday' class="datepicker" required>
+												<input type="text" name="bday" id='bday' class="datepicker" value="<?php echo $bday; ?>" required>
                     </div>
                     <div class="row">
 											<div class="col s12">

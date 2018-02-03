@@ -19,13 +19,13 @@ checkLoginStatus();
   include "ui/header.php";?>
 
   <main class="container">
-    <h4 class="left-align col s12 m6 offset-m3 margintop4">Payment</h4>Enter your card details
+    <h4 class="left-align col s12 m6 offset-m3 margintop4">Payment</h4>Enter your card details<br /> Please note your default address will be used
     <div class="divider" style="margin-top:2%"></div>
 		<form method="POST" action="php/makePayment.php" class="col s12"  style="margin-top:3%;">
 				<div class="input-field col s12">
 					Total Price : RM <?php echo $GLOBALS['totalPrice']; ?>
 				</div>
-				<div class="row">
+				<div class="row margintop4">
 					<div class="input-field col s12 m6">
 						<i class="material-icons prefix">credit_card</i>
 						<input name="creditCardNumber" id="creditCardNumber" type="text" class="validate" <?php if(isset($_COOKIE['tpmb-card'])){ $card=$_COOKIE['tpmb-card']; echo "value=$card"; } ?> required>

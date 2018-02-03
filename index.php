@@ -17,7 +17,7 @@ include "php/connect.php";
   </script>
 </head>
 
-<body background="bg.jpg" style="background-size:cover;">
+<body>
 <?php //load header
   include "ui/header.php" ?>
 

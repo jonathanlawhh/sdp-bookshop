@@ -35,7 +35,39 @@ if(isset($_POST['rememberCard'])){
 
     }
   }
-  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionCard, transactionDate)
-  VALUES ('$transactionID', '$username', '" . $_SESSION['tpmb-total'] . "' ,'$cardNumber' , '$currentTime')");
+  $tp = $_SESSION['tpmb-total'] * 10;
+  //Add transaction
+  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionPoint, transactionCard, transactionDate)
+  VALUES ('$transactionID', '$username', '" . $_SESSION['tpmb-total'] . "' , '$tp' ,'$cardNumber' , '$currentTime')");
+
+  //Retrive user points and email value
+  $declareForEmail = mysqli_query($conn,"SELECT fname, email, address, points FROM user WHERE username='$username'");
+  while($userDetail = mysqli_fetch_array($declareForEmail)){
+    $fname = $userDetail['fname'];
+    $email = $userDetail['email'];
+    $address = $userDetail['address'];
+    $point = $userDetail['points'];
+  }
+
+  //Topup user account member points
+  $totalPoints = $tp + $point;
+  mysqli_query($conn,"UPDATE user SET points = $totalPoints WHERE username = '$username'");
+
+  //Remove some characters from transactionID for security
+  $_SESSION['tpmb-temp'] = strstr($transactionID,'-2');
+
+
+  include "sendPaymentEmail.php";
+  //Remove cart item
+  unset($_SESSION["tpmb-cartItem"]);
+  unset($_SESSION["tpmb-cartItemQty"]);
+  unset($_SESSION["tpmb-total"]);
+  mysqli_close($conn);
+  if($status=='serverfail'){
+    echo "<script>window.location = '../transaction-done.php?status=serverfail'; exit();</script>";
+  } else {
+    echo "<script>window.location = '../transaction-done.php'; exit();</script>";
+  }
+  exit;
 }
 ?>

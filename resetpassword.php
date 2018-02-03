@@ -29,7 +29,7 @@
 						echo "<p class='col s12 offset-m3'>Wrong details</p>";
 					} elseif($_GET['search'] == 1) {
 						echo "<p class='col s12 offset-m3'>An error occured with our email server... Please contact our admin</p>";
-					} elseif($_GET['search'] == "success"){
+					} elseif($_GET['search'] == 3){
 						echo "<p class='col s12 offset-m3'>A recovery email has been sent to you</p>";
 					}
 				}

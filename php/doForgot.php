@@ -87,7 +87,7 @@ if (isset($_POST['resetMe'])){
 
     //Update password at database
     $updatePassword=mysqli_query($conn,"UPDATE user SET password = '$enewpassword' WHERE username='$username' AND email='$email'");
-    echo "<script>window.location = '../resetpassword.php?search=success'; exit();</script>";
+    echo "<script>window.location = '../resetpassword.php?search=3'; exit();</script>";
   }
 }
 ?>

@@ -13,6 +13,7 @@ if (isset($_POST['register'])){
   $bday = scanner($_POST["bday"],'../register.php?register=2');
   $date = scanner(date("Ymd"),'../register.php?register=2');
   $password = scanner($_POST["pwd"],'../register.php?register=2');
+  $address = $_POST["address"];
   //Lets encrypt the Password
   $salt = $username . "tpmb";
   $epassword = crypt($password, $salt);
@@ -31,8 +32,8 @@ if (isset($_POST['register'])){
     if($password !== $_POST["pwd2"]){
       echo "<script>window.location = '../register.php?register=3'; exit();</script>";
     }
-    $sql = "INSERT INTO user (username, fname, lname, email, password, gender, pnumber, birthday, status, registerdate)
-    VALUES ('$username', '$fname', '$lname', '$email', '$epassword', '$gender', '$pnumber', '$bday', 'member', '$date')";
+    $sql = "INSERT INTO user (username, fname, lname, email, password, gender, pnumber, birthday, address, status, registerdate)
+    VALUES ('$username', '$fname', '$lname', '$email', '$epassword', '$gender', '$pnumber', '$bday', '$address', 'member', '$date')";
     mysqli_query($conn, $sql);
     echo "<script>window.location = 'registersuccess.php'; exit();</script>";
     mysqli_close($conn);
@@ -46,7 +47,7 @@ if(isset($_POST['uname'])){
   $username = $_POST["uname"];
   $checkUsername = "SELECT username FROM user WHERE username='$username'";
   $checkUserRows=mysqli_query($conn,$checkUsername);
-  if (preg_match('/[\'"^$&%*}{#~?><>,|;]/', $username)){
+  if (preg_match('/[\'"^$&%*}-{#~?><>,|;]/', $username)){
        echo "Invalid characters detected";
   } elseif(mysqli_num_rows($checkUserRows) == 0){
       echo "Username is available";
