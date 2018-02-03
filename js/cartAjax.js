@@ -34,6 +34,20 @@ function userRatingForm(commentID, rating){
    refreshComment(); }
 }
 
+function deleteFeedback(deleteThis, bookISBN){
+ if(deleteThis){
+	$.ajax({
+	type: 'post', url: 'php/doFeedback.php', dataType: 'text', data: { deleteThis:deleteThis, bookISBN:bookISBN, },
+	success: function (response) {
+    eval(response);
+    refreshComment();
+  }
+	});
+ } else {
+   eval(response);
+   refreshComment(); }
+}
+
 //Need to remove tooptiped due to onclick bug in MaterializeCSS framework: https://github.com/Dogfalo/materialize/issues/3566
 function refreshComment(){
   $('.tooltipped').tooltip('remove');

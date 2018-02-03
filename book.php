@@ -215,6 +215,12 @@ $currentBook=$_GET['bookid'];
 					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useless')" class="hand">
 						<i class="material-icons tooltipped red-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useless feedback" style="margin-left:20px;">thumb_down</i>
 					</a><?php while($commentVal = mysqli_fetch_array($checkCommentUseless)){ echo $commentVal['totaluseless']; }?>
+					<?php if($feedbacks['username']==$currentUser) { ?>
+						<a role="button" onclick="deleteFeedback(<?php echo $feedbacks['ratingID'] . ",'" . $currentBook . "'"; ?>)" class="hand">
+							<i class="material-icons tooltipped deep-purple-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Delete feedback" style="margin-left:40px;">delete_forever</i>
+						</a>
+					<?php } ?>
+
 					<div class="divider"></div>
 				</div>
 			<?php } //End of user comments?>

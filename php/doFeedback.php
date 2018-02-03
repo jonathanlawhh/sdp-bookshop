@@ -32,9 +32,27 @@ if(isset($_POST['feedback'])){
   $bookID = scanner($_POST['bookID'], '404.php');
   $comment = scanner($_POST['comment'], '404.php');
 
-  $addBookFeedback = "INSERT INTO bookcomment (bookISBN, username, comments, date) VALUES ('$bookID', '$currentUser', '$comment', '$today')";
-  mysqli_query($conn,$addBookFeedback);
+  mysqli_query($conn,"INSERT INTO bookcomment (bookISBN, username, comments, date) VALUES ('$bookID', '$currentUser', '$comment', '$today')");
   echo "<script>window.location = '../book.php?bookid=$bookID'; exit();</script>";
+}
+
+//Delete own feedback
+if(isset($_POST['deleteThis'])){
+  $currentUser = scanner($_SESSION['tpmb-user'], '404.php');
+  $feedbackID = scanner($_POST['deleteThis'], '404.php');
+  $bookID = scanner($_POST['bookISBN'], '404.php');
+  //Check if feedback really exist
+  $check = mysqli_query($conn,"SELECT * FROM bookcomment WHERE username='$currentUser' AND ratingID='$feedbackID' AND bookISBN='$bookID'");
+  if(mysqli_num_rows($check) == 0){
+    echo "Materialize.toast('Something went wrong, please reload the page', 3000)";
+    exit;
+  }
+
+  //Remove feedback
+  mysqli_query($conn,"DELETE FROM bookcomment WHERE username='$currentUser' AND ratingID='$feedbackID' AND bookISBN='$bookID'");
+  //Remove feedback ratings
+  mysqli_query($conn,"DELETE FROM userfeedbackrating WHERE ratingID='$feedbackID'");
+  echo "Materialize.toast('Feedback deleted', 3000)";
 }
 
 //Add feedback
