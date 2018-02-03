@@ -21,7 +21,6 @@ $mail->addReplyTo($adminEmail, 'TPMB Admin');
 //Send to ??
 $mail->addAddress($email, $username);
 $mail->Subject = 'Your order today';
-$totalAmount = $_SESSION['tpmb-total'];
 $ti = $_SESSION['tpmb-temp'];
 $emailContent = "
 <main>
@@ -32,7 +31,7 @@ $emailContent = "
     <div style='border-style:solid;border-color:#BDBDBD;border-width:1px; max-width:92%; margin:auto;'>
       <div style='padding: 2px 16px;'>
         <h4>Hello $fname,</h4>
-        <p>A transaction of RM $totalAmount just took place.
+        <p>A transaction of RM $newPrice just took place.
         Your order with transaction ID $ti will be sent to the following address :<br />
         <span><u>$address</u></span><br /><br />
         You can view the transaction details from the history page after logging in.<br />

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2018 at 10:26 AM
+-- Generation Time: Feb 03, 2018 at 04:43 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -50,7 +50,7 @@ INSERT INTO `book` (`bookISBN`, `bookname`, `bookcategory`, `bookauthor`, `bookd
 ('b-00001', 'Harry Potter and the Cursed Child', 'Fantasy', 'JK Rowling', 'Based on an original new story by J.K. Rowling, John Tiffany and Jack Thorne, a new play by Jack Thorne, Harry Potter and the Cursed Child is the eighth story in the Harry Potter series and the first official Harry Potter story to be presented on stage. The play will receive its world premiere in London\'s West End on 30th July 2016.\r\n\r\nIt was always difficult being Harry Potter and it isn\'t much easier now that he is an overworked employee of the Ministry of Magic, a husband, and father of three school-age children.\r\n\r\nWhile Harry grapples with a past that refuses to stay where it belongs, his youngest son Albus must struggle with the weight of a family legacy he never wanted. As past and present fuse ominously, both father and son learn the uncomfortable truth: sometimes, darkness comes from unexpected places.', 21, 320, ' Original West End Production ', 20171231, 'harrypotter-cursed.png', 88),
 ('b-00002', 'Harry Potter and the Deathly Hallows', 'Fantasy', 'JK Rowling', 'Harry Potter and the Deathly Hallows is a fantasy novel written by British author J. K. Rowling and the seventh and final novel of the Harry Potter series. The book was released on 21 July 2007, ending the series that began in 1997 with the publication of Harry Potter and the Philosopher\'s Stone. It was published by Bloomsbury Publishing in the United Kingdom, in the United States by Scholastic, and in Canada by Raincoast Books. The novel chronicles the events directly following Harry Potter and the Half-Blood Prince (2005), and the final confrontation between the wizards Harry Potter and Lord Voldemort.', 21, 451, 'Original West End Production ', 20180101, 'harrypotter-deathly.png', 71),
 ('b-00003', 'The Maze Runner', 'Action', 'James Dashner', 'When Thomas wakes up in the lift, the only thing he can remember is his name. He is surrounded by strangers boys whose memories are also gone.\r\n   Outside the towering stone walls that surround them is a limitless, ever-changing maze. It is the only way out and no one has ever made it through alive.\r\n   Then a girl arrives. The first girl ever. And the message she delivers is terrifying: Remember. Survive. Run.', 24, 149, 'Paperback', 20180101, 'themazerunner01.png', 47),
-('b-00004', 'The Scorch Trials (Maze Runner, Book 2)', 'Action', 'James Dashner', 'Thomas was sure that escape from the Maze would mean freedom for him and the Gladers. But WICKED is not done yet. Phase Two has just begun. The Scorch.\r\n   The Gladers have two weeks to cross through the Scorch, the most burned-out section of the world. And WICKED has made sure to adjust the variables and stack the odds against them.\r\n   There are others now. Their survival depends on the Gladers destruction and they are determined to survive.\r\n   Friendships will be tested. Loyalties will be broken. All bets are off. ', 24, 215, 'Paperback', 20180101, 'themazerunner02.png', 122),
+('b-00004', 'The Scorch Trials (Maze Runner, Book 2)', 'Action', 'James Dashner', 'Thomas was sure that escape from the Maze would mean freedom for him and the Gladers. But WICKED is not done yet. Phase Two has just begun. The Scorch.\r\n   The Gladers have two weeks to cross through the Scorch, the most burned-out section of the world. And WICKED has made sure to adjust the variables and stack the odds against them.\r\n   There are others now. Their survival depends on the Gladers destruction and they are determined to survive.\r\n   Friendships will be tested. Loyalties will be broken. All bets are off. ', 24, 215, 'Paperback', 20180101, 'themazerunner02.png', 121),
 ('b-00005', 'The Death Cure (Maze Runner, Book Three)', 'Action', 'James Dashner', 'WICKED has taken everything from Thomas: his life, his memories, and now his only friends, the Gladers. But it is finally over. The trials are complete, after one final test.\r\n\r\nWhat WICKED does not know is that Thomas remembers far more than they think. And it is enough to prove that he cannot believe a word of what they say.\r\n\r\nThomas beat the Maze. He survived the Scorch. He will risk anything to save his friends. But the truth might be what ends it all.\r\n\r\nThe time for lies is over.', 24, 302, 'Paperback', 20180101, 'themazerunner03.png', 5),
 ('b-00006', 'The 5th Wave: The First Book of the 5th Wave Series', 'Sci-Fi', 'Rick Yancey', 'After the 1st wave, only darkness remains. After the 2nd, only the lucky escape. And after the 3rd, only the unlucky survive. After the 4th wave, only one rule applies: trust no one.\r\n\r\nNow, it\'s the dawn of the 5th wave, and on a lonely stretch of highway, Cassie runs from Them. The beings who only look human, who roam the countryside killing anyone they see. Who have scattered Earth\'s last survivors. To stay alone is to stay alive, Cassie believes, until she meets Evan Walker. Beguiling and mysterious, Evan Walker may be Cassie\'s only hope for rescuing her brother--or even saving herself. But Cassie must choose: between trust and despair, between defiance and surrender, between life and death. To give up or to get up.', 20, 89, 'Paperback', 20180101, 'the5thwave.png', 184),
 ('b-00007', 'The Infinite Sea: The Second Book of the 5th Wave', 'Sci-Fi', 'Rick Yancey', 'How do you rid the Earth of seven billion humans? Rid the humans of their humanity.\r\n\r\nSurviving the first four waves was nearly impossible. Now Cassie Sullivan finds herself in a new world, a world in which the fundamental trust that binds us together is gone. As the 5th Wave rolls across the landscape, Cassie, Ben, and Ringer are forced to confront the Others ultimate goal: the extermination of the human race.\r\n\r\nCassie and her friends have not seen the depths to which the Others will sink, nor have the Others seen the heights to which humanity will rise, in the ultimate battle between life and death, hope and despair, love and hate.', 22, 105, 'Paperback', 20180101, 'the5thwave02.png', 114),
@@ -99,7 +99,6 @@ CREATE TABLE `bookcomment` (
 --
 
 INSERT INTO `bookcomment` (`ratingID`, `bookISBN`, `username`, `comments`, `date`) VALUES
-(1, 'b-00003', 'admin', 'Totally love this book. Gonna give a copy to my aunt, uncle, cousin, niece and grandparents for their upcoming birthday', 20180104),
 (2, 'b-00003', 'jon', 'Average book with average storyline. Would say if it is in comic form, it will be better', 20180104),
 (3, 'b-00005', 'jon', 'This book is definitely better than the first one. Very exciting and the plot twist at the end broke my heart haha', 20180104),
 (4, 'b-00009', 'jon', 'Murder in the Louvre! Code in classic art! A conspiracy big enough to rewrite history!', 20180105),
@@ -164,6 +163,7 @@ INSERT INTO `transaction` (`transactionID`, `transactionUser`, `transactionTotal
 ('admin-20180202143642', 'admin', 24, 0, 12345678, '2018-02-02 14:36'),
 ('admin-20180203064602', 'admin', 130, 0, 12345678, '2018-02-03 06:46'),
 ('admin-20180203080630', 'admin', 21, 0, 12345678, '2018-02-03 08:06'),
+('admin-20180203163506', 'admin', 14, 140, 12345678, '2018-02-03 16:35'),
 ('jon-20180203101859', 'jon', 87, 870, 12345678, '2018-02-03 10:18');
 
 -- --------------------------------------------------------
@@ -189,7 +189,8 @@ INSERT INTO `transactiondetail` (`index`, `transactionID`, `bookISBN`, `quantity
 (10, 'admin-20180203064602', 'b-00020', 1),
 (12, 'admin-20180203080630', 'b-00002', 1),
 (17, 'jon-20180203101859', 'b-00002', 3),
-(18, 'jon-20180203101859', 'b-00024', 1);
+(18, 'jon-20180203101859', 'b-00024', 1),
+(19, 'admin-20180203163506', 'b-00004', 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +218,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`, `pnumber`, `birthday`, `address`, `status`, `points`, `registerdate`) VALUES
-('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'member', 0, 20171209),
+('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'member', 8740, 20171209),
 ('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', '', 'member', 0, 20180105),
 ('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0123456789', '0001-01-01', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 870, 20171209),
 ('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', '', 'member', 0, 20171217),
@@ -244,7 +245,7 @@ INSERT INTO `userfeedbackrating` (`userfeedbackID`, `username`, `ratingID`, `fee
 (1, 'admin', 3, 'veryuseful'),
 (2, 'admin', 12, 'useless'),
 (3, 'admin', 10, 'veryuseful'),
-(4, 'admin', 1, 'veryuseful');
+(5, 'jon', 12, 'useless');
 
 --
 -- Indexes for dumped tables
@@ -312,13 +313,13 @@ ALTER TABLE `bookrating`
 -- AUTO_INCREMENT for table `transactiondetail`
 --
 ALTER TABLE `transactiondetail`
-  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `userfeedbackrating`
 --
 ALTER TABLE `userfeedbackrating`
-  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

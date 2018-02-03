@@ -32,7 +32,7 @@ $currentUser = $_SESSION['tpmb-user'];
       <tbody>
 		<?php
     //Query for feedback
-    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' LIMIT 3");
+    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' ORDER BY transactionDate DESC LIMIT 3");
     $userTransactionCount=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser'");
     while($userTransaction = mysqli_fetch_array($userTransactionArray)){
 			//Below will remove certain part of the transaction ID for security
@@ -44,7 +44,7 @@ $currentUser = $_SESSION['tpmb-user'];
             <td><?php echo $userTransaction['transactionDate']; ?></td>
           </tr>
       <?php } if(mysqli_num_rows($userTransactionCount) > 3){
-        echo "<tr><td colspan='3'><a href='transaction-more.php'><i class='material-icons right'>chevron_right</i>View more feedbacks you gave</a></td></tr>";
+        echo "<tr><td colspan='4'><a href='transaction-more.php'><i class='material-icons right'>chevron_right</i>View more transactions</a></td></tr>";
       } ?>
       </tbody>
     </table>

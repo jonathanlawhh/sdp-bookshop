@@ -1,7 +1,7 @@
 <?php session_start();
 include "php/connect.php";
-checkLoginStatus();
-?>
+checkLoginStatus();?>
+
 <head>
 	<title>TPM Bookshop</title>
 	<link rel="icon" href="images/favicon.png">
@@ -23,7 +23,12 @@ checkLoginStatus();
     <div class="divider" style="margin-top:2%"></div>
 		<form method="POST" action="php/makePayment.php" class="col s12"  style="margin-top:3%;">
 				<div class="input-field col s12">
-					Total Price : RM <?php echo $GLOBALS['totalPrice']; ?>
+					Total Price : RM <?php echo $GLOBALS['totalPrice']; if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){
+					 $pointPrice = $_SESSION["tpmb-point"] / 100;
+					 $newPrice = $GLOBALS['totalPrice']-$pointPrice;
+					 if($newPrice <=0){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
+					 echo " - RM " . $pointPrice . " = RM " . $newPrice;
+			 }?>
 				</div>
 				<div class="row margintop4">
 					<div class="input-field col s12 m6">
@@ -61,5 +66,6 @@ checkLoginStatus();
 		</form>
   </main>
   <?php //Load footer
+		if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){ echo "<script>Materialize.toast('Points applied!!', 3000)</script>"; }
     include "ui/footer.html"; ?>
 </body>

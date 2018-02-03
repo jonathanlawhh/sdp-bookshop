@@ -104,17 +104,11 @@ $currentBook=$_GET['bookid'];
 			$executeBookRating = mysqli_query($conn,$checkBookRatingQuery);
 			$rating01 = $rating02 = $rating03 = $rating04 = $rating05 = 0;
 			while($bookRating = mysqli_fetch_array($executeBookRating)){
-				if($bookRating['rating'] == 1){
-					$rating01=$bookRating['result'];
-				} elseif ($bookRating['rating'] == 2){
-					$rating02=$bookRating['result'];
-				} elseif ($bookRating['rating'] == 3){
-					$rating03=$bookRating['result'];
-				} elseif ($bookRating['rating'] == 4){
-					$rating04=$bookRating['result'];
-				} elseif ($bookRating['rating'] == 5){
-					$rating05=$bookRating['result'];
-				}
+				if($bookRating['rating'] == 1){ $rating01=$bookRating['result']; }
+				elseif ($bookRating['rating'] == 2){ $rating02=$bookRating['result']; }
+				elseif ($bookRating['rating'] == 3){ $rating03=$bookRating['result']; }
+				elseif ($bookRating['rating'] == 4){ $rating04=$bookRating['result']; }
+				elseif ($bookRating['rating'] == 5){ $rating05=$bookRating['result']; }
 			}
 
 			//Check if this book has any rating. If no, do not show empty chart

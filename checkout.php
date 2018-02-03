@@ -26,6 +26,12 @@ function deleteCart(a) {
     my_function();
   }}) : my_function();
 }
+
+function applyPoint() {
+  (b = document.getElementById("pointVal").value) ? $.ajax({type:"post", url:"php/addToCart.php", dataType:"text", data:{applyPoint:b}, success:function(a) {
+    my_function();
+  }}) : my_function();
+}
 </script>
 
 <body>
@@ -61,11 +67,43 @@ function deleteCart(a) {
 				 } //End of fetching book name and price from database
 			 } $_SESSION['tpmb-total'] = $GLOBALS['totalPrice'];//End of cart query ?>
 			 <tr><td colspan="4"></td></tr>
-			 <tr><th></th><th>Total Price : </th><td>RM <?php echo $GLOBALS['totalPrice']; ?></td></tr>
+			 <tr><th></th><th>Total Price : </th>
+				 <td colspan="3">RM <?php echo $GLOBALS['totalPrice'];
+					 if(isset($_SESSION["tpmb-point"])){
+						  if($_SESSION["tpmb-point"] != 0){
+							 $pointPrice = $_SESSION["tpmb-point"] / 100;
+							 $newPrice = $GLOBALS['totalPrice']-$pointPrice;
+							 echo " - RM " . $pointPrice . " = RM " . $newPrice;
+					 }} ?>
+			 	 </td>
+		 	</tr>
       </tbody>
     </table>
 		</div>
-		<a href="payment.php"><button class="waves-effect waves-light btn right margintop4">Payment</button></a>
+
+		<div class="row margintop4">
+			<div class="input-field col s12 m3 offset-m5">
+				<select id="pointVal" onchange="applyPoint()"><option value="0">Do not deduct points</option>
+					<?php //Member apply points
+					$currentUser=$_SESSION['tpmb-user']; $userPoint = 0; $storedPts = 0; //Initialize value
+					if(isset($_SESSION["tpmb-point"])){ $storedPts = $_SESSION["tpmb-point"]; }
+					$checkPoint=mysqli_query($conn,"SELECT points FROM user WHERE username='$currentUser'");
+					while($userPtsDetail = mysqli_fetch_array($checkPoint)){ $userPoint = $userPtsDetail['points']; }
+					for($i = 1; $i*1000 <= $userPoint; $i++){
+							$checkNegative = $GLOBALS['totalPrice'] - $i*10;
+							if($checkNegative<=0){ break; }
+							$givePts = $i * 1000; ?>
+				      <option value="<?php echo $givePts; ?>" <?php if($i*1000 == $storedPts){ echo 'selected'; }?>><?php echo $givePts . " pts / RM " . $i*10; ?></option>
+
+					<?php } ?>
+				</select>
+			<label>Deduct member point</label>
+			</div>
+			<div class="col s12 m3"><a href="payment.php"><button class="waves-effect waves-light btn right margintop4">Payment</button></a></div>
+		</div>
+
+		<?php if(isset($_GET['error']) && $_GET['error']==1){ echo "<script>Materialize.toast('Error in cart, please rectify!', 3000)</script>"; } ?>
+		<script>$(document).ready(function() { $('select').material_select(); });</script>
   </main>
   <?php //Load footer
     include "ui/footer.html"; ?>

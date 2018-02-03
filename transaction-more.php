@@ -27,18 +27,21 @@ $currentUser = $_SESSION['tpmb-user'];
     <div class="divider"></div>
 		<table class="highlight responsive-table">
       <thead>
-        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Date</th></tr>
+        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Points Earned</th><th>Date</th></tr>
       </thead>
       <tbody>
 		<?php
     //Query for feedback
-    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser'");
-    while($userTransaction = mysqli_fetch_array($userTransactionArray)){ ?>
-          <tr>
-            <td><a href="transaction-slip.php?transID=<?php echo $userTransaction['transactionID']; ?>"><?php echo $userTransaction['transactionID']; ?></a></td>
-            <td>RM <?php echo $userTransaction['transactionTotal']; ?></td>
-            <td><?php echo $userTransaction['transactionDate']; ?></td>
-          </tr>
+    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' ORDER BY transactionDate DESC");
+		while($userTransaction = mysqli_fetch_array($userTransactionArray)){
+			//Below will remove certain part of the transaction ID for security
+			$ti = strstr($userTransaction['transactionID'],'-2'); ?>
+			<tr>
+				<td><a target="_blank" href="transaction-slip.php?transID=<?php echo $ti; ?>"><?php echo $ti; ?></a></td>
+				<td>RM <?php echo $userTransaction['transactionTotal']; ?></td>
+				<td><?php echo $userTransaction['transactionPoint']; ?></td>
+				<td><?php echo $userTransaction['transactionDate']; ?></td>
+			</tr>
       <?php } ?>
       </tbody>
     </table>

@@ -43,6 +43,12 @@ if(isset($_POST['deleteCart'])){
   unset($_SESSION["tpmb-cartItem"][$arrayToDelete]);
   unset($_SESSION["tpmb-cartItemQty"][$arrayToDelete]);
 }
-
-//unset($_SESSION["tpmb-cartItem"]);
+//User apply point usage
+if(isset($_POST['applyPoint'])){
+  if($_POST['applyPoint']!=0){
+    $_SESSION['tpmb-point'] = $_POST['applyPoint'];
+  } else {
+    unset($_SESSION['tpmb-point']);
+  }
+}
 ?>

@@ -9,12 +9,18 @@ if(isset($_POST['makePayment'])){
   $cardNumber = $_POST['creditCardNumber'];
   $transactionID = $username . "-" . date("YmdHis");
   $currentTime = date("Y-m-d H:i");
+  $newPrice = $_SESSION['tpmb-total'];
+  //Check again if promo was modified/hacked
+  if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){
+    $newPrice = $_SESSION['tpmb-total'] - ($_SESSION["tpmb-point"] / 100);
+    if($newPrice <=0){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
+  }
 
-if(isset($_POST['rememberCard'])){
-  setcookie("tpmb-card", "$cardNumber", time() + 31536000, '/');
-} else {
-  setcookie("tpmb-card", "", time() + 31536000, '/');
-}
+  if(isset($_POST['rememberCard'])){
+    setcookie("tpmb-card", "$cardNumber", time() + 31536000, '/');
+  } else {
+    setcookie("tpmb-card", "", time() + 31536000, '/');
+  }
 
   //Insert transaction details
   $cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
@@ -35,10 +41,10 @@ if(isset($_POST['rememberCard'])){
 
     }
   }
-  $tp = $_SESSION['tpmb-total'] * 10;
+  $tp = $newPrice * 10;
   //Add transaction
   mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionPoint, transactionCard, transactionDate)
-  VALUES ('$transactionID', '$username', '" . $_SESSION['tpmb-total'] . "' , '$tp' ,'$cardNumber' , '$currentTime')");
+  VALUES ('$transactionID', '$username', '" . $newPrice . "' , '$tp' ,'$cardNumber' , '$currentTime')");
 
   //Retrive user points and email value
   $declareForEmail = mysqli_query($conn,"SELECT fname, email, address, points FROM user WHERE username='$username'");
@@ -49,9 +55,12 @@ if(isset($_POST['rememberCard'])){
     $point = $userDetail['points'];
   }
 
-  //Topup user account member points
-  $totalPoints = $tp + $point;
-  mysqli_query($conn,"UPDATE user SET points = $totalPoints WHERE username = '$username'");
+  //Topup/reduce user account member points
+    $totalPoints = $tp + $point;
+    if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){
+      $totalPoints = $totalPoints - $_SESSION['tpmb-point'];
+    }
+    mysqli_query($conn,"UPDATE user SET points = $totalPoints WHERE username = '$username'");
 
   //Remove some characters from transactionID for security
   $_SESSION['tpmb-temp'] = strstr($transactionID,'-2');
@@ -62,6 +71,7 @@ if(isset($_POST['rememberCard'])){
   unset($_SESSION["tpmb-cartItem"]);
   unset($_SESSION["tpmb-cartItemQty"]);
   unset($_SESSION["tpmb-total"]);
+  unset($_SESSION["tpmb-point"]);
   mysqli_close($conn);
   if($status=='serverfail'){
     echo "<script>window.location = '../transaction-done.php?status=serverfail'; exit();</script>";
