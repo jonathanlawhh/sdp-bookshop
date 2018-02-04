@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2018 at 04:43 PM
+-- Generation Time: Feb 04, 2018 at 02:39 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -59,7 +59,7 @@ INSERT INTO `book` (`bookISBN`, `bookname`, `bookcategory`, `bookauthor`, `bookd
 ('b-00010', 'Inferno', 'Mystery', 'Dan Brown', 'Harvard professor of symbology Robert Langdon awakens in an Italian hospital, disoriented and with no recollection of the past thirty-six hours, including the origin of the macabre object hidden in his belongings. With a relentless female assassin trailing them through Florence, he and his resourceful doctor, Sienna Brooks, are forced to flee. Embarking on a harrowing journey, they must unravel a series of codes, which are the work of a brilliant scientist whose obsession with the end of the world is matched only by his passion for one of the most influential masterpieces ever written, Dante Alighieri\'s The Inferno. ', 23, 624, 'Paperback', 20180101, 'inferno.png', 93),
 ('b-00011', 'Fifty Shades of Grey: Book One', 'Romance', 'E L James', 'When literature student Anastasia Steele goes to interview young entrepreneur Christian Grey, she encounters a man who is beautiful, brilliant, and intimidating. The unworldly, innocent Ana is startled to realize she wants this man and, despite his enigmatic reserve, finds she is desperate to get close to him. Unable to resist Ana\'s quiet beauty, wit, and independent spirit, Grey admits he wants her, too, but on his own terms.\r\n \r\nShocked yet thrilled by Grey\'s singular erotic tastes, Ana hesitates. For all the trappings of success, his multinational businesses, his vast wealth, his loving family. Grey is a man tormented by demons and consumed by the need to control. When the couple embarks on a daring, passionately physical affair, Ana discovers Christian Grey\'s secrets and explores her own dark desires.\r\n\r\nThis book is intended for mature audiences.', 18, 514, 'Vintage Books', 20180101, 'fiftyshadesofgrey01.png', 0),
 ('b-00012', 'Fifty Shades Darker', 'Romance', 'E L James', 'Daunted by the singular tastes and dark secrets of the beautiful, tormented young entrepreneur Christian Grey, Anastasia Steele has broken off their relationship to start a new career with a Seattle publishing house. \r\n \r\nBut desire for Christian still dominates her every waking thought, and when he proposes a new arrangement, Anastasia cannot resist. They rekindle their searing sensual affair, and Anastasia learns more about the harrowing past of her damaged, driven and demanding Fifty Shades.\r\n \r\nWhile Christian wrestles with his inner demons, Anastasia must confront the anger and envy of the women who came before her, and make the most important decision of her life.\r\n\r\nThis book is intended for mature audiences. ', 19, 544, 'Vintage Books', 20180101, 'fiftyshadesdarker.png', 158),
-('b-00013', 'Fifty Shades Freed: Book Three of the Fifty Shades', 'Romance', 'E L James', 'When unworldly student Anastasia Steele first encountered the driven and dazzling young entrepreneur Christian Grey it sparked a sensual affair that changed both of their lives irrevocably. Shocked, intrigued, and, ultimately, repelled by Christian\'s singular erotic tastes, Ana demands a deeper commitment. Determined to keep her, Christian agrees.\r\n \r\nNow, Ana and Christian have it all, love, passion, intimacy, wealth, and a world of possibilities for their future. But Ana knows that loving her Fifty Shades will not be easy, and that being together will pose challenges that neither of them would anticipate. Ana must somehow learn to share Christian\'s opulent lifestyle without sacrificing her own identity. And Christian must overcome his compulsion to control as he wrestles with the demons of a tormented past.\r\n \r\nJust when it seems that their strength together will eclipse any obstacle, misfortune, malice, and fate conspire to make Ana\'s deepest fears turn to reality.\r\n\r\nThis book is intended for mature audiences.', 19, 592, 'Vintage Books', 20180101, 'fiftyshadesfreed.png', 109),
+('b-00013', 'Fifty Shades Freed: Book Three of the Fifty Shades', 'Romance', 'E L James', 'When unworldly student Anastasia Steele first encountered the driven and dazzling young entrepreneur Christian Grey it sparked a sensual affair that changed both of their lives irrevocably. Shocked, intrigued, and, ultimately, repelled by Christian\'s singular erotic tastes, Ana demands a deeper commitment. Determined to keep her, Christian agrees.\r\n \r\nNow, Ana and Christian have it all, love, passion, intimacy, wealth, and a world of possibilities for their future. But Ana knows that loving her Fifty Shades will not be easy, and that being together will pose challenges that neither of them would anticipate. Ana must somehow learn to share Christian\'s opulent lifestyle without sacrificing her own identity. And Christian must overcome his compulsion to control as he wrestles with the demons of a tormented past.\r\n \r\nJust when it seems that their strength together will eclipse any obstacle, misfortune, malice, and fate conspire to make Ana\'s deepest fears turn to reality.\r\n\r\nThis book is intended for mature audiences.', 19, 592, 'Vintage Books', 20180101, 'fiftyshadesfreed.png', 108),
 ('b-00014', 'Dark Notes', 'Romance', 'Pam Godwin', 'They call me a slut. Maybe I am.\r\nSometimes I do things I despise.\r\nSometimes men take without asking.\r\n\r\nBut I have a musical gift, only a year left of high school, and a plan.\r\nWith one obstacle.\r\n\r\nEmeric Marceaux doesn\'t just take.\r\nHe seizes my will power and bangs it like a dark note.\r\nWhen he commands me to play, I want to give him everything.\r\nI kneel for his punishments, tremble for his touch, and risk it all for our stolen moments.\r\n\r\nHe\'s my obsession, my master, my music.\r\nAnd my teacher.', 50, 428, 'Pam Godwin', 20180101, 'darknotes.png', 170),
 ('b-00015', 'Dirty Ties', 'Romance', 'Pam Godwin', 'Revenge.\r\nI race to finance it.\r\nI evade to protect it.\r\nI kill to attain it.\r\nI planned everything.\r\n\r\nExcept her.\r\nThe alluring, curvaceous blonde at the finish line.\r\nWith sapphire eyes that cheat and lie.\r\nWhose powerful family murdered mine.\r\n\r\nI hate her.\r\nI want her.\r\n\r\nI know she\'s hiding something.\r\nBut so am I.', 24, 305, 'Pam Godwin', 20180101, 'dirtyties.png', 62),
 ('b-00016', 'Beneath the Burn', 'Romance', 'Pam Godwin', 'They meet by chance. The timing is wrong.\r\n\r\nThree years later, she finds him again, but their separation was poisoned with narcotics and bloodied by enslavement.\r\n\r\nHer freedom gambled away, Charlee Grosky escapes the international businessman who held her captive. But his power reaches beyond her protective barriers and threatens everyone she has come to love.\r\n\r\nJay Mayard wears his tortured secrets under his rock god facade. Drugs are his release, even as he seeks to be the man forged of the steel only she can see.\r\n\r\nIn a celebrity world filled with paparazzi, groupies, and drugs, Jay and Charlee must face their worst fears. When the battle is over, what will be left...Beneath The Burn.', 32, 484, 'Pam Godwin', 20180101, 'beneaththeburn.png', 196),
@@ -69,7 +69,7 @@ INSERT INTO `book` (`bookISBN`, `bookname`, `bookcategory`, `bookauthor`, `bookd
 ('b-00020', 'Eclipse (Twilight Sagas)', 'Romance', 'Stephenie Meyer', 'Readers captivated by Twilight and New Moon will eagerly devour the paperback edition Eclipse, the third book in Stephenie Meyer\'s riveting vampire love saga. As Seattle is ravaged by a string of mysterious killings and a malicious vampire continues her quest for revenge, Bella once again finds herself surrounded by danger. In the midst of it all, she is forced to choose between her love for Edward and her friendship with Jacob --- knowing that her decision has the potential to ignite the ageless struggle between vampire and werewolf. With her graduation quickly approaching, Bella has one more decision to make: life or death. But which is which?', 30, 640, 'Paperback', 20180101, 'twilighteclipse.png', 95),
 ('b-00021', 'Breaking Dawn (The Twilight Saga, Book 4)', 'Romance', 'Stephenie Meyer', 'When you loved the one who was killing you, it left you no options. How could you run, how could you fight, when doing so would hurt that beloved one? If your life was all you had to give, how could you not give it? If it was someone you truly loved?\r\n\r\nTo be irrevocably in love with a vampire is both fantasy and nightmare woven into a dangerously heightened reality for Bella Swan. Pulled in one direction by her intense passion for Edward Cullen, and in another by her profound connection to werewolf Jacob Black, a tumultuous year of temptation, loss, and strife have led her to the ultimate turning point. Her imminent choice to either join the dark but seductive world of immortals or to pursue a fully human life has become the thread from which the fates of two tribes hangs.\r\n\r\nNow that Bella has made her decision, a startling chain of unprecedented events is about to unfold with potentially devastating, and unfathomable, consequences. Just when the frayed strands of Bella\'s life-first discovered in Twilight, then scattered and torn in New Moon and Eclipse-seem ready to heal and knit together, could they be destroyed... forever?\r\n\r\nThe astonishing, breathlessly anticipated conclusion to the Twilight Saga, Breaking Dawn illuminates the secrets and mysteries of this spellbinding romantic epic that has entranced millions.', 35, 768, 'Paperback', 20180101, 'twilightbreakingdawn.png', 153),
 ('b-00022', 'Life and Death: Twilight Reimagined', 'Romance', 'Stephenie Meyer', '\r\nThere are two sides to every story....\r\n\r\nYou know Bella and Edward, now get to know Beau and Edythe.\r\n\r\nWhen Beaufort Swan moves to the gloomy town of Forks and meets the mysterious, alluring Edythe Cullen, his life takes a thrilling and terrifying turn. With her porcelain skin, golden eyes, mesmerizing voice, and supernatural gifts, Edythe is both irresistible and enigmatic.\r\n\r\nWhat Beau doesn\'t realize is the closer he gets to her, the more he is putting himself and those around him at risk. And, it might be too late to turn back....\r\n\r\nWith a foreword and afterword by Stephenie Meyer, this compelling reimagining of the iconic love story is a must-read for Twilight fans everywhere.', 25, 400, 'Paperback', 20180101, 'twilightlifeanddeath.png', 97),
-('b-00023', 'Fantastic Beasts and Where to Find Them', 'Fantasy', 'JK Rowling', 'J.K. Rowling\'s screenwriting debut is captured in this exciting hardcover edition of the Fantastic Beasts and Where to Find Them screenplay.\r\n\r\nWhen Magizoologist Newt Scamander arrives in New York, he intends his stay to be just a brief stopover. However, when his magical case is misplaced and some of Newt\'s fantastic beasts escape, it spells trouble for everyone…\r\n\r\nFantastic Beasts and Where to Find Them marks the screenwriting debut of J.K. Rowling, author of the beloved and internationally bestselling Harry Potter books. Featuring a cast of remarkable characters, this is epic, adventure-packed storytelling at its very best.', 42, 304, 'Original West End Production ', 20180101, 'fantasticbeastandwheretofindthem.png', 106),
+('b-00023', 'Fantastic Beasts and Where to Find Them', 'Fantasy', 'JK Rowling', 'J.K. Rowling\'s screenwriting debut is captured in this exciting hardcover edition of the Fantastic Beasts and Where to Find Them screenplay.\r\n\r\nWhen Magizoologist Newt Scamander arrives in New York, he intends his stay to be just a brief stopover. However, when his magical case is misplaced and some of Newt\'s fantastic beasts escape, it spells trouble for everyone...\r\n\r\nFantastic Beasts and Where to Find Them marks the screenwriting debut of J.K. Rowling, author of the beloved and internationally bestselling Harry Potter books. Featuring a cast of remarkable characters, this is epic, adventure-packed storytelling at its very best.', 42, 304, 'Original West End Production ', 20180101, 'fantasticbeastandwheretofindthem.png', 106),
 ('b-00024', 'Awaken', 'Fantasy', 'Rachel Humphrey', 'Colin\'s favorite thing is to get lost in a good fantasy or sci-fi novel, but he never expected a free book gifted from a grizzled flea market owner to change his entire future within an hour after taking it out of the market. The giver of the book insists that Colin take good care of it--easier said than done when the book starts talking to you!\r\n\r\nBut talking books, even rude ones, should not exist. Not in the real world, at least. Unless the world they\'ve been living in isn\'t the real world, or the right one?\r\n\r\nBut for Colin, it\'s yet another day he has to rely on his twin sister to come to his rescue. But the book changes all that and gives Colin an incredible gift which he uses to stand up for himself, his friends, and much larger more frightening foe that should most definitely not exist in the real world.\r\n\r\nAnd just when they think things can\'t get any crazier or more unbelievable, and that life is about to return to wonderful (according to Meghan) and boring (according to Colin) old normalsville, a series of unbelievable events leads to an unfortunate and shocking twist, and the real fantasy adventure begins....', 24, 312, 'Jackal Lantern Books', 20180101, 'awaken.png', 99),
 ('b-00025', 'Origin', 'Mystery', 'Dan Brown', 'Robert Langdon, Harvard professor of symbology and religious iconology, arrives at the ultramodern Guggenheim Museum Bilbao to attend a major announcement—the unveiling of a discovery that \"will change the face of science forever.\" The evening’s host is Edmond Kirsch, a forty-year-old billionaire and futurist whose dazzling high-tech inventions and audacious predictions have made him a renowned global figure. Kirsch, who was one of Langdon’s first students at Harvard two decades earlier, is about to reveal an astonishing breakthrough... one that will answer two of the fundamental questions of human existence.', 28, 480, 'Doubleday', 20180101, 'origin.png', 170),
 ('b-00026', 'The Sacred Symbol: A Historical Conspiracy Mystery', 'Mystery', 'Paula Wynne', 'Ana-María de Carbonela must warn Christopher Columbus that his crew are planning a mutiny, but she is captured. When her Jewish tutor is caught and punished for rescuing her, she has a terrible decision to make. Can she save him and get to Columbus in time to reveal his crew’s betrayal? Or will she risk the death penalty for dressing as a man?', 18, 253, 'Doubleday', 20180101, 'thesacredsymbol.png', 82),
@@ -108,7 +108,10 @@ INSERT INTO `bookcomment` (`ratingID`, `bookISBN`, `username`, `comments`, `date
 (8, 'b-00003', 'hrx', 'This book is quite boring, not worth the money and time', 20180105),
 (10, 'b-00011', 'admin', 'First, let me say I liked this series, hence the 4 star review. It wasnt perfect, but it was worth the price of admission.', 20180109),
 (11, 'b-00012', 'jon', 'I really wish I could manually add a 6th star for this book. I never would have believed it was possible, but Fifty Shades Darker is even better than Fifty Shades of Grey. Hard to believe, but true.', 20180109),
-(12, 'b-00005', 'admin', 'haha', 20180202);
+(12, 'b-00005', 'admin', 'haha', 20180202),
+(14, 'b-00002', 'random', 'Best book among the Harry Potter series', 20180204),
+(15, 'b-00002', 'jon', 'Definitely!! The suspense is killing me, urging all potter fans to read this!!', 20180204),
+(16, 'b-00002', 'testing01', 'Worth the money and time, totally recommend it', 20180204);
 
 -- --------------------------------------------------------
 
@@ -138,7 +141,9 @@ INSERT INTO `bookrating` (`ratingID`, `bookISBN`, `username`, `rating`, `date`) 
 (9, 'b-00005', 'admin', 3, 20180105),
 (10, 'b-00003', 'hrx', 1, 20180105),
 (11, 'b-00007', 'admin', 3, 20180109),
-(12, 'b-00011', 'admin', 5, 20180109);
+(12, 'b-00011', 'admin', 5, 20180109),
+(13, 'b-00002', 'random', 5, 20180204),
+(14, 'b-00002', 'testing01', 5, 20180204);
 
 -- --------------------------------------------------------
 
@@ -151,6 +156,7 @@ CREATE TABLE `transaction` (
   `transactionUser` varchar(255) NOT NULL,
   `transactionTotal` int(255) NOT NULL,
   `transactionPoint` int(11) NOT NULL,
+  `transactionDiscount` int(5) NOT NULL DEFAULT '0',
   `transactionCard` int(11) NOT NULL,
   `transactionDate` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -159,12 +165,13 @@ CREATE TABLE `transaction` (
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`transactionID`, `transactionUser`, `transactionTotal`, `transactionPoint`, `transactionCard`, `transactionDate`) VALUES
-('admin-20180202143642', 'admin', 24, 0, 12345678, '2018-02-02 14:36'),
-('admin-20180203064602', 'admin', 130, 0, 12345678, '2018-02-03 06:46'),
-('admin-20180203080630', 'admin', 21, 0, 12345678, '2018-02-03 08:06'),
-('admin-20180203163506', 'admin', 14, 140, 12345678, '2018-02-03 16:35'),
-('jon-20180203101859', 'jon', 87, 870, 12345678, '2018-02-03 10:18');
+INSERT INTO `transaction` (`transactionID`, `transactionUser`, `transactionTotal`, `transactionPoint`, `transactionDiscount`, `transactionCard`, `transactionDate`) VALUES
+('admin-20180202143642', 'admin', 24, 0, 0, 12345678, '2018-02-02 14:36'),
+('admin-20180203064602', 'admin', 130, 0, 0, 12345678, '2018-02-03 06:46'),
+('admin-20180203080630', 'admin', 21, 0, 0, 12345678, '2018-02-03 08:06'),
+('admin-20180203163506', 'admin', 14, 140, 10, 12345678, '2018-02-03 16:35'),
+('admin-20180204021454', 'admin', 19, 190, 0, 12345678, '2018-02-04 02:14'),
+('jon-20180203101859', 'jon', 87, 870, 0, 12345678, '2018-02-03 10:18');
 
 -- --------------------------------------------------------
 
@@ -190,7 +197,8 @@ INSERT INTO `transactiondetail` (`index`, `transactionID`, `bookISBN`, `quantity
 (12, 'admin-20180203080630', 'b-00002', 1),
 (17, 'jon-20180203101859', 'b-00002', 3),
 (18, 'jon-20180203101859', 'b-00024', 1),
-(19, 'admin-20180203163506', 'b-00004', 1);
+(19, 'admin-20180203163506', 'b-00004', 1),
+(20, 'admin-20180204021454', 'b-00013', 1);
 
 -- --------------------------------------------------------
 
@@ -218,9 +226,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`, `pnumber`, `birthday`, `address`, `status`, `points`, `registerdate`) VALUES
-('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'member', 8740, 20171209),
+('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'member', 8930, 20171209),
 ('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', '', 'member', 0, 20180105),
-('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0123456789', '0001-01-01', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 870, 20171209),
+('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0166443602', '1998-04-15', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 870, 20171209),
+('random', 'Random', 'User', 'random@email.com', 'raNORnCQ19QG2', 'female', '0123456789', '2011-01-11', '64000 Sepang, Selangor', 'member', 0, 20180204),
 ('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', '', 'member', 0, 20171217),
 ('testing01', 'TestingAccount', 'One', 'testing@test.test', 'tesGeyALKYm3A', 'male', '0123456789', '2018-01-15', '', 'restricted', 0, 20180130);
 
@@ -245,7 +254,13 @@ INSERT INTO `userfeedbackrating` (`userfeedbackID`, `username`, `ratingID`, `fee
 (1, 'admin', 3, 'veryuseful'),
 (2, 'admin', 12, 'useless'),
 (3, 'admin', 10, 'veryuseful'),
-(5, 'jon', 12, 'useless');
+(5, 'jon', 12, 'useless'),
+(6, 'admin', 11, 'veryuseful'),
+(7, 'admin', 14, 'veryuseful'),
+(8, 'random', 10, 'veryuseful'),
+(9, 'testing01', 14, 'veryuseful'),
+(10, 'random', 14, 'veryuseful'),
+(11, 'random', 15, 'veryuseful');
 
 --
 -- Indexes for dumped tables
@@ -301,25 +316,25 @@ ALTER TABLE `userfeedbackrating`
 -- AUTO_INCREMENT for table `bookcomment`
 --
 ALTER TABLE `bookcomment`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `bookrating`
 --
 ALTER TABLE `bookrating`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `transactiondetail`
 --
 ALTER TABLE `transactiondetail`
-  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `userfeedbackrating`
 --
 ALTER TABLE `userfeedbackrating`
-  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

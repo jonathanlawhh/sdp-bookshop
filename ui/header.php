@@ -55,31 +55,32 @@
      <?php
      if(empty($_SESSION["tpmb-cartItem"])){ //Check if the cart is empty
        echo "<p>There is nothing your cart right now! Start by adding some books :)</p>";
-     } else { //If not empty, list the content of the cart ?>
+     } else { //If not empty, list the content of the cart?>
      <table class="highlight">
        <thead>
-         <tr><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
+         <tr><th>No</th><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
        </thead>
        <tbody>
-         <?php //Query items in the cart
+         <?php $cartIndex = 1; //Query items in the cart, , initialize cart index
          $cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
          foreach($cartCombined as $sessionArray => $sessionQtyArray){
          	 $bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
            while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database?>
                <tr>
                    <input name="bookID" id="<?php echo $sessionArray; ?>" value="<?php echo $sessionArray; ?>" type="hidden">
+                   <td><?php echo $cartIndex; ?></td>
                    <td><?php echo $sessionArray; ?></td>
                    <td><?php echo $book['bookname']; ?></td>
                    <td><?php  echo $sessionQtyArray; ?></td>
                    <td>RM <?php $sumBook = $book['bookprice']*$sessionQtyArray; echo $sumBook; ?></td>
                    <td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
                </tr>
-          <?php $totalPrice += $sumBook;
+          <?php $totalPrice += $sumBook; $cartIndex++;
           } //End of fetching book name and price from database
         } //End of cart query
       } //End of checking whether the cart is empty ?>
-      <tr><td colspan="4"></td></tr>
-      <tr><th colspan="2">Total Book Price : </th><td>RM <?php echo $totalPrice; ?></td></tr>
+      <tr><td colspan="6"></td></tr>
+      <tr><th colspan="4"></th><th>Total Book Price : </th><td>RM <?php echo $totalPrice; ?></td></tr>
      </tbody>
    </table>
    </div>

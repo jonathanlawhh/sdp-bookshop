@@ -1,10 +1,14 @@
 <?php session_start();
-error_reporting(0);
 include "php/connect.php";
 if(!isset($_SESSION['tpmb-user'])){
 	$loginStatus=0;
 } else { $currentUser = $_SESSION['tpmb-user']; $loginStatus=1;}
 $currentBook=$_GET['bookid'];
+function getCommentValue($usefulness){
+	global $currentFeedbackID; global $conn; //Get global var
+	$returnedUsefulness = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS thisFeedback FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='$usefulness'");
+	while($usefulness = mysqli_fetch_array($returnedUsefulness)){ echo $usefulness['thisFeedback']; }
+}
 ?>
 
 <head>
@@ -16,7 +20,7 @@ $currentBook=$_GET['bookid'];
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 </head>
 <script>
@@ -27,7 +31,6 @@ $currentBook=$_GET['bookid'];
 <?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
 	<script type="text/javascript" src="js/cartAjax.js"></script>
 <?php } ?>
-
 
 <body>
 <?php //load header
@@ -94,7 +97,7 @@ $currentBook=$_GET['bookid'];
       </div>
 			<!-- Dirty codes end here!!! -->
 
-    </div>
+    </div><?php } //Close loop for book details?>
 
 		<h5>Users feedbacks and ratings</h5>
 		<div class="divider line"></div>
@@ -190,30 +193,26 @@ $currentBook=$_GET['bookid'];
 				<?php //Select all user comments for this book
 				$queryForComments = "SELECT * FROM bookcomment WHERE bookISBN='$currentBook'";
 				$arrayComments = mysqli_query($conn,$queryForComments);
-				while($feedbacks = mysqli_fetch_array($arrayComments)){
-					$currentFeedbackID = $feedbacks['ratingID'];
-					//Inefficient coding, but who cares
-					$checkCommentVUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totalveryuseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='veryuseful'");
-					$checkCommentUseful = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseful FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useful'");
-					$checkCommentUseless = mysqli_query($conn,"SELECT COUNT(feedbackrated) AS totaluseless FROM userfeedbackrating WHERE ratingID='$currentFeedbackID' AND feedbackrated='useless'");
-				?>
+				while($feedbacks = mysqli_fetch_array($arrayComments)){ $currentFeedbackID = $feedbacks['ratingID']; ?>
+				
 				<div class="section" id="<?php echo $feedbacks['ratingID']; ?>">
 					<span><?php echo $feedbacks['username'] . " on " . $feedbacks['date'] ?> says :</span>
 					<p><?php echo $feedbacks['comments'] ?></p>
+					<?php if(isset($_SESSION['tpmb-user'])){ //Only allow members to rate comment ?>
 					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'veryuseful')" class="hand">
 						<i class="material-icons tooltipped teal-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Very useful feedback">thumb_up</i>
-					</a><?php while($commentVal = mysqli_fetch_array($checkCommentVUseful)){ echo $commentVal['totalveryuseful']; }?>
+					</a><?php getCommentValue('veryuseful'); ?>
 					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useful')" class="hand">
 						<i class="material-icons tooltipped blue-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useful feedback" style="margin-left:20px;">thumbs_up_down</i>
-					</a><?php while($commentVal = mysqli_fetch_array($checkCommentUseful)){ echo $commentVal['totaluseful']; }?>
+					</a><?php getCommentValue('useful'); ?>
 					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useless')" class="hand">
 						<i class="material-icons tooltipped red-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useless feedback" style="margin-left:20px;">thumb_down</i>
-					</a><?php while($commentVal = mysqli_fetch_array($checkCommentUseless)){ echo $commentVal['totaluseless']; }?>
+					</a><?php getCommentValue('useless'); ?>
 					<?php if($feedbacks['username']==$currentUser) { ?>
 						<a role="button" onclick="deleteFeedback(<?php echo $feedbacks['ratingID'] . ",'" . $currentBook . "'"; ?>)" class="hand">
 							<i class="material-icons tooltipped deep-purple-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Delete feedback" style="margin-left:40px;">delete_forever</i>
 						</a>
-					<?php } ?>
+					<?php }} ?>
 
 					<div class="divider"></div>
 				</div>
@@ -225,5 +224,4 @@ $currentBook=$_GET['bookid'];
   </main>
   <?php //Load footer
     include "ui/footer.html"; ?>
-<?php } ?>
 </body>

@@ -10,8 +10,7 @@ if(isset($_POST['rate'])){
   $bookID = scanner($_POST['bookID'], '404.php');
   $rating = scanner($_POST['rating'], '404.php');
 
-  $addRatingQuery = "INSERT INTO bookrating (bookISBN, username, rating, date) VALUES ('$bookID', '$currentUser', '$rating', '$today')";
-  mysqli_query($conn,$addRatingQuery);
+  mysqli_query($conn,"INSERT INTO bookrating (bookISBN, username, rating, date) VALUES ('$bookID', '$currentUser', '$rating', '$today')");
   echo "<script>window.location = '../book.php?bookid=$bookID'; exit();</script>";
 }
 
@@ -21,8 +20,7 @@ if(isset($_POST['update-rate'])){
   $bookID = scanner($_POST['bookID'], '404.php');
   $rating = scanner($_POST['rating'], '404.php');
 
-  $updateRatingQuery = "UPDATE bookrating SET rating = $rating WHERE bookISBN = '$bookID' AND username='$currentUser'";
-  mysqli_query($conn,$updateRatingQuery);
+  mysqli_query($conn,"UPDATE bookrating SET rating = $rating WHERE bookISBN = '$bookID' AND username='$currentUser'");
   echo "<script>window.location = '../book.php?bookid=$bookID'; exit();</script>";
 }
 
@@ -30,7 +28,7 @@ if(isset($_POST['update-rate'])){
 if(isset($_POST['feedback'])){
   $currentUser = scanner($_SESSION['tpmb-user'], '404.php');
   $bookID = scanner($_POST['bookID'], '404.php');
-  $comment = scanner($_POST['comment'], '404.php');
+  $comment = $_POST['comment'];
 
   mysqli_query($conn,"INSERT INTO bookcomment (bookISBN, username, comments, date) VALUES ('$bookID', '$currentUser', '$comment', '$today')");
   echo "<script>window.location = '../book.php?bookid=$bookID'; exit();</script>";
@@ -42,7 +40,7 @@ if(isset($_POST['deleteThis'])){
   $feedbackID = scanner($_POST['deleteThis'], '404.php');
   $bookID = scanner($_POST['bookISBN'], '404.php');
   //Check if feedback really exist
-  $check = mysqli_query($conn,"SELECT * FROM bookcomment WHERE username='$currentUser' AND ratingID='$feedbackID' AND bookISBN='$bookID'");
+  $check = mysqli_query($conn,"SELECT ratingID, username FROM bookcomment WHERE username='$currentUser' AND ratingID='$feedbackID' AND bookISBN='$bookID'");
   if(mysqli_num_rows($check) == 0){
     echo "Materialize.toast('Something went wrong, please reload the page', 3000)";
     exit;
@@ -67,8 +65,7 @@ if(isset($_POST['feedbackID'])){
   }
 
   //Check if user gave any feedback for the comment before
-  $checkUserGaveRatingQuery = "SELECT * FROM userfeedbackrating WHERE username = '$currentUser' AND ratingID = $feedbackID";
-  $userGaveRating = mysqli_query($conn,$checkUserGaveRatingQuery);
+  $userGaveRating = mysqli_query($conn,"SELECT username, ratingID FROM userfeedbackrating WHERE username = '$currentUser' AND ratingID = $feedbackID");
   if(mysqli_num_rows($userGaveRating) == 0){
     $addBookFeedback = "INSERT INTO userfeedbackrating (username, ratingID, feedbackrated )
       VALUES ('$currentUser', '$feedbackID', '$feedbackRating')";

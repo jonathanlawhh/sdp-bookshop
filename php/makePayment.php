@@ -16,10 +16,13 @@ if(isset($_POST['makePayment'])){
     if($newPrice <=0){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
   }
 
+  //Cookie card details
   if(isset($_POST['rememberCard'])){
-    setcookie("tpmb-card", "$cardNumber", time() + 31536000, '/');
+    $destroyHex = rand(1,9);
+    $newCardNumber = dechex($cardNumber) . "$destroyHex";
+    setcookie("tpmb-card-$username", "$newCardNumber", time() + 31536000, '/');
   } else {
-    setcookie("tpmb-card", "", time() + 31536000, '/');
+    setcookie("tpmb-card-$username", "", time() - 31536000, '/');
   }
 
   //Insert transaction details

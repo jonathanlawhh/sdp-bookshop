@@ -8,13 +8,9 @@ include "php/connect.php";
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script>
-	  $(document).ready(function(){ $('.carousel').carousel({padding:250}); });
-		$(document).ready(function(){ $('.scrollspy').scrollSpy(); });
-  </script>
 </head>
 
 <body>
@@ -98,5 +94,9 @@ include "php/connect.php";
 
   <?php //Load footer
     include "ui/footer.html"; ?>
+	<script>
+	  $(document).ready(function(){ $('.carousel').carousel({padding:250}); });
+		$(document).ready(function(){ $('.scrollspy').scrollSpy(); });
+  </script>
 </main>
 </body>

@@ -2,6 +2,14 @@
 include "php/connect.php";
 checkLoginStatus();
 $currentUser = $_SESSION['tpmb-user'];
+
+function viewMore($sqlState, $URL, $msg){
+	if(mysqli_num_rows($sqlState) > 3){
+			echo "<tr><td colspan='5'><a href='$URL' class='deep-orange-text text-darken-3'><i class='material-icons right'>chevron_right</i>View more $msg</a></td></tr>";
+	} elseif(mysqli_num_rows($sqlState) == 0) {
+			echo "<tr><td colspan='5'><i class='material-icons'>hourglass_empty</i> No results</td></tr>";
+	}
+}
 ?>
 <head>
 	<title>TPM Bookshop</title>
@@ -10,7 +18,7 @@ $currentUser = $_SESSION['tpmb-user'];
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -27,25 +35,26 @@ $currentUser = $_SESSION['tpmb-user'];
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>
-        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Points Earned</th><th>Date</th></tr>
+        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Discount</th><th>Points Earned</th><th>Date</th></tr>
       </thead>
       <tbody>
-		<?php
+		<?php $historyIndex = 0;
     //Query for feedback
-    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' ORDER BY transactionDate DESC LIMIT 3");
-    $userTransactionCount=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser'");
+    $userTransactionArray=mysqli_query($conn,"SELECT * FROM transaction WHERE transactionUser = '$currentUser' ORDER BY transactionDate DESC LIMIT 4");
     while($userTransaction = mysqli_fetch_array($userTransactionArray)){
 			//Below will remove certain part of the transaction ID for security
 			$ti = strstr($userTransaction['transactionID'],'-2'); ?>
           <tr>
             <td><a target="_blank" href="transaction-slip.php?transID=<?php echo $ti; ?>"><?php echo $ti; ?></a></td>
             <td>RM <?php echo $userTransaction['transactionTotal']; ?></td>
-            <td><?php echo $userTransaction['transactionPoint']; ?></td>
+            <td><?php if($userTransaction['transactionDiscount'] == 0){ echo "None"; } else {
+						echo "RM " . $userTransaction['transactionDiscount'] . " / " . $userTransaction['transactionDiscount']*100 . " pts";} ?>
+						</td>
+						<td><?php echo $userTransaction['transactionPoint']; ?></td>
             <td><?php echo $userTransaction['transactionDate']; ?></td>
           </tr>
-      <?php } if(mysqli_num_rows($userTransactionCount) > 3){
-        echo "<tr><td colspan='4'><a href='transaction-more.php'><i class='material-icons right'>chevron_right</i>View more transactions</a></td></tr>";
-      } ?>
+      <?php $historyIndex++; if($historyIndex >= 3 ){ break ; } }
+			viewMore($userTransactionArray, 'transaction-more.php', 'transactions'); ?>
       </tbody>
     </table>
 
@@ -56,19 +65,17 @@ $currentUser = $_SESSION['tpmb-user'];
         <tr><th>Book</th><th>Comment</th><th>Date</th></tr>
       </thead>
       <tbody>
-		<?php
+		<?php $historyIndex = 0;
     //Query for feedback
-    $userFeedbackArray=mysqli_query($conn,"SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN LIMIT 3");
-    $userFeedbackCount=mysqli_query($conn,"SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN");
+    $userFeedbackArray=mysqli_query($conn,"SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN LIMIT 4");
     while($userFeedback = mysqli_fetch_array($userFeedbackArray)){ ?>
           <tr>
             <td><a target="_blank" href="book.php?bookid=<?php echo $userFeedback['bookISBN']; ?>"><?php echo $userFeedback['bookname']; ?></a></td>
             <td><?php echo $userFeedback['comments']; ?></td>
             <td><?php echo $userFeedback['date']; ?></td>
           </tr>
-      <?php } if(mysqli_num_rows($userFeedbackCount) > 3){
-        echo "<tr><td colspan='3'><a href='history-more.php?action=feedbacks'><i class='material-icons right'>chevron_right</i>View more feedbacks you gave</a></td></tr>";
-      } ?>
+      <?php $historyIndex++; if($historyIndex >= 3 ){ break ; }}
+			viewMore($userFeedbackArray, 'history-more.php?action=feedbacks', 'feedbacks'); ?>
       </tbody>
     </table>
 
@@ -76,26 +83,20 @@ $currentUser = $_SESSION['tpmb-user'];
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>
-        <tr>
-            <th>Book</th>
-            <th>Rating</th>
-            <th>Date</th>
-        </tr>
+				<tr><th style="width:40%;">Book</th><th>Ratings </th><th>Date</th></tr>
       </thead>
       <tbody>
-		<?php
-    //Query for rating
-    $userRatingArray=mysqli_query($conn,"SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN LIMIT 3");
-    $userRatingCount=mysqli_query($conn,"SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN");
-    while($userRating = mysqli_fetch_array($userRatingArray)){ ?>
+		<?php $historyIndex = 0;
+	    //Query for rating
+	    $userRatingArray=mysqli_query($conn,"SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN LIMIT 4");
+	    while($userRating = mysqli_fetch_array($userRatingArray)){ ?>
           <tr>
             <td><a target="_blank" href="book.php?bookid=<?php echo $userRating['bookISBN']; ?>"><?php echo $userRating['bookname']; ?></a></td>
             <td><?php echo $userRating['rating']; ?></td>
             <td><?php echo $userRating['date']; ?></td>
           </tr>
-      <?php } if(mysqli_num_rows($userRatingCount) > 3){
-        echo "<tr><td colspan='3'><a href='history-more.php?action=rating'><i class='material-icons right'>chevron_right</i>View more ratings you gave</a></td></tr>";
-      } ?>
+      <?php $historyIndex++; if($historyIndex >= 3 ){ break ; }}
+			viewMore($userRatingArray, 'history-more.php?action=rating', 'ratings'); ?>
       </tbody>
     </table>
   </main>

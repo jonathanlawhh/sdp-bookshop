@@ -10,7 +10,7 @@ $currentUser = $_SESSION['tpmb-user'];
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -27,7 +27,7 @@ $currentUser = $_SESSION['tpmb-user'];
     <div class="divider"></div>
 		<table class="highlight responsive-table">
       <thead>
-        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Points Earned</th><th>Date</th></tr>
+        <tr><th>Transaction ID</th><th>Transaction Amount</th><th>Discount</th><th>Points Earned</th><th>Date</th></tr>
       </thead>
       <tbody>
 		<?php
@@ -39,6 +39,9 @@ $currentUser = $_SESSION['tpmb-user'];
 			<tr>
 				<td><a target="_blank" href="transaction-slip.php?transID=<?php echo $ti; ?>"><?php echo $ti; ?></a></td>
 				<td>RM <?php echo $userTransaction['transactionTotal']; ?></td>
+				<td><?php if($userTransaction['transactionDiscount'] == 0){ echo "None"; } else {
+				echo "RM " . $userTransaction['transactionDiscount'] . " / " . $userTransaction['transactionDiscount']*100 . " pts";} ?>
+				</td>
 				<td><?php echo $userTransaction['transactionPoint']; ?></td>
 				<td><?php echo $userTransaction['transactionDate']; ?></td>
 			</tr>

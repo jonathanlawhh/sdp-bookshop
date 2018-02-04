@@ -47,7 +47,10 @@ $query = "SELECT * FROM transaction WHERE transactionUser = '$currentUser' AND t
 					<td>RM <?php echo $bookDetail['bookprice']; ?></td>
 					<td>RM <?php $totalPerBook = $bookDetail['quantity'] * $bookDetail['bookprice']; echo $totalPerBook; ?></td>
 				</tr>
-			<?php $indexNum++; $totalPrice += $totalPerBook;} ?>
+			<?php $indexNum++; $totalPrice += $totalPerBook;} //Check for discount
+			if($userTransaction['transactionDiscount'] != 0){ ?>
+				<tr><td colspan="4" class="right-align">Applied Discount : </td><td></td><td>RM <?php echo $userTransaction['transactionDiscount']; ?></td></tr>
+			<?php $totalPrice-=$userTransaction['transactionDiscount']; }?>
 			<tr><td colspan="4" class="right-align">Total Price : </td><td></td><td>RM <?php echo $totalPrice; ?></td></tr>
 			</tbody>
 		</table>

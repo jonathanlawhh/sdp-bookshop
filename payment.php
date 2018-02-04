@@ -1,6 +1,8 @@
 <?php session_start();
 include "php/connect.php";
-checkLoginStatus();?>
+checkLoginStatus();
+$currentUser = $_SESSION['tpmb-user'];
+?>
 
 <head>
 	<title>TPM Bookshop</title>
@@ -9,7 +11,7 @@ checkLoginStatus();?>
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -26,14 +28,20 @@ checkLoginStatus();?>
 					Total Price : RM <?php echo $GLOBALS['totalPrice']; if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){
 					 $pointPrice = $_SESSION["tpmb-point"] / 100;
 					 $newPrice = $GLOBALS['totalPrice']-$pointPrice;
-					 if($newPrice <=0){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
+					 if($newPrice <=0){ unset($_SESSION['tpmb-point']); echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
 					 echo " - RM " . $pointPrice . " = RM " . $newPrice;
-			 }?>
+				 } if($GLOBALS['totalPrice']==0 && (!isset($_SESSION['tpmb-point']))){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }?>
 				</div>
 				<div class="row margintop4">
 					<div class="input-field col s12 m6">
 						<i class="material-icons prefix">credit_card</i>
-						<input name="creditCardNumber" id="creditCardNumber" type="text" class="validate" <?php if(isset($_COOKIE['tpmb-card'])){ $card=$_COOKIE['tpmb-card']; echo "value=$card"; } ?> required>
+						<input name="creditCardNumber" id="creditCardNumber" type="text" class="validate"
+						<?php //Secure cookie conversion
+						if(isset($_COOKIE["tpmb-card-$currentUser"])){
+							$card = substr($_COOKIE["tpmb-card-$currentUser"], 0, -1);
+							$card=hexdec($card);
+							echo "value=$card"; }
+						?> required>
 						<label for="creditCardNumber">Card number</label>
 					</div>
 				</div>
@@ -59,7 +67,7 @@ checkLoginStatus();?>
 						<button name="makePayment" type="submit" class="waves-effect waves-light btn"><i class="material-icons left">monetization_on</i>Pay now</button>
 					</p>
 					<p class="col s12">
-						<input name="rememberCard" type="checkbox" id="rmbCard" <?php if(isset($_COOKIE['tpmb-card'])){ echo "checked"; }?>/>
+						<input name="rememberCard" type="checkbox" id="rmbCard" <?php if(isset($_COOKIE["tpmb-card-$currentUser"])){ echo "checked"; }?>/>
 						<label for="rmbCard">Remember Card</label>
 					</p>
 				</div>

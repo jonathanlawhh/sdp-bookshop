@@ -9,24 +9,25 @@ checkLoginStatus();
 
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 	<link type="text/css" rel="stylesheet" href="css/tpmb.css" media="screen,projection" />
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <script>
+//Auto refresh cart
 setInterval("my_function();",5000);
-    function my_function(){
-      $('#updateCartDiv').load(location.href + ' #updateCart');
+function my_function(){
+  $('#updateCartDiv').load(location.href + ' #updateCart');
 }
 
 //Delete cart ajax
 function deleteCart(a) {
   (a = document.getElementById(a).value) ? $.ajax({type:"post", url:"php/addToCart.php", dataType:"text", data:{deleteCart:a}, success:function(a) {
-    $("#test").html(a);
     my_function();
   }}) : my_function();
 }
 
+//Apply member point for discount ajax
 function applyPoint() {
   (b = document.getElementById("pointVal").value) ? $.ajax({type:"post", url:"php/addToCart.php", dataType:"text", data:{applyPoint:b}, success:function(a) {
     my_function();
@@ -47,36 +48,35 @@ function applyPoint() {
 		<div id="updateCartDiv">
     <table id="updateCart" class="highlight responsive-table">
       <thead>
-      <tr><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
+      <tr><th>No</th><th>Book ISBN</th><th>Book Name</th><th>Quantity</th><th>Book Price</th><th>Remove</th></tr>
       </thead>
       <tbody>
-				<?php $totalPrice = 0; //Query items in the cart
+				<?php $totalPrice = 0; $cIndex = 1; //Query items in the cart, initialize checkout index
 				$cartCombined = array_combine($_SESSION["tpmb-cartItem"], $_SESSION["tpmb-cartItemQty"]);
 				foreach($cartCombined as $sessionArray => $sessionQtyArray){
 					$bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$sessionArray'");
 					while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database?>
 						<tr>
 								<input name="bookID" id="<?php echo $sessionArray; ?>" value="<?php echo $sessionArray; ?>" type="hidden">
+								<td><?php echo $cIndex; ?></td>
 								<td><?php echo $sessionArray; ?></td>
 								<td><?php echo $book['bookname']; ?></td>
 								<td><?php echo $sessionQtyArray; ?></td>
 								<td>RM <?php $sumBook = $book['bookprice']*$sessionQtyArray; echo $sumBook; ?></td>
 								<td><button name="deleteCart" type="submit" class="btn" onclick="deleteCart('<?php echo $sessionArray; ?>')"><i class="material-icons">delete</i></button></td>
 						</tr>
-				 <?php $GLOBALS['totalPrice'] += $sumBook;
+				 <?php $GLOBALS['totalPrice'] += $sumBook; $cIndex++;
 				 } //End of fetching book name and price from database
 			 } $_SESSION['tpmb-total'] = $GLOBALS['totalPrice'];//End of cart query ?>
-			 <tr><td colspan="4"></td></tr>
-			 <tr><th></th><th>Total Price : </th>
-				 <td colspan="3">RM <?php echo $GLOBALS['totalPrice'];
-					 if(isset($_SESSION["tpmb-point"])){
-						  if($_SESSION["tpmb-point"] != 0){
-							 $pointPrice = $_SESSION["tpmb-point"] / 100;
-							 $newPrice = $GLOBALS['totalPrice']-$pointPrice;
-							 echo " - RM " . $pointPrice . " = RM " . $newPrice;
-					 }} ?>
-			 	 </td>
-		 	</tr>
+			 <tr><td colspan="6"></td></tr>
+			 <?php if(isset($_SESSION["tpmb-point"])){
+					if($_SESSION["tpmb-point"] != 0){
+						 $pointPrice = $_SESSION["tpmb-point"] / 100;
+						 $GLOBALS['totalPrice'] -= $pointPrice; ?>
+					 		<tr><th colspan="3"></th><th>Discount : </th><td colspan="2">RM <?php echo $pointPrice;?> </td></tr>
+			 <?php }} ?>
+
+			 <tr><th colspan="3"></th><th>Total Price : </th><td colspan="2">RM <?php echo $GLOBALS['totalPrice'];?> </td></tr>
       </tbody>
     </table>
 		</div>
@@ -90,7 +90,7 @@ function applyPoint() {
 					$checkPoint=mysqli_query($conn,"SELECT points FROM user WHERE username='$currentUser'");
 					while($userPtsDetail = mysqli_fetch_array($checkPoint)){ $userPoint = $userPtsDetail['points']; }
 					for($i = 1; $i*1000 <= $userPoint; $i++){
-							$checkNegative = $GLOBALS['totalPrice'] - $i*10;
+							$checkNegative = $_SESSION['tpmb-total'] - $i*10;
 							if($checkNegative<=0){ break; }
 							$givePts = $i * 1000; ?>
 				      <option value="<?php echo $givePts; ?>" <?php if($i*1000 == $storedPts){ echo 'selected'; }?>><?php echo $givePts . " pts / RM " . $i*10; ?></option>
