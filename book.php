@@ -1,4 +1,5 @@
 <?php session_start();
+error_reporting(0);
 include "php/connect.php";
 if(!isset($_SESSION['tpmb-user'])){
 	$loginStatus=0;
@@ -23,22 +24,13 @@ function getCommentValue($usefulness){
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 </head>
-<script>
-	function goBack() { history.go(-1); }
-	function forceLogin(){ $('.tap-target').tapTarget('open'); }
-</script>
-
-<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
-	<script type="text/javascript" src="js/cartAjax.js"></script>
-<?php } ?>
 
 <body>
 <?php //load header
   include "ui/header.php";
 
 	//Query for book details
-	$getBook = "SELECT * FROM book WHERE bookISBN='$currentBook'";
-	$bookArray=mysqli_query($conn,$getBook);
+	$bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$currentBook'");
   while($book = mysqli_fetch_array($bookArray)){
 	setcookie("tpmb-recc", $book['bookcategory'], time() + 31536000, '/');
 	$bookID = $book['bookISBN'];
@@ -54,18 +46,20 @@ function getCommentValue($usefulness){
     <div style="margin-top:1%;" class="chip"><a href="search.php?searchterm=<?php echo $book['bookauthor']; ?>"><?php echo $book['bookauthor']; ?></a></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpublisher']; ?></div>
     <div style="margin-top:1%;" class="chip"><?php echo $book['bookpages']; ?> pages</div>
+    <div style="margin-top:1%;" class="chip" id="unitTag"><?php echo $book['bookQty']; ?> units left</div>
 
     <div class="row section">
       <div class="col s6 m4 l2 offset-m3 offset-s3">
-        <div class="card customCardDiv" style="width:250px; height:450px">
+        <div class="card customCardDiv" style="width:250px; <?php if($book['bookQty'] > 0 && $loginStatus==1){ echo "450px"; } else { echo "300px"; } ?>">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" height="305px" src="books/cover/<?php echo $book['bookthumbnail']; ?>">
           </div>
           <div class="card-content">
+						<?php if($book['bookQty'] > 0 && $loginStatus==1){ ?>
 						<span class="input-field">
-		          <input placeholder="Quantity" id="cartQty" name="cartQty" type="number" class="validate" value="1">
+		          <input placeholder="Quantity" id="cartQty" type="number" class="validate" value="1">
 		        </span>
-						<?php //Add to cart button
+						<?php } //Add to cart button
 						$cartStatus = "Add";
 						if(isset($_SESSION["tpmb-cartItem"])){
 							if(in_array($currentBook, $_SESSION["tpmb-cartItem"])){
@@ -74,8 +68,8 @@ function getCommentValue($usefulness){
 						}
 
 						if($loginStatus==1){?>
-								<input id="bookID" name="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
-								<button id="cartBtn" class="waves-effect waves-light btn" <?php if($book['bookQty'] == 0){ echo "disabled"; } else { echo "onclick='addToCartForm()'"; }?>>
+								<input id="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
+								<button id="cartBtn" class="waves-effect waves-light btn truncate" <?php if($book['bookQty'] == 0){ echo "disabled"; } else { echo "onclick='addToCartForm()'"; }?>>
 									<i class="material-icons left">add_shopping_cart</i><?php if($book['bookQty'] == 0){ echo "Out Of Stock"; } else { echo $cartStatus; }?>
 								</button>
 						<?php } else { ?>
@@ -194,7 +188,7 @@ function getCommentValue($usefulness){
 				$queryForComments = "SELECT * FROM bookcomment WHERE bookISBN='$currentBook'";
 				$arrayComments = mysqli_query($conn,$queryForComments);
 				while($feedbacks = mysqli_fetch_array($arrayComments)){ $currentFeedbackID = $feedbacks['ratingID']; ?>
-				
+
 				<div class="section" id="<?php echo $feedbacks['ratingID']; ?>">
 					<span><?php echo $feedbacks['username'] . " on " . $feedbacks['date'] ?> says :</span>
 					<p><?php echo $feedbacks['comments'] ?></p>
@@ -224,4 +218,12 @@ function getCommentValue($usefulness){
   </main>
   <?php //Load footer
     include "ui/footer.html"; ?>
+	<script>
+		function goBack() { history.go(-1); }
+		function forceLogin(){ $('.tap-target').tapTarget('open'); }
+	</script>
+
+	<?php if(isset($_SESSION['tpmb-user'])){ //Prevent script from loading for users who did not login ?>
+		<script type="text/javascript" src="js/cartAjax.js"></script>
+	<?php } ?>
 </body>

@@ -91,7 +91,7 @@ function applyPoint() {
 					while($userPtsDetail = mysqli_fetch_array($checkPoint)){ $userPoint = $userPtsDetail['points']; }
 					for($i = 1; $i*1000 <= $userPoint; $i++){
 							$checkNegative = $_SESSION['tpmb-total'] - $i*10;
-							if($checkNegative<=0){ break; }
+							if($checkNegative<0){ break; }
 							$givePts = $i * 1000; ?>
 				      <option value="<?php echo $givePts; ?>" <?php if($i*1000 == $storedPts){ echo 'selected'; }?>><?php echo $givePts . " pts / RM " . $i*10; ?></option>
 

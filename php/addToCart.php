@@ -22,7 +22,7 @@ if(isset($_POST['bookID'])){
   $bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$cartItem'");
   while($book = mysqli_fetch_array($bookArray)){ //Fetching book name and price from database
     $afterDeduct = $book['bookQty'] - $cartItemQty; //Make sure there is enough books
-    if($afterDeduct>0){
+    if($afterDeduct>=0){
       if(in_array($cartItem, $cartItemArray)){
         echo "Exist";
       } else {
@@ -33,7 +33,7 @@ if(isset($_POST['bookID'])){
         echo "Added";
       }
     } else {
-      echo "Out of stock";
+      echo "Not enough";
     }
   }
 }

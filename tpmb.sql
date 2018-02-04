@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 04, 2018 at 02:39 PM
+-- Generation Time: Feb 04, 2018 at 03:30 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -111,7 +111,8 @@ INSERT INTO `bookcomment` (`ratingID`, `bookISBN`, `username`, `comments`, `date
 (12, 'b-00005', 'admin', 'haha', 20180202),
 (14, 'b-00002', 'random', 'Best book among the Harry Potter series', 20180204),
 (15, 'b-00002', 'jon', 'Definitely!! The suspense is killing me, urging all potter fans to read this!!', 20180204),
-(16, 'b-00002', 'testing01', 'Worth the money and time, totally recommend it', 20180204);
+(16, 'b-00002', 'testing01', 'Worth the money and time, totally recommend it', 20180204),
+(17, 'b-00011', 'random', 'This book is good, but it was not as good as the previous few', 20180204);
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,10 @@ INSERT INTO `bookrating` (`ratingID`, `bookISBN`, `username`, `rating`, `date`) 
 (11, 'b-00007', 'admin', 3, 20180109),
 (12, 'b-00011', 'admin', 5, 20180109),
 (13, 'b-00002', 'random', 5, 20180204),
-(14, 'b-00002', 'testing01', 5, 20180204);
+(14, 'b-00002', 'testing01', 5, 20180204),
+(15, 'b-00011', 'jon', 5, 20180204),
+(16, 'b-00011', 'random', 4, 20180204),
+(17, 'b-00011', 'testing01', 5, 20180204);
 
 -- --------------------------------------------------------
 
@@ -260,7 +264,8 @@ INSERT INTO `userfeedbackrating` (`userfeedbackID`, `username`, `ratingID`, `fee
 (8, 'random', 10, 'veryuseful'),
 (9, 'testing01', 14, 'veryuseful'),
 (10, 'random', 14, 'veryuseful'),
-(11, 'random', 15, 'veryuseful');
+(11, 'random', 15, 'veryuseful'),
+(12, 'testing01', 17, 'useful');
 
 --
 -- Indexes for dumped tables
@@ -316,13 +321,13 @@ ALTER TABLE `userfeedbackrating`
 -- AUTO_INCREMENT for table `bookcomment`
 --
 ALTER TABLE `bookcomment`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `bookrating`
 --
 ALTER TABLE `bookrating`
-  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ratingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `transactiondetail`
@@ -334,7 +339,7 @@ ALTER TABLE `transactiondetail`
 -- AUTO_INCREMENT for table `userfeedbackrating`
 --
 ALTER TABLE `userfeedbackrating`
-  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

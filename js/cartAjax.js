@@ -7,7 +7,8 @@ function addToCartForm(){
 	success: function (response) {
 	 $( '#cartBtn' ).html(response);
 	 "Exist" == response ? (document.getElementById("cartBtn").innerHTML = "<i class='material-icons left'>tag_faces</i>Done", Materialize.toast("Item exist in cart", 2000, "rounded")) :
-   "Added" == response && (document.getElementById("cartBtn").innerHTML = "<i class='material-icons left'>add_to_queue</i>Added", Materialize.toast("Added to cart", 2000, "rounded"));
+   "Added" == response ? (document.getElementById("cartBtn").innerHTML = "<i class='material-icons left'>add_to_queue</i>Added", Materialize.toast("Added to cart", 2000, "rounded")) :
+   "Not enough" == response && (document.getElementById("unitTag").className += " pulse");
 	}
 	});
  } else {

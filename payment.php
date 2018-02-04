@@ -28,7 +28,7 @@ $currentUser = $_SESSION['tpmb-user'];
 					Total Price : RM <?php echo $GLOBALS['totalPrice']; if(isset($_SESSION['tpmb-point']) && $_SESSION['tpmb-point'] != 0){
 					 $pointPrice = $_SESSION["tpmb-point"] / 100;
 					 $newPrice = $GLOBALS['totalPrice']-$pointPrice;
-					 if($newPrice <=0){ unset($_SESSION['tpmb-point']); echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
+					 if($newPrice < 0){ unset($_SESSION['tpmb-point']); echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }
 					 echo " - RM " . $pointPrice . " = RM " . $newPrice;
 				 } if($GLOBALS['totalPrice']==0 && (!isset($_SESSION['tpmb-point']))){ echo "<script>window.location = 'checkout.php?error=1'; exit();</script>"; }?>
 				</div>
