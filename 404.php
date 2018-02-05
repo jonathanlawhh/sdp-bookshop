@@ -1,3 +1,6 @@
+<?php session_start();
+include "php/connect.php";
+?>
 <head>
 	<title>TPM Bookshop</title>
 	<link rel="icon" href="images/favicon.png">

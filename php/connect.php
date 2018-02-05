@@ -4,7 +4,7 @@ function checkLoginStatus($tpmbUserStatus = 'basic'){
   if(!isset($_SESSION['tpmb-user'])){
   	header("Location: 404.php");
   }
-  if($tpmbUserStatus ==='staff' && $_SESSION['tpmb-userstatus'] != 'staff'){
+  if($tpmbUserStatus ==='staff' && $_SESSION['tpmb-userstatus'] !== 'admin'){
     header("Location: 404.php");
   }
 }
