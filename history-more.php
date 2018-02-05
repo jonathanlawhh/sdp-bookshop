@@ -6,10 +6,10 @@ $currentAction = scanner($_GET['action'],"404.php");
 
 //Get action and perform query accordingly
 if($currentAction == "feedbacks"){
-	$query = "SELECT * FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN";
+	$query = "SELECT b.bookISBN, bc.ratingID, b.bookname, bc.comments, bc.date FROM bookcomment AS bc, book AS b WHERE bc.username = '$currentUser' AND bc.bookISBN=b.bookISBN";
 	$queryParam = "comments";
 } else if ($currentAction == "rating"){
-	$query = "SELECT * FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN";
+	$query = "SELECT b.bookISBN, br.ratingID, b.bookname, br.rating, br.date FROM bookrating AS br, book AS b WHERE br.username = '$currentUser' AND br.bookISBN=b.bookISBN";
 	$queryParam = "rating";
 } else { //else redirect unknown GET
 	header("Location: 404.php");
@@ -39,23 +39,20 @@ if($currentAction == "feedbacks"){
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>
-        <tr>
-            <th>Book</th>
-            <th><?php echo $currentAction; ?></th>
-            <th>Date</th>
-        </tr>
+        <tr><th>No</th><th>Book</th><th><?php echo $currentAction; ?></th><th>Date</th></tr>
       </thead>
       <tbody>
 		<?php
     //Query for feedback
-    $userHistoryArray=mysqli_query($conn,$query);
+    $userHistoryArray=mysqli_query($conn,$query); $i=1;
     while($userHistory = mysqli_fetch_array($userHistoryArray)){ ?>
-          <tr>
-            <td><a target="_blank" href="book.php?bookid=<?php echo $userHistory['bookISBN']; ?>"><?php echo $userHistory['bookname']; ?></a></td>
-            <td><?php echo $userHistory[$queryParam]; ?></td>
-            <td><?php echo $userHistory['date']; ?></td>
-          </tr>
-      <?php } ?>
+        <tr>
+					<td><?php echo $i; ?></td>
+          <td><a target="_blank" href="book.php?bookid=<?php echo $userHistory['bookISBN']; ?>"><?php echo $userHistory['bookname']; ?></a></td>
+          <td><?php echo $userHistory[$queryParam]; ?></td>
+          <td><?php echo $userHistory['date']; ?></td>
+        </tr>
+      <?php $i++; } ?>
       </tbody>
     </table>
   </main>
