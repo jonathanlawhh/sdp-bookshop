@@ -40,6 +40,7 @@ function viewMore($sqlState, $URL, $msg){
             <p class="col s4 m2">Birthday</p><p class="col s8 m4">: <?php echo $bday?></p>
             <p class="col s4 m2">Gender</p><p class="col s8 m4">: <?php echo $gender?></p><br />
 						<p class="col s4 m2">Email</p><p class="col s8 m4">: <?php echo $email?></p><br />
+						<p class="col s4 m2">Current points</p><p class="col s8 m4">: <?php echo $pts?> pts</p><br />
 						<?php
 						$checkUserRatingQuery = "SELECT COUNT(ufr.feedbackRated) AS feedbackCount,ufr.feedbackRated FROM userfeedbackrating AS ufr, bookcomment AS bc WHERE ufr.ratingID=bc.ratingID AND bc.username = '$currentUser' GROUP BY ufr.feedbackRated";
 						$checkUserRatingArray=mysqli_query($conn,$checkUserRatingQuery);

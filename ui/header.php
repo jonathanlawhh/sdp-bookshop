@@ -37,7 +37,7 @@
             <li><a class="dropdown-button" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false" data-activates="staffDropdown"><i class="material-icons">store</i></a></li>
             <ul id="staffDropdown" class="dropdown-content">
               <li><a href="staff_page.php" class="blue-grey-text text-darken-3"><i class="material-icons left">record_voice_over</i>Staff Page</a></li>
-              <li><a href="bookcmd.php" class="blue-grey-text text-darken-3"><i class="material-icons left">library_books</i>Book Management</a></li>
+              <li><a href="staff_bookcmd.php" class="blue-grey-text text-darken-3"><i class="material-icons left">library_books</i>Book Management</a></li>
               <li class="divider"></li>
               <li><a href="php/logout.php" class="blue-grey-text text-darken-3"><i class="material-icons left">directions_walk</i>Logout</a></li>
             </ul>

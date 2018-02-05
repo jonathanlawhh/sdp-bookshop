@@ -1,8 +1,11 @@
 <?php
 //Use to prevent people from coming in
-function checkLoginStatus(){
+function checkLoginStatus($tpmbUserStatus = 'basic'){
   if(!isset($_SESSION['tpmb-user'])){
   	header("Location: 404.php");
+  }
+  if($tpmbUserStatus ==='staff' && $_SESSION['tpmb-userstatus'] != 'staff'){
+    header("Location: 404.php");
   }
 }
 
