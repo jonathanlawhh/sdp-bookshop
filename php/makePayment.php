@@ -44,10 +44,10 @@ if(isset($_POST['makePayment'])){
 
     }
   }
-  $tp = $newPrice * 10;
+  $tp = $newPrice * 10; $transactionDiscount = $_SESSION['tpmb-point']/100;
   //Add transaction
-  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionPoint, transactionCard, transactionDate)
-  VALUES ('$transactionID', '$username', '" . $newPrice . "' , '$tp' ,'$cardNumber' , '$currentTime')");
+  mysqli_query($conn,"INSERT INTO transaction (transactionID, transactionUser, transactionTotal, transactionPoint, transactionDiscount, transactionCard, transactionDate)
+  VALUES ('$transactionID', '$username', '" . $newPrice . "' , '$tp' , '$transactionDiscount','$cardNumber' , '$currentTime')");
 
   //Retrive user points and email value
   $declareForEmail = mysqli_query($conn,"SELECT fname, email, address, points FROM user WHERE username='$username'");
