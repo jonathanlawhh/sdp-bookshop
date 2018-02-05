@@ -28,7 +28,8 @@ $currentAction = scanner($_GET['cat'], "404.php");
 			<h4 class="left-align col s12 m6 margintop4">There is no results for your query</h4>
 		<?php } else { while($bookCat = mysqli_fetch_array($executeCategories)){
 		?>
-    <h4 class="left-align col s12 m6 margintop4"><?php echo $bookCat['bookcategory'] ?></h4>
+    <h4 class="left-align col s12 m6 margintop4"><a role="button" onclick="history.go(-1);" style="cursor: pointer;">
+			<i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $bookCat['bookcategory'] ?></h4>
     <div class="divider"></div>
 		<div class="row" >
 		<?php

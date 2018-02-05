@@ -33,13 +33,14 @@ function getCommentValue($usefulness){
 	$bookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN='$currentBook'");
   while($book = mysqli_fetch_array($bookArray)){
 	setcookie("tpmb-recc", $book['bookcategory'], time() + 31536000, '/');
-	$bookID = $book['bookISBN'];
-	?>
+	$bookID = $book['bookISBN']; ?>
+
   <main class="container">
     <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $book['bookname']; ?></h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a role="button" onclick="goBack()" style="cursor: pointer;">
+			<i class="material-icons" style="margin-right:10px;">arrow_back</i></a><?php echo $book['bookname']; ?></h4>
     <div class="divider line"></div>
 
     <div style="margin-top:1%;" class="chip"><a href="category-more.php?cat=<?php echo $book['bookcategory']; ?>"><?php echo $book['bookcategory']; ?></a></div>
@@ -60,14 +61,9 @@ function getCommentValue($usefulness){
 		          <input placeholder="Quantity" id="cartQty" type="number" class="validate" value="1">
 		        </span>
 						<?php } //Add to cart button
-						$cartStatus = "Add";
-						if(isset($_SESSION["tpmb-cartItem"])){
-							if(in_array($currentBook, $_SESSION["tpmb-cartItem"])){
-						    $cartStatus = "Done";
-						  }
-						}
-
-						if($loginStatus==1){?>
+						$cartStatus = 'Add';
+						if(isset($_SESSION["tpmb-cartItem"]) && in_array($currentBook, $_SESSION['tpmb-cartItem'])){ $cartStatus = 'Done'; }
+						if($loginStatus===1){?>
 								<input id="bookID" type="hidden" value="<?php echo $bookID; ?>"/>
 								<button id="cartBtn" class="waves-effect waves-light btn truncate" <?php if($book['bookQty'] == 0){ echo "disabled"; } else { echo "onclick='addToCartForm()'"; }?>>
 									<i class="material-icons left">add_shopping_cart</i><?php if($book['bookQty'] == 0){ echo "Out Of Stock"; } else { echo $cartStatus; }?>
@@ -114,18 +110,10 @@ function getCommentValue($usefulness){
 			} else { ?>
 			<canvas id="myChart" width="500" height="100"></canvas>
 			<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-			    type: 'doughnut',
-			    data: {
-			        labels: ["Very Bad", "Bad", "Average", "Good", "Reccomended"],
-			        datasets: [{
-			            label: '# of Votes',
-									data: [<?php echo "$rating01,$rating02,$rating03,$rating04,$rating05"; ?>],
-									backgroundColor: ["#ff6384", "#ffb74d", "#36a2eb", "#7986cb", "#4db6ac"]
-			        }]
-			    }
-			});
+				var c = document.getElementById("myChart"),myChart = new Chart(c, {type:"doughnut",
+				data:{labels:["Very Bad", "Bad", "Average", "Good", "Reccomended"], datasets:[{label:"# of Votes",
+				data:[<?php echo "$rating01,$rating02,$rating03,$rating04,$rating05"; ?>],
+				backgroundColor:["#ff6384", "#ffb74d", "#36a2eb", "#7986cb", "#4db6ac"]}]}});
 			</script>
 		<?php } //End of rating chart ?>
     </div>
@@ -135,10 +123,9 @@ function getCommentValue($usefulness){
 		if($loginStatus==1){ ?>
     <li class="hoverable">
 			<?php //Check if user has rated this book before
-			$checkIfRatedQuery = "SELECT * FROM bookrating WHERE bookISBN='$currentBook' AND username='$currentUser'";
-			$executeRateCheck = mysqli_query($conn,$checkIfRatedQuery);
-			if(mysqli_num_rows($executeRateCheck) > 0){
-				while($rateCheck = mysqli_fetch_array($executeRateCheck)){ ?>
+			$execRateCheck = mysqli_query($conn,"SELECT * FROM bookrating WHERE bookISBN='$currentBook' AND username='$currentUser'");
+			if(mysqli_num_rows($execRateCheck) > 0){
+				while($rateCheck = mysqli_fetch_array($execRateCheck)){ ?>
 					<div class="collapsible-header"><i class="material-icons">rate_review</i>You rated this book a <?php echo $rateCheck['rating']; ?> out of 5</div>
 					<div class="collapsible-body">
 						<form action="php/doFeedback.php" method="POST">
@@ -185,25 +172,24 @@ function getCommentValue($usefulness){
       <div class="collapsible-body" id="commentHeader">
 				<div id="commentSection">
 				<?php //Select all user comments for this book
-				$queryForComments = "SELECT * FROM bookcomment WHERE bookISBN='$currentBook'";
-				$arrayComments = mysqli_query($conn,$queryForComments);
+				$arrayComments = mysqli_query($conn,"SELECT * FROM bookcomment WHERE bookISBN='$currentBook'");
 				while($feedbacks = mysqli_fetch_array($arrayComments)){ $currentFeedbackID = $feedbacks['ratingID']; ?>
 
 				<div class="section" id="<?php echo $feedbacks['ratingID']; ?>">
 					<span><?php echo $feedbacks['username'] . " on " . $feedbacks['date'] ?> says :</span>
 					<p><?php echo $feedbacks['comments'] ?></p>
 					<?php if(isset($_SESSION['tpmb-user'])){ //Only allow members to rate comment ?>
-					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'veryuseful')" class="hand">
+					<a role="button" onclick="userRatingForm(<?php echo $currentFeedbackID; ?>, 'veryuseful')" class="hand">
 						<i class="material-icons tooltipped teal-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Very useful feedback">thumb_up</i>
 					</a><?php getCommentValue('veryuseful'); ?>
-					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useful')" class="hand">
+					<a role="button" onclick="userRatingForm(<?php echo $currentFeedbackID; ?>, 'useful')" class="hand">
 						<i class="material-icons tooltipped blue-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useful feedback" style="margin-left:20px;">thumbs_up_down</i>
 					</a><?php getCommentValue('useful'); ?>
-					<a role="button" onclick="userRatingForm(<?php echo $feedbacks['ratingID']; ?>, 'useless')" class="hand">
+					<a role="button" onclick="userRatingForm(<?php echo $currentFeedbackID; ?>, 'useless')" class="hand">
 						<i class="material-icons tooltipped red-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Useless feedback" style="margin-left:20px;">thumb_down</i>
 					</a><?php getCommentValue('useless'); ?>
 					<?php if($feedbacks['username']==$currentUser) { ?>
-						<a role="button" onclick="deleteFeedback(<?php echo $feedbacks['ratingID'] . ",'" . $currentBook . "'"; ?>)" class="hand">
+						<a role="button" onclick="deleteFeedback(<?php echo "$currentFeedbackID,'$currentBook'"; ?>)" class="hand">
 							<i class="material-icons tooltipped deep-purple-text text-darken-4" data-position="top" data-delay="50" data-tooltip="Delete feedback" style="margin-left:40px;">delete_forever</i>
 						</a>
 					<?php }} ?>

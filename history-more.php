@@ -35,7 +35,8 @@ if($currentAction == "feedbacks"){
     <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3 margintop4">Your <?php echo $currentAction; ?></h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a role="button" onclick="history.go(-1);" style="cursor: pointer;">
+			<i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Your <?php echo $currentAction; ?></h4>
     <div class="divider"></div>
     <table class="highlight responsive-table">
       <thead>

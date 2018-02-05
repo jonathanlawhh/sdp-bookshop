@@ -34,9 +34,8 @@ include "php/connect.php";
   <div class="divider line"></div>
   <div class="carousel">
 		<?php //Query for new book
-		$getNewBook = "SELECT * FROM book ORDER BY bookdateadd DESC LIMIT 6";
-		$newBooksQuery=mysqli_query($conn,$getNewBook);
-		while($newBook = mysqli_fetch_array($newBooksQuery)){?>
+		$nbQuery=mysqli_query($conn,"SELECT * FROM book ORDER BY bookdateadd DESC LIMIT 6");
+		while($newBook = mysqli_fetch_array($nbQuery)){?>
     	<a class="carousel-item" href="book.php?bookid=<?php echo $newBook['bookISBN']; ?>"><img src="books/cover/<?php echo $newBook['bookthumbnail']; ?>"></a>
 		<?php } ?>
   </div>
@@ -49,22 +48,21 @@ include "php/connect.php";
 		<?php
 		// Query for Recomended
 		// A cache for the book category is made everytime a book is being searched. This cache will be used to reccomend.
-		if(isset($_COOKIE['tpmb-recc'])){ $recc = $_COOKIE['tpmb-recc']; } else { $recc = "Fantasy"; }
-		$queryRecc = "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$recc' ORDER BY RAND() LIMIT 5";
-		$executeRecc=mysqli_query($conn, $queryRecc);
-		while($reccbook = mysqli_fetch_array($executeRecc)){ ?>
+		if(isset($_COOKIE['tpmb-recc'])){ $r = $_COOKIE['tpmb-recc']; } else { $r = "Fantasy"; }
+		$execRecc=mysqli_query($conn, "SELECT bookISBN, bookname, bookthumbnail, bookdateadd FROM book WHERE bookcategory='$r' ORDER BY RAND() LIMIT 5");
+		while($rbook = mysqli_fetch_array($execRecc)){ ?>
     <div class="customCardDiv">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" height="250px" src="books/cover/<?php echo $reccbook['bookthumbnail'] ?>">
+          <img class="activator" height="250px" src="books/cover/<?php echo $rbook['bookthumbnail'] ?>">
         </div>
         <div class="card-content">
-          <span class="grey-text text-darken-4 truncate"><?php echo $reccbook['bookname'] ?></span>
-          <p><a href="book.php?bookid=<?php echo $reccbook['bookISBN']; ?>">Click me</a></p>
+          <span class="grey-text text-darken-4 truncate"><?php echo $rbook['bookname'] ?></span>
+          <p><a href="book.php?bookid=<?php echo $rbook['bookISBN']; ?>">Click me</a></p>
         </div>
       </div>
     </div>
-	<?php } //End of recomended ?>
+	<?php } unset($r); //End of recomended ?>
   </div>
 
   <h4 id="book-rate" class="left-align col s12 m6 offset-m3 scrollspy">Top rating books</h4>
@@ -73,9 +71,9 @@ include "php/connect.php";
 
   <div class="row section">
 		<?php //Query for top rating books
-		$queryTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY RAND() DESC LIMIT 5";
-		$executeTopRate=mysqli_query($conn,$queryTopRate);
-		while($topRating = mysqli_fetch_array($executeTopRate)){?>
+		$qTopRate = "SELECT b.bookISBN, b.bookname, b.bookthumbnail FROM bookrating AS br, book AS b WHERE br.rating=5 AND br.bookISBN=b.bookISBN GROUP BY b.bookISBN ORDER BY RAND() DESC LIMIT 5";
+		$execTopRate=mysqli_query($conn,$qTopRate);
+		while($topRating = mysqli_fetch_array($execTopRate)){?>
     <div class="customCardDiv">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
