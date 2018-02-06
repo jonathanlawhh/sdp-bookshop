@@ -9,17 +9,12 @@ function checkLoginStatus($tpmbUserStatus = 'basic'){
   }
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "tpmb";
-
 //Use Vivaldi Email as SMTP are configured for Vivaldi properly
 $adminEmail = "jonathanlawhh@vivaldi.net";
 $adminEmailPassword = "jonjon98";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $db);
+$conn = new mysqli('localhost', 'root', '', 'tpmb');
 
 //Prevent unknown symbols and XSS
 function scanner($input,$url){

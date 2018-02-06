@@ -19,11 +19,6 @@ $searchBookArray=mysqli_query($conn,"SELECT * FROM book WHERE bookISBN LIKE '%$s
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<script>
-function goBack() {
-	window.history.back();
-}
-</script>
 
 <body>
 <?php //load header
@@ -33,7 +28,7 @@ function goBack() {
     <div class="row margintop4">
 			<?php include "ui/searchUI.php"; ?>
     </div>
-    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a href="" onclick="goBack()"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Search results</h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4"><a role="button" onclick="history.go(-1);" style="cursor: pointer;"><i class="material-icons" style="margin-right:10px;">arrow_back</i></a>Search results</h4>
     <div class="divider line"></div>
 		<?php if(mysqli_num_rows($searchBookArray) == 0){ ?>
 			<div class="row section">

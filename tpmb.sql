@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 04, 2018 at 03:30 PM
+-- Generation Time: Feb 06, 2018 at 09:16 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -31,15 +31,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `book` (
   `bookISBN` varchar(255) NOT NULL,
   `bookname` varchar(255) NOT NULL,
-  `bookcategory` varchar(80) NOT NULL,
+  `bookcategory` varchar(30) NOT NULL,
   `bookauthor` varchar(255) NOT NULL,
   `bookdesc` longtext NOT NULL,
-  `bookprice` int(11) NOT NULL,
-  `bookpages` int(11) NOT NULL,
+  `bookprice` int(6) NOT NULL,
+  `bookpages` int(6) NOT NULL,
   `bookpublisher` varchar(255) NOT NULL,
   `bookdateadd` int(11) NOT NULL,
   `bookthumbnail` varchar(255) NOT NULL,
-  `bookQty` int(11) NOT NULL DEFAULT '0'
+  `bookQty` int(6) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -49,9 +49,9 @@ CREATE TABLE `book` (
 INSERT INTO `book` (`bookISBN`, `bookname`, `bookcategory`, `bookauthor`, `bookdesc`, `bookprice`, `bookpages`, `bookpublisher`, `bookdateadd`, `bookthumbnail`, `bookQty`) VALUES
 ('b-00001', 'Harry Potter and the Cursed Child', 'Fantasy', 'JK Rowling', 'Based on an original new story by J.K. Rowling, John Tiffany and Jack Thorne, a new play by Jack Thorne, Harry Potter and the Cursed Child is the eighth story in the Harry Potter series and the first official Harry Potter story to be presented on stage. The play will receive its world premiere in London\'s West End on 30th July 2016.\r\n\r\nIt was always difficult being Harry Potter and it isn\'t much easier now that he is an overworked employee of the Ministry of Magic, a husband, and father of three school-age children.\r\n\r\nWhile Harry grapples with a past that refuses to stay where it belongs, his youngest son Albus must struggle with the weight of a family legacy he never wanted. As past and present fuse ominously, both father and son learn the uncomfortable truth: sometimes, darkness comes from unexpected places.', 21, 320, ' Original West End Production ', 20171231, 'harrypotter-cursed.png', 88),
 ('b-00002', 'Harry Potter and the Deathly Hallows', 'Fantasy', 'JK Rowling', 'Harry Potter and the Deathly Hallows is a fantasy novel written by British author J. K. Rowling and the seventh and final novel of the Harry Potter series. The book was released on 21 July 2007, ending the series that began in 1997 with the publication of Harry Potter and the Philosopher\'s Stone. It was published by Bloomsbury Publishing in the United Kingdom, in the United States by Scholastic, and in Canada by Raincoast Books. The novel chronicles the events directly following Harry Potter and the Half-Blood Prince (2005), and the final confrontation between the wizards Harry Potter and Lord Voldemort.', 21, 451, 'Original West End Production ', 20180101, 'harrypotter-deathly.png', 71),
-('b-00003', 'The Maze Runner', 'Action', 'James Dashner', 'When Thomas wakes up in the lift, the only thing he can remember is his name. He is surrounded by strangers boys whose memories are also gone.\r\n   Outside the towering stone walls that surround them is a limitless, ever-changing maze. It is the only way out and no one has ever made it through alive.\r\n   Then a girl arrives. The first girl ever. And the message she delivers is terrifying: Remember. Survive. Run.', 24, 149, 'Paperback', 20180101, 'themazerunner01.png', 47),
+('b-00003', 'The Maze Runner', 'Action', 'James Dashner', 'When Thomas wakes up in the lift, the only thing he can remember is his name. He is surrounded by strangers boys whose memories are also gone.\r\n   Outside the towering stone walls that surround them is a limitless, ever-changing maze. It is the only way out and no one has ever made it through alive.\r\n   Then a girl arrives. The first girl ever. And the message she delivers is terrifying: Remember. Survive. Run.', 24, 149, 'Paperback', 20180101, 'themazerunner01.png', 46),
 ('b-00004', 'The Scorch Trials (Maze Runner, Book 2)', 'Action', 'James Dashner', 'Thomas was sure that escape from the Maze would mean freedom for him and the Gladers. But WICKED is not done yet. Phase Two has just begun. The Scorch.\r\n   The Gladers have two weeks to cross through the Scorch, the most burned-out section of the world. And WICKED has made sure to adjust the variables and stack the odds against them.\r\n   There are others now. Their survival depends on the Gladers destruction and they are determined to survive.\r\n   Friendships will be tested. Loyalties will be broken. All bets are off. ', 24, 215, 'Paperback', 20180101, 'themazerunner02.png', 121),
-('b-00005', 'The Death Cure (Maze Runner, Book Three)', 'Action', 'James Dashner', 'WICKED has taken everything from Thomas: his life, his memories, and now his only friends, the Gladers. But it is finally over. The trials are complete, after one final test.\r\n\r\nWhat WICKED does not know is that Thomas remembers far more than they think. And it is enough to prove that he cannot believe a word of what they say.\r\n\r\nThomas beat the Maze. He survived the Scorch. He will risk anything to save his friends. But the truth might be what ends it all.\r\n\r\nThe time for lies is over.', 24, 302, 'Paperback', 20180101, 'themazerunner03.png', 5),
+('b-00005', 'The Death Cure (Maze Runner, Book Three)', 'Action', 'James Dashner', 'WICKED has taken everything from Thomas: his life, his memories, and now his only friends, the Gladers. But it is finally over. The trials are complete, after one final test.\r\n\r\nWhat WICKED does not know is that Thomas remembers far more than they think. And it is enough to prove that he cannot believe a word of what they say.\r\n\r\nThomas beat the Maze. He survived the Scorch. He will risk anything to save his friends. But the truth might be what ends it all.\r\n\r\nThe time for lies is over.', 24, 302, 'Paperback', 20180101, 'themazerunner03.png', 4),
 ('b-00006', 'The 5th Wave: The First Book of the 5th Wave Series', 'Sci-Fi', 'Rick Yancey', 'After the 1st wave, only darkness remains. After the 2nd, only the lucky escape. And after the 3rd, only the unlucky survive. After the 4th wave, only one rule applies: trust no one.\r\n\r\nNow, it\'s the dawn of the 5th wave, and on a lonely stretch of highway, Cassie runs from Them. The beings who only look human, who roam the countryside killing anyone they see. Who have scattered Earth\'s last survivors. To stay alone is to stay alive, Cassie believes, until she meets Evan Walker. Beguiling and mysterious, Evan Walker may be Cassie\'s only hope for rescuing her brother--or even saving herself. But Cassie must choose: between trust and despair, between defiance and surrender, between life and death. To give up or to get up.', 20, 89, 'Paperback', 20180101, 'the5thwave.png', 184),
 ('b-00007', 'The Infinite Sea: The Second Book of the 5th Wave', 'Sci-Fi', 'Rick Yancey', 'How do you rid the Earth of seven billion humans? Rid the humans of their humanity.\r\n\r\nSurviving the first four waves was nearly impossible. Now Cassie Sullivan finds herself in a new world, a world in which the fundamental trust that binds us together is gone. As the 5th Wave rolls across the landscape, Cassie, Ben, and Ringer are forced to confront the Others ultimate goal: the extermination of the human race.\r\n\r\nCassie and her friends have not seen the depths to which the Others will sink, nor have the Others seen the heights to which humanity will rise, in the ultimate battle between life and death, hope and despair, love and hate.', 22, 105, 'Paperback', 20180101, 'the5thwave02.png', 114),
 ('b-00008', 'The Last Star: The Final Book of The 5th Wave', 'Sci-Fi', 'Rick Yancey', 'The enemy is Other. The enemy is us. They are down here, they are up there, they are nowhere. They want the Earth, they want us to have it. They came to wipe us out, they came to save us.\r\n\r\nBut beneath these riddles lies one truth: Cassie has been betrayed. So has Ringer. Zombie. Nugget. And all 7.5 billion people who used to live on our planet. Betrayed first by the Others, and now by ourselves.\r\n\r\nIn these last days, Earths remaining survivors will need to decide what is more important: saving themselves ... or saving what makes us human.', 22, 115, 'Paperback', 20180101, 'the5thwave03.png', 130),
@@ -124,8 +124,8 @@ CREATE TABLE `bookrating` (
   `ratingID` int(11) NOT NULL,
   `bookISBN` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `rating` int(11) NOT NULL,
-  `date` int(255) NOT NULL
+  `rating` int(3) NOT NULL,
+  `date` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -158,8 +158,8 @@ INSERT INTO `bookrating` (`ratingID`, `bookISBN`, `username`, `rating`, `date`) 
 CREATE TABLE `transaction` (
   `transactionID` varchar(255) NOT NULL,
   `transactionUser` varchar(255) NOT NULL,
-  `transactionTotal` int(255) NOT NULL,
-  `transactionPoint` int(11) NOT NULL,
+  `transactionTotal` int(10) NOT NULL,
+  `transactionPoint` int(10) NOT NULL,
   `transactionDiscount` int(5) NOT NULL DEFAULT '0',
   `transactionCard` int(11) NOT NULL,
   `transactionDate` varchar(50) NOT NULL
@@ -175,7 +175,8 @@ INSERT INTO `transaction` (`transactionID`, `transactionUser`, `transactionTotal
 ('admin-20180203080630', 'admin', 21, 0, 0, 12345678, '2018-02-03 08:06'),
 ('admin-20180203163506', 'admin', 14, 140, 10, 12345678, '2018-02-03 16:35'),
 ('admin-20180204021454', 'admin', 19, 190, 0, 12345678, '2018-02-04 02:14'),
-('jon-20180203101859', 'jon', 87, 870, 0, 12345678, '2018-02-03 10:18');
+('jon-20180203101859', 'jon', 87, 870, 0, 12345678, '2018-02-03 10:18'),
+('jon-20180205053304', 'jon', 4, 40, 20, 12345678, '2018-02-05 05:33');
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,7 @@ CREATE TABLE `transactiondetail` (
   `index` int(11) NOT NULL,
   `transactionID` varchar(255) NOT NULL,
   `bookISBN` varchar(255) NOT NULL,
-  `quantity` int(255) NOT NULL
+  `quantity` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -202,7 +203,9 @@ INSERT INTO `transactiondetail` (`index`, `transactionID`, `bookISBN`, `quantity
 (17, 'jon-20180203101859', 'b-00002', 3),
 (18, 'jon-20180203101859', 'b-00024', 1),
 (19, 'admin-20180203163506', 'b-00004', 1),
-(20, 'admin-20180204021454', 'b-00013', 1);
+(20, 'admin-20180204021454', 'b-00013', 1),
+(21, 'jon-20180205052553', 'b-00005', 1),
+(22, 'jon-20180205053304', 'b-00003', 1);
 
 -- --------------------------------------------------------
 
@@ -212,15 +215,15 @@ INSERT INTO `transactiondetail` (`index`, `transactionID`, `bookISBN`, `quantity
 
 CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `lname` varchar(100) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `gender` varchar(7) NOT NULL,
   `pnumber` varchar(32) NOT NULL,
   `birthday` varchar(10) DEFAULT NULL,
   `address` text NOT NULL,
-  `status` varchar(30) NOT NULL DEFAULT 'member',
+  `status` varchar(10) NOT NULL DEFAULT 'member',
   `points` int(11) NOT NULL DEFAULT '0',
   `registerdate` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -230,9 +233,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`, `pnumber`, `birthday`, `address`, `status`, `points`, `registerdate`) VALUES
-('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'member', 8930, 20171209),
+('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'admin', 8930, 20171209),
 ('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', '', 'member', 0, 20180105),
-('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0166443602', '1998-04-15', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 870, 20171209),
+('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0166443602', '1998-04-15', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 2950, 20171209),
 ('random', 'Random', 'User', 'random@email.com', 'raNORnCQ19QG2', 'female', '0123456789', '2011-01-11', '64000 Sepang, Selangor', 'member', 0, 20180204),
 ('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', '', 'member', 0, 20171217),
 ('testing01', 'TestingAccount', 'One', 'testing@test.test', 'tesGeyALKYm3A', 'male', '0123456789', '2018-01-15', '', 'restricted', 0, 20180130);
@@ -265,7 +268,8 @@ INSERT INTO `userfeedbackrating` (`userfeedbackID`, `username`, `ratingID`, `fee
 (9, 'testing01', 14, 'veryuseful'),
 (10, 'random', 14, 'veryuseful'),
 (11, 'random', 15, 'veryuseful'),
-(12, 'testing01', 17, 'useful');
+(12, 'testing01', 17, 'useful'),
+(13, 'jon', 10, 'veryuseful');
 
 --
 -- Indexes for dumped tables
@@ -333,13 +337,13 @@ ALTER TABLE `bookrating`
 -- AUTO_INCREMENT for table `transactiondetail`
 --
 ALTER TABLE `transactiondetail`
-  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `index` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `userfeedbackrating`
 --
 ALTER TABLE `userfeedbackrating`
-  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

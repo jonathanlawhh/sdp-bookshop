@@ -1,8 +1,7 @@
 <?php session_start();
 include "php/connect.php";
 checkLoginStatus();
-$currentUser = $_SESSION['tpmb-user'];
-?>
+$currentUser = $_SESSION['tpmb-user']; ?>
 
 <head>
 	<title>TPM Bookshop</title>
@@ -40,8 +39,7 @@ $currentUser = $_SESSION['tpmb-user'];
 						if(isset($_COOKIE["tpmb-card-$currentUser"])){
 							$card = substr($_COOKIE["tpmb-card-$currentUser"], 0, -1);
 							$card=hexdec($card);
-							echo "value=$card"; }
-						?> required>
+							echo "value=$card"; } ?> required>
 						<label for="creditCardNumber">Card number</label>
 					</div>
 				</div>

@@ -10,9 +10,8 @@ if (isset($_POST['login'])){
   $epassword = crypt($password, $salt);
 
   //Check if user exist. If yes, do not continue
-  $checkUsername = "SELECT username, status FROM user WHERE username='$username' AND password='$epassword'";
-  $checkRows=mysqli_query($conn,$checkUsername);
-  if(mysqli_num_rows($checkRows) == 0){
+  $s = mysqli_query($conn,"SELECT username, status FROM user WHERE username='$username' AND password='$epassword'");
+  if(mysqli_num_rows($s) == 0){
     echo "<script>window.location = '../login.php?loginfailure=1'; exit();</script>";
   } else {
     if(isset($_POST['rememberMe'])){
@@ -21,7 +20,7 @@ if (isset($_POST['login'])){
       setcookie("tpmb-username", "", time() + 31536000, '/');
     }
     session_start();
-    while($userStatus = mysqli_fetch_array($checkRows)){
+    while($userStatus = mysqli_fetch_array($s)){
       if($userStatus['status'] == 'admin'){ $_SESSION['tpmb-userstatus']='admin'; }
       elseif ($userStatus['status'] == 'member'){ $_SESSION['tpmb-userstatus']='member'; }
       elseif ($userStatus['status'] == 'restricted'){ echo "<script>window.location = '../login.php?loginfailure=restricted'; exit();</script>"; }
