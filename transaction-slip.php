@@ -21,11 +21,12 @@ $query = "SELECT * FROM transaction WHERE transactionUser = '$currentUser' AND t
 
 <body>
   <main class="container">
-    <h4 class="left-align col s12 m6 offset-m3 margintop4">TPMB Transcation Invoice</h4>
+    <h4 class="left-align col s12 m6 offset-m3 margintop4">TPMB Transaction Invoice</h4>
 		<?php
     $userTransactionArray=mysqli_query($conn,$query);
 		if(mysqli_num_rows($userTransactionArray) > 0){
     while($userTransaction = mysqli_fetch_array($userTransactionArray)){ ?>
+		<span>User &nbsp;&nbsp;&nbsp;&nbsp;: <?php echo $currentUser; ?></span><br />
 		<span>Transaction ID &nbsp;&nbsp;&nbsp;&nbsp;: <?php echo $currentAction; ?></span><br />
 		<span>Transaction Date : <?php echo $userTransaction['transactionDate']; ?></span>
     <div class="divider margintop4"></div>

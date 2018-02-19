@@ -3,9 +3,7 @@ include 'connect.php';
 checkLoginStatus();
 
 $currentUser = $_SESSION['tpmb-user'];
-
-$getUserData = "SELECT username, fname, lname, email, pnumber, gender, address, birthday, points FROM user WHERE username='$currentUser'";
-$userData = mysqli_query($conn,$getUserData);
+$userData = mysqli_query($conn,"SELECT username, fname, lname, email, pnumber, gender, address, birthday, points, lastlogin FROM user WHERE username='$currentUser'");
 
 while($row = mysqli_fetch_assoc($userData)) {
   $fname = $row['fname'];
@@ -16,5 +14,5 @@ while($row = mysqli_fetch_assoc($userData)) {
   $address = $row['address'];
   $bday = $row['birthday'];
   $pts = $row['points'];
-}
-?>
+  $lastlogin = $row['lastlogin'];
+} ?>

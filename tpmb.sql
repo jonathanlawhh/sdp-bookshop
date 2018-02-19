@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2018 at 09:16 AM
+-- Generation Time: Feb 19, 2018 at 08:47 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -225,20 +225,21 @@ CREATE TABLE `user` (
   `address` text NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'member',
   `points` int(11) NOT NULL DEFAULT '0',
-  `registerdate` int(10) NOT NULL
+  `registerdate` int(10) NOT NULL,
+  `lastlogin` varchar(50) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`, `pnumber`, `birthday`, `address`, `status`, `points`, `registerdate`) VALUES
-('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'admin', 8930, 20171209),
-('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', '', 'member', 0, 20180105),
-('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0166443602', '1998-04-15', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 2950, 20171209),
-('random', 'Random', 'User', 'random@email.com', 'raNORnCQ19QG2', 'female', '0123456789', '2011-01-11', '64000 Sepang, Selangor', 'member', 0, 20180204),
-('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', '', 'member', 0, 20171217),
-('testing01', 'TestingAccount', 'One', 'testing@test.test', 'tesGeyALKYm3A', 'male', '0123456789', '2018-01-15', '', 'restricted', 0, 20180130);
+INSERT INTO `user` (`username`, `fname`, `lname`, `email`, `password`, `gender`, `pnumber`, `birthday`, `address`, `status`, `points`, `registerdate`, `lastlogin`) VALUES
+('admin', 'admin', 'admin', 'jon_law98@hotmail.com', 'adk6oNRwypFwA', 'female', '0000000', '0001-01-01', 'Jalan Teknologi 5, Taman Teknologi Malaysia, 57000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur', 'admin', 8930, 20171209, '2018 February 19 08:36AM'),
+('hrx', 'Rui Xiang', 'Ho', 'rui.xiang@cloudmails.apu.edu.my', 'hrfk8UNEv60po', 'male', '0123456789', '2018-01-01', '', 'member', 0, 20180105, '0'),
+('jon', 'Jonathan', 'Law', 'jonathan.law@cloudmails.apu.edu.my', 'jo1g3w0zpe932', 'male', '0166443602', '1998-04-15', '1600 Pennsylvania Ave NW, Washington, DC 20500, USA', 'member', 2950, 20171209, '2018 February 19 08:43AM'),
+('random', 'Random', 'User', 'random@email.com', 'raNORnCQ19QG2', 'female', '0123456789', '2011-01-11', '64000 Sepang, Selangor', 'member', 0, 20180204, '0'),
+('test', 'admin', '', 'admin@TPM', 'teCcXDQBWYvL6', 'male', '0000000', '0001-01-01', '', 'member', 0, 20171217, '0'),
+('testing01', 'TestingAccount', 'One', 'testing@test.test', 'tesGeyALKYm3A', 'male', '0123456789', '2018-01-15', '', 'restricted', 0, 20180130, '0');
 
 -- --------------------------------------------------------
 
@@ -269,7 +270,8 @@ INSERT INTO `userfeedbackrating` (`userfeedbackID`, `username`, `ratingID`, `fee
 (10, 'random', 14, 'veryuseful'),
 (11, 'random', 15, 'veryuseful'),
 (12, 'testing01', 17, 'useful'),
-(13, 'jon', 10, 'veryuseful');
+(13, 'jon', 10, 'veryuseful'),
+(14, 'admin', 8, 'useless');
 
 --
 -- Indexes for dumped tables
@@ -343,7 +345,7 @@ ALTER TABLE `transactiondetail`
 -- AUTO_INCREMENT for table `userfeedbackrating`
 --
 ALTER TABLE `userfeedbackrating`
-  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `userfeedbackID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
